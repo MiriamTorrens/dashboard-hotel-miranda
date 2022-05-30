@@ -1,0 +1,21 @@
+Bookings:
+    - POST/Bookings
+    - GET/Bookings
+    - GET/Bookings/:id
+    - PUT/Bookings
+    - DELETE/Bookings
+Rooms:
+    - POST/Rooms
+    - GET/Rooms
+    - PUT/Rooms
+    - DELETE/Rooms
+Users:
+    - POST/User
+    - GET/User
+    - PUT/User
+    - DELETE/User
+Contact:
+    - POST/Contact
+    - GET/Contact
+    - PUT/Contact
+    - DELETE/Contact
