@@ -22,7 +22,7 @@ function App() {
   const [authenticated, setAuthenticated] = useState(isAuthenticated);
 
   return (
-    <div style={{display:'flex', backgroundColor:'#F8F8F8'}}>
+    <div style={{display:'flex'}}>
       <NavBar authenticated={authenticated}/>
        <Routes>
        <Route path="/" element={<Login authenticated={authenticated} setAuthenticated={setAuthenticated} />}/>

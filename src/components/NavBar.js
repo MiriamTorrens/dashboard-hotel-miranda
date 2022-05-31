@@ -94,7 +94,7 @@ export default function NavBar(props){
     const display = props.authenticated ?  'block' : 'none';
 
     return(
-        <Container>
+        <Container style={{display}}>
             <ContainerLogo>
                 <Logo/>
                 <TextLogo>
@@ -102,7 +102,7 @@ export default function NavBar(props){
                     <Subtitle>Hotel Admin Dashboard</Subtitle>
                 </TextLogo>
             </ContainerLogo>
-            <Nav style={{display}}>
+            <Nav>
                 <DivLink>
                     <NavLink to="/dashboard" style={Style}><Link>Dashboard</Link></NavLink>
                 </DivLink>
