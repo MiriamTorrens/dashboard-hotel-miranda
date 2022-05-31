@@ -1,7 +1,8 @@
 
-
 export default function Rooms(){
     return(
-        <h1>Desde Rooms</h1>
+        <>
+            <h1>Desde Rooms</h1>
+        </>
     )
 }
