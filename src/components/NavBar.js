@@ -1,101 +1,19 @@
-import {NavLink} from 'react-router-dom';
-import styled from 'styled-components';
-import logo from '../img/logo.png';
-import user from '../img/user.png';
-
-export const Container = styled.div`
-  width: 350px;
-  height:1812px;
-  background-color: white;
-  border-left:1px solid black;
-`
-export const ContainerLogo = styled.div`
-    display: flex;
-    margin-top: 40px;
-    margin-left:46px;
-`
-export const TextLogo = styled.div`
-    display:block;
-    text-align: left;
-    margin-left:8px;
-`
-export const Logo = styled.div`
-    background-image: url(${logo});
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-size: 100% 100%;
-    background-position: center;
-    width: 80px;
-    height: 80px;
-`
-export const Title = styled.h1`
-    margin-bottom:0;
-    font-size: 30px;
-    font-weight: 1000;
-`
-export const Subtitle = styled.p`
-    margin-top:0;
-    font: 12px Poppins;
-    color: #135846;
-`
-export const Nav = styled.nav`
-    margin-top: 83px;
-`
-export const Style = {
-    textDecoration: 'none',
-}
-export const DivLink = styled.div`
-    width: 100%;
-    height: 67px;
-    margin-bottom: 15px;
-`
-export const Link = styled.span`
-    color: #799283;
-    font: 18px Poppins;
-    margin-left: 107px;
-    &:hover{
-        color: #E23428;
-    }
-`
-export const ContainerUser = styled.div`
-    width: 233px;
-    height: 221px;
-    margin-left:46px;
-    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 0px 20px 30px #00000014;
-    border-radius: 18px;
-    text-align: center;
-`
-export const ImgUser = styled.div`
-    background-image: url(${user});
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-size: 100% 100%;
-    background-position: center;
-    width: 70px;
-    height: 70px;
-    margin: 0 auto;
-    background-color: #C5C5C5;
-    border-radius: 8px;
-`
-export const ButtonContact = styled.button`
-    font: 600 14px Poppins;
-    width: 158px;
-    height: 47px;
-    background: #ebf1ee;
-    color: #135846;
-    border-radius: 8px;
-    border: none;
-    margin-top: 20px;
-`
+import {TbLayoutDashboard} from 'react-icons/tb';
+import {AiOutlineKey} from 'react-icons/ai';
+import {BsCalendarCheck} from 'react-icons/bs';
+import {HiOutlineUser} from 'react-icons/hi';
+import {HiOutlineMail} from 'react-icons/hi';
+import {BsSuitHeartFill}from 'react-icons/bs';
+import {AiOutlineCopyright}from 'react-icons/ai';
+import {Container, Nav, DivLink, ContainerUser, ImgUser, ButtonContact, StyleIcons, UserName, UserEmail, Texts, StyledNavLink} from '../styles/NavBarStyles';
+import {ContainerLogo, Logo, TextLogo, Title, Subtitle} from '../styles/LoginStyles';
 
 export default function NavBar(props){
     const display = props.authenticated ?  'block' : 'none';
-
+  
     return(
         <Container style={{display}}>
-            <ContainerLogo>
+            <ContainerLogo style={{marginTop:20, marginLeft:0}}>
                 <Logo/>
                 <TextLogo>
                     <Title>travl</Title>
@@ -104,27 +22,37 @@ export default function NavBar(props){
             </ContainerLogo>
             <Nav>
                 <DivLink>
-                    <NavLink to="/dashboard" style={Style}><Link>Dashboard</Link></NavLink>
+                    <TbLayoutDashboard style={StyleIcons}/>
+                    <StyledNavLink to="/dashboard" >Dashboard</StyledNavLink>
                 </DivLink>
                 <DivLink>
-                    <NavLink to="/bookings" style={Style}><Link>Bookings</Link></NavLink>
+                    <AiOutlineKey style={StyleIcons}/>
+                    <StyledNavLink to="/rooms">Rooms</StyledNavLink>
                 </DivLink>
                 <DivLink>
-                    <NavLink to="/rooms" style={Style}><Link>Rooms</Link></NavLink>
+                    <BsCalendarCheck style={{fontSize:'x-large', marginLeft: 63}}/>
+                    <StyledNavLink to="/bookings">Bookings</StyledNavLink>
                 </DivLink>
                 <DivLink>
-                    <NavLink to="/contact" style={Style}><Link>Contact</Link></NavLink>
+                    <HiOutlineUser style={StyleIcons}/>
+                    <StyledNavLink to="/users">Users</StyledNavLink>
                 </DivLink>
                 <DivLink>
-                    <NavLink to="/users" style={Style}><Link>Users</Link></NavLink>
+                    <HiOutlineMail style={StyleIcons}/>
+                    <StyledNavLink to="/contact">Contact</StyledNavLink>
                 </DivLink>
             </Nav>
             <ContainerUser>
                 <ImgUser/>
-                <span>Nombre Apellido</span><br/>
-                <span>Correo</span><br/>
-                <ButtonContact>Contact Us</ButtonContact>
+                <UserName>Miriam Torrens</UserName><br/>
+                <UserEmail>miriam_torrens@miranda.com</UserEmail><br/>
+                <ButtonContact>Edit</ButtonContact>
             </ContainerUser>
+            <Texts>
+                <p style={{fontSize: 16, fontWeight:'bold', marginBottom:0}}>Travl Hotel Admin Dashboard</p>
+                <p style={{fontSize: 14, color: '#799283', marginTop:0}}><AiOutlineCopyright/> 2022 All Rights Reserved</p>
+                <p style={{fontSize: 14, color: '#799283', marginTop:30}}>Made with <BsSuitHeartFill/> by Miriam</p>
+            </Texts>
         </Container>
     )
 }

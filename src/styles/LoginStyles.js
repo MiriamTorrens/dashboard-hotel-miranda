@@ -6,13 +6,14 @@ export const Container = styled.div`
     text-align: center;
     margin: 0 auto;
     padding: 20px;
-    width: 15%; 
+    width: 350px; 
     margin-top: 100px;
     box-shadow: 0px 20px 30px #799283;
 `
 export const ContainerLogo = styled.div`
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
 `
 export const TextLogo = styled.div`
     display:block;
@@ -35,7 +36,8 @@ export const Title = styled.h1`
 `
 export const Subtitle = styled.p`
     margin-top:0;
-    font: 12px Poppins;
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
     color: #135846;
 `
 export const Input = styled.input`
@@ -46,7 +48,9 @@ export const Input = styled.input`
     text-indent: 10px;
 `
 export const InputSubmit = styled.input`
-    font: 600 16px Poppins;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
     width: 158px;
     height: 47px;
     background: #ebf1ee;

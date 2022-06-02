@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, ContainerLogo, Logo, TextLogo, Title, Subtitle, Input, InputSubmit} from '../styles/LoginStyles';
 
 export default function Login(props){
-    const {authenticated, setAuthenticated} = props;
+    const {setAuthenticated} = props;
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
     let navigate = useNavigate();
@@ -14,6 +14,7 @@ export default function Login(props){
     }
   
     const handleSubmit = (event) => {
+        event.preventDefault();
         if (user === myUser.user && password === myUser.password){
             localStorage.setItem('authenticated', true);
             setAuthenticated(true);
@@ -21,15 +22,8 @@ export default function Login(props){
         }else{
             localStorage.removeItem('authenticated');
             setAuthenticated(false);
-        } 
-        event.preventDefault();
+        }   
     }
-
-    useEffect(() => {
-        if(authenticated){
-            navigate('/dashboard', { replace: true });  
-        }
-    }, []);
 
     return(
         <>
