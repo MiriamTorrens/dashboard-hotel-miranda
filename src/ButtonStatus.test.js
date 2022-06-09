@@ -3,7 +3,7 @@
 /* eslint-disable testing-library/no-node-access */
 import '@testing-library/jest-dom';
 import 'jest-styled-components';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import ButtonStatus from './components/Buttonstatus';
 
 describe('Button change color', () => {
@@ -27,7 +27,6 @@ describe('Button change color', () => {
         const buttonClass = ButtonStatus(props).type.styledComponentId;
         const ButtonRoots = container.getElementsByClassName(buttonClass);
         const style = window.getComputedStyle(ButtonRoots[0]);
-        screen.debug();
         expect(style.backgroundColor).toBe('rgb(226, 52, 40)');
     });
 });
