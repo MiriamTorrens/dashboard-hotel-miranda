@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ContainerPagination = styled.div`
+const ContainerPagination = styled.div`
 width: 100%;
 margin-top: 50px;
 display: flex;
@@ -8,7 +8,7 @@ justify-content: space-between;
 font-size: 16px;
 font-family: 'Poppins', sans-serif;
 `
-export const ButtonPagination = styled.button`
+const ButtonPagination = styled.button`
 background-color: white;
 border-color:#135846;
 border-radius: 12px;

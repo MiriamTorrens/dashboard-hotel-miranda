@@ -4,7 +4,6 @@ const Container = styled.div`
     box-shadow: 0px 4px 4px #00000005;
     border-radius: 20px;
     width:95%;
-    height: auto;
     background-color: #FFFFFF;
     height: 510px;
     margin: 0 auto;

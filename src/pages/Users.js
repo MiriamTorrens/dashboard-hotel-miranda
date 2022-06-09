@@ -1,29 +1,30 @@
-import { ContainerAll, SubContainer, HeaderTab, Tab, MenuOPtions, InputText,ContainerSelect, Select, ButtonNew } from "../styles/Styles";
-import { Table} from '../styles/TableStyles';
+import { ContainerAll, SubContainer, ContainerHeader,Table } from "../styles/Styles";
 import { UsersList } from '../JSON/UsersList';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { BsFillTelephoneFill } from 'react-icons/bs';
 import Pagination from "../components/Pagination";
+import { NavLink } from "react-router-dom";
+import ButtonNew from "../components/ButtonNew";
+import Header from "../components/Header";
+import Select from "../components/Select";
+import InputText from "../components/InputText";
 
 export default function Users(){
+    const menuOptions = ["All Employee", "Active Employee", "Inactive Employee"];
+    const selectOptions = ["Newest", "Guest"];
+    const text = "Employee";
+    const placeholder = "Search employee";
     return(
         <ContainerAll>
         <SubContainer>
-            <HeaderTab>
-                <Tab>
-                    <MenuOPtions>All Employee</MenuOPtions>
-                    <MenuOPtions>Active Employee</MenuOPtions>
-                    <MenuOPtions>Inactive Employee</MenuOPtions>
-                </Tab>
-                <InputText placeholder="Buscar empleado"/>
-                <ContainerSelect>
-                    <ButtonNew>+ New Employee</ButtonNew>
-                    <Select>
-                        <option value="status">Newest</option>
-                        <option value="priceMenor">Guest</option>
-                    </Select>
-                </ContainerSelect>
-            </HeaderTab>
+            <ContainerHeader>
+                <Header menuOptions={menuOptions}/>
+                <InputText placeholder={placeholder}/>
+                <div>
+                    <NavLink to="/users/newUser"><ButtonNew text={text}/></NavLink>
+                    <Select selectOptions={selectOptions}/>
+                </div>
+            </ContainerHeader>
             <Table> 
                 <thead>
                     <tr>

@@ -1,35 +1,29 @@
-import { ContainerAll, SubContainer, HeaderTab, Tab, MenuOPtions, InputText, SelectDate, ContainerSelect, Select, ButtonView} from "../styles/Styles";
-import { Table } from '../styles/TableStyles';
+import { ContainerAll, SubContainer, ContainerHeader, SelectDate, Table} from "../styles/Styles";
 import { BookingsList } from '../JSON/BookingsList';
-import { BsThreeDotsVertical } from 'react-icons/bs';
 import Pagination from "../components/Pagination";
+import { BsThreeDotsVertical } from 'react-icons/bs';
+import Header from "../components/Header";
+import Select from "../components/Select";
+import InputText from "../components/InputText";
+import ButtonView from "../components/ButtonView";
 
 export default function Bookings(){
-
+    const menuOptions = ["All Bookings", "Pending", "Booked", "Canceled", "Refund"];
+    const selectOptions = ["Newest", "Guest", "Check In", "Check Out"];
+    const placeholder = "Search guest";
     return(
         <ContainerAll>
             <SubContainer>
-            <HeaderTab>
-                <Tab>
-                    <MenuOPtions>All Bookings</MenuOPtions>
-                    <MenuOPtions>Pending</MenuOPtions>
-                    <MenuOPtions>Booked</MenuOPtions>
-                    <MenuOPtions>Canceled</MenuOPtions>
-                    <MenuOPtions>Refund</MenuOPtions>
-                </Tab>
-                <InputText placeholder="Buscar por nombre cliente"></InputText>
-                <ContainerSelect>
-                <SelectDate>
-                    <option>1 November 2020 - 30 November 2020</option>
-                </SelectDate>
-                    <Select>
-                        <option value="newest">Newest</option>
-                        <option value="guest">Guest</option>
-                        <option value="checkin">Check In</option>
-                        <option value="checkout">Chake Out</option>
-                    </Select>
-                </ContainerSelect>
-            </HeaderTab>
+                <ContainerHeader>
+                        <Header menuOptions={menuOptions} selectOptions={selectOptions}/>
+                        <InputText placeholder={placeholder}></InputText>
+                        <div>
+                            <SelectDate>
+                                <option>1 November 2020 - 30 November 2020</option>
+                            </SelectDate>
+                            <Select selectOptions={selectOptions}/>
+                        </div>
+                </ContainerHeader>
                 <Table>
                     <thead>
                         <tr>
@@ -49,7 +43,7 @@ export default function Bookings(){
                                 <td>{booking.date}</td>
                                 <td>{booking.checkin}</td>
                                 <td>{booking.checkout}</td>
-                                <td><ButtonView>View Notes</ButtonView></td>
+                                <td><ButtonView/></td>
                                 <td>{booking.roomType.type} - {booking.roomType.roomNumber}</td>
                                 <td>Estado</td>
                                 <td><BsThreeDotsVertical/></td>

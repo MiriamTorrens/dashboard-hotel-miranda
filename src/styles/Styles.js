@@ -5,6 +5,15 @@ export const ContainerAll = styled.div`
     padding: 5px;
     margin-left: 30px;
 `
+export const ContainerLogo = styled.div`
+    width: 400px;
+    height: 350px;
+    text-align: center;
+    box-shadow: 5px 10px 20px 30px #00000014;
+    margin: 0 auto;
+    margin-top: 150px;
+    border-radius: 18px;
+`
 export const ContainerDashboard = styled.div`
     width: 95%;
     margin: 0 auto;
@@ -17,35 +26,9 @@ export const SubContainer = styled.div`
     margin: 0 auto;
     margin-top: 50px;
 `
-export const HeaderTab = styled.div`
+export const ContainerHeader = styled.div`
     display: flex;
     justify-content: space-between;
-  
-`
-export const Tab = styled.div`
-    display: flex;
-    color: #6E6E6E;
-    height: 36px;
-    font-size: 16px;
-    font-weight: 600;
-    font-family: 'Poppins', sans-serif;
-    border-bottom: 1px solid #0000001A;
-`
-export const MenuOPtions = styled.span`
-    margin-right: 70px;
-    &:hover{
-        color: #135846;
-        cursor: pointer;
-        border-bottom: 3px solid #135846;
-    }
-`
-export const InputText = styled.input`
-    border-color: #135846;
-    border-radius: 5px;
-    width: 200px;
-    height: 40px;
-    float: right;
-    text-align: center;
 `
 export const SelectDate = styled.select`
     background-color: #135846;
@@ -61,34 +44,22 @@ export const SelectDate = styled.select`
 export const ContainerSelect = styled.div`
     float:right;
 `
-export const Select = styled.select`
-    border-color: #135846;
-    color:#135846;
-    border-radius: 12px;
-    width: 129px;
-    height: 49px;
-    text-align: center;
-    font-size: 16px;
-`
-export const ButtonNew = styled.button`
-    background-color: #135846;
-    color: white;
-    width: 213px;
-    height: 49px;
-    border-radius: 12px;
-    border: none;
-    margin-right: 20px;
-    cursor: pointer;
-`
-export const ButtonView = styled.button`
-    background-color: #EEF9F2;
-    width: 160px;
-    height: 48px;
-    border-radius: 12px;
-    border: none;
-    margin-right: 20px;
-    font-size: 16px;
-    font-weight: 600;
-    font-family: 'Poppins', sans-serif;
-    cursor: pointer;
+export const Table = styled.table`
+margin-top: 48px;
+width: 100%;
+font-size: 16px;
+font-weight: 600;
+font-family: 'Poppins', sans-serif;
+color: #393939;
+background-color: #FFFFFF;
+border-radius: 20px;
+text-align: left;
+border-spacing: 50px 5px;
+    & tr{
+        border-bottom:1px solid black;
+        height: 65px;
+    }   
+    & td{
+        height: 121px;
+    }
 `
