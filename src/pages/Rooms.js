@@ -12,7 +12,8 @@ export default function Rooms(){
     const text = "Room";
     const menuOptions = ["All Rooms"]
     const selectOptions = ["Status", "Price <", "Price >"];
-;    return(
+
+    return(
         <ContainerAll>
             <SubContainer>
                 <ContainerHeader>
@@ -46,7 +47,7 @@ export default function Rooms(){
                                 <td>{room.amenities}</td>
                                 <td>${room.price}</td>
                                 <td>${(room.price-(room.price*room.discount/100)).toFixed(2)}</td>
-                                <td><ButtonStatus status={room.status} color={room.status === "Available" ? 'rgb(90, 208, 122)' : 'rgb(226, 52, 40)'}/></td>
+                                <td><ButtonStatus status={room.status}></ButtonStatus></td>
                                 <td><BsThreeDotsVertical/></td>
                             </tr>
                         ))}

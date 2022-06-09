@@ -5,6 +5,7 @@ import Contacts from '../components/Contacts';
 import Pagination from "../components/Pagination";
 import Header from "../components/Header";
 import Select from "../components/Select";
+import ButtonArchive from "../components/ButtonArchive";
 
 export default function Contact(){
     const menuOptions = ["All Contacts", "Archivated"];
@@ -29,10 +30,10 @@ export default function Contact(){
                 <tbody>
                     {ContactList.map(contact => (
                         <tr key={contact.idContact}>
-                            <td >{contact.idContact}<br/>{contact.date}</td>}
+                            <td >{contact.idContact}<br/>{contact.date}</td>
                             <td>{contact.customer.fullName}<br/>{contact.customer.email}<br/>{contact.customer.phoneNumber}<br/></td>
                             <td style={{width:600}}><b>{contact.subjetc}</b><br/>{contact.comment}</td>
-                            <td><button>Archive</button></td>
+                            <td><ButtonArchive/></td>
                             <td><BsThreeDotsVertical/></td>
                         </tr>
                     ))}

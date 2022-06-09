@@ -15,7 +15,14 @@ export const Button = styled.button`
 
 export default function ButtonStatus(props){
     const status = props.status;
-    const color = props.status === "Available" ? '#5AD07A' : '#E23428';
+    let color;
+    if(status === "Available" || status === "Check In"){
+        color = '#5AD07A'
+    }else if (status === "Booked" || status === 'Check Out'){
+        color = '#E23428'
+    }else{
+        color = '#FF9C3A'
+    }
     return(
         <Button style={{backgroundColor:color}}>{status}</Button>
     )

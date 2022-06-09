@@ -41,9 +41,6 @@ export const SelectDate = styled.select`
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
 `
-export const ContainerSelect = styled.div`
-    float:right;
-`
 export const Table = styled.table`
 margin-top: 48px;
 width: 100%;

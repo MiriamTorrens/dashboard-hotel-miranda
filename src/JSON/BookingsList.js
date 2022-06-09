@@ -16,7 +16,7 @@ export const BookingsList =
             "roomNumber": 18
         },
         "roomDescription": "nostrud pariatur cillum cillum velit cupidatat aute qui elit occaecat occaecat aliquip excepteur cupidatat excepteur cupidatat in duis id incididunt tempor enim Lorem incididunt exercitation dolor commodo dolore enim ipsum sit est velit in pariatur cupidatat non ipsum voluptate ullamco veniam culpa tempor nostrud incididunt reprehenderit cillum culpa sunt voluptate amet quis Lorem culpa pariatur cupidatat proident mollit sint mollit reprehenderit amet in pariatur veniam ipsum aliquip aliquip elit excepteur eu consectetur cillum minim velit",
-        "status": ""
+        "status": "Check In"
     },
     {
         "fullName": "Josh Weber",
@@ -34,7 +34,7 @@ export const BookingsList =
             "roomNumber": 6
         },
         "roomDescription": "laborum eu excepteur esse excepteur culpa nostrud veniam consequat cupidatat sint ea labore consectetur pariatur labore id eu incididunt commodo reprehenderit duis aliquip Lorem proident aliqua occaecat reprehenderit proident adipisicing quis irure anim ex mollit non tempor ea consequat ut aliqua pariatur velit irure aliqua officia ad labore cupidatat mollit voluptate pariatur non in nisi exercitation adipisicing in sit commodo eiusmod ex adipisicing ipsum tempor proident amet proident enim mollit aliqua magna dolore aute amet adipisicing nisi cupidatat",
-        "status": ""
+        "status": "Check Out"
     },
     {
         "fullName": "Albert Carroll",
@@ -52,7 +52,7 @@ export const BookingsList =
             "roomNumber": 12
         },
         "roomDescription": "dolore ipsum adipisicing anim in qui laboris exercitation exercitation aliqua voluptate aute nostrud et minim et pariatur velit enim deserunt cillum cupidatat enim et labore proident aliquip fugiat dolor voluptate id dolor esse amet cupidatat aliqua aute nulla occaecat do ad qui irure cillum aute commodo adipisicing proident nostrud enim ex labore anim do incididunt duis culpa tempor cupidatat velit enim aute cupidatat id sit est aliquip qui ullamco enim exercitation duis culpa amet ad",
-        "status": ""
+        "status": "Check Out"
     },
     {
         "fullName": "Olivia Hayes",
@@ -70,7 +70,7 @@ export const BookingsList =
             "roomNumber": 16
         },
         "roomDescription": "ea in aliqua tempor eiusmod voluptate ipsum anim ullamco esse aute id incididunt tempor eu nostrud commodo incididunt consectetur eu tempor eiusmod sint cillum do anim enim non minim esse mollit cupidatat consequat deserunt consectetur dolore fugiat ex eiusmod cupidatat esse officia mollit ipsum do ad velit ullamco excepteur deserunt fugiat irure ullamco duis ipsum ad et amet nostrud Lorem sunt occaecat ut tempor sint ad ipsum ipsum incididunt eu irure enim ullamco aliqua irure",
-        "status": ""
+        "status": "Check In"
     },
     {
         "fullName": "Ronald Ratke",
@@ -88,7 +88,7 @@ export const BookingsList =
             "roomNumber": 11
         },
         "roomDescription": "incididunt nulla duis nostrud laborum dolor nisi ut nulla incididunt minim ullamco do proident tempor dolore mollit laborum quis sint excepteur irure eu mollit magna ea est labore proident sit commodo quis quis esse do ipsum tempor enim minim non nostrud incididunt amet aliquip consectetur minim laboris velit est anim enim do cupidatat minim quis qui cillum ad enim laboris in laboris nulla nulla do dolore laborum commodo cillum laboris officia ullamco qui tempor adipisicing sunt commodo",
-        "status": ""
+        "status": "Check Out"
     },
     {
         "fullName": "Billy Beatty",
@@ -106,7 +106,7 @@ export const BookingsList =
             "roomNumber": 2
         },
         "roomDescription": "elit tempor occaecat ullamco ut eiusmod deserunt laborum exercitation non eiusmod labore occaecat culpa non officia mollit do do qui et sit voluptate amet exercitation cupidatat aute proident sint veniam nostrud velit dolore non ad est qui officia laboris aliquip cupidatat et labore cillum in ullamco esse fugiat commodo commodo ullamco id veniam fugiat labore incididunt nisi eiusmod id nisi exercitation voluptate ad esse in officia duis nulla exercitation deserunt qui",
-        "status": ""
+        "status": "In Progress"
     },
     {
         "fullName": "Marshall Rowe",
@@ -124,7 +124,7 @@ export const BookingsList =
             "roomNumber": 19
         },
         "roomDescription": "ad sunt excepteur est nisi qui laboris aliquip sit exercitation est irure aute ex sunt aliquip adipisicing quis sit incididunt ipsum ut aliqua culpa aliquip sint exercitation et in commodo cupidatat irure anim excepteur consequat veniam anim elit ipsum exercitation proident proident consequat sunt aute duis adipisicing irure enim aute mollit nulla irure amet nisi ea exercitation deserunt in elit amet est consequat excepteur ad culpa velit ea est do ex anim",
-        "status": ""
+        "status": "Check In"
     },
     {
         "fullName": "Jonathon Stanton",
@@ -142,7 +142,7 @@ export const BookingsList =
             "roomNumber": 11
         },
         "roomDescription": "incididunt duis excepteur exercitation consequat cupidatat ex occaecat do eu ut sunt incididunt reprehenderit elit ea voluptate cupidatat eiusmod qui tempor incididunt tempor consectetur nulla magna non non veniam est eiusmod eiusmod ex sint fugiat laboris dolore commodo ad qui quis adipisicing magna consequat eiusmod sit quis mollit labore elit excepteur nostrud laboris eu adipisicing ad velit nulla nostrud incididunt aute irure amet consectetur quis duis fugiat laboris",
-        "status": ""
+        "status": "Check Out"
     },
     {
         "fullName": "Joanna Gerhold",
@@ -160,7 +160,7 @@ export const BookingsList =
             "roomNumber": 8
         },
         "roomDescription": "velit nulla ea velit exercitation consectetur ullamco eiusmod magna cillum duis voluptate consectetur ipsum reprehenderit non ut pariatur esse Lorem deserunt consectetur deserunt occaecat qui qui sint tempor deserunt est do nisi adipisicing eu sint fugiat dolore labore magna nulla ad proident sit cillum ut fugiat dolore culpa duis minim eiusmod sit sunt pariatur excepteur qui eu deserunt sit incididunt incididunt aliquip ad eu ut amet quis veniam irure anim fugiat qui ad",
-        "status": ""
+        "status": "In Progress"
     },
     {
         "fullName": "Hugo Marks",
@@ -178,6 +178,6 @@ export const BookingsList =
             "roomNumber": 10
         },
         "roomDescription": "fugiat fugiat tempor est eu labore quis excepteur ut anim esse id pariatur labore esse tempor Lorem labore dolore Lorem non est sit do cillum excepteur pariatur qui consequat laboris amet non veniam laboris quis proident cillum veniam fugiat aliqua proident labore do ipsum nulla elit qui adipisicing fugiat qui fugiat excepteur ullamco qui amet aliquip irure excepteur non qui velit sit id eu incididunt esse magna enim Lorem incididunt duis Lorem labore incididunt dolor",
-        "status": ""
+        "status": "In Progress"
     }
 ]

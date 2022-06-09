@@ -48,7 +48,7 @@ export default function Users(){
                             <td>{user.startDate}</td>
                             <td>{user.occupation}</td>
                             <td><BsFillTelephoneFill/> {user.contact}</td>
-                            <td>Estado</td>
+                            <td style={{color:user.status === 'ACTIVE' ? '#5AD07A' : '#E23428'}}>{user.status}</td>
                             <td><BsThreeDotsVertical/></td>
                         </tr>
                     ))}

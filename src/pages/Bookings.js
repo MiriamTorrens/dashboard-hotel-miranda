@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import Select from "../components/Select";
 import InputText from "../components/InputText";
 import ButtonView from "../components/ButtonView";
+import ButtonStatus from "../components/ButtonStatus";
 
 export default function Bookings(){
     const menuOptions = ["All Bookings", "Pending", "Booked", "Canceled", "Refund"];
@@ -45,7 +46,7 @@ export default function Bookings(){
                                 <td>{booking.checkout}</td>
                                 <td><ButtonView/></td>
                                 <td>{booking.roomType.type} - {booking.roomType.roomNumber}</td>
-                                <td>Estado</td>
+                                <td><ButtonStatus status={booking.status}></ButtonStatus></td>
                                 <td><BsThreeDotsVertical/></td>
                             </tr>
                         ))}

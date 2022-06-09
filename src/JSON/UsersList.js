@@ -8,7 +8,7 @@ export const UsersList =
         "occupation": "Manager",
         "description": "cillum ea ea ullamco culpa veniam est aute Lorem exercitation irure veniam irure aliqua magna fugiat labore ex et",
         "contact": "836-287-2369",
-        "status": "",
+        "status": "ACTIVE",
         "photo": "",
         "password": "HBUKGB4133K"
     },
@@ -20,7 +20,7 @@ export const UsersList =
         "occupation": "Reception",
         "description": "excepteur dolor nisi fugiat laboris sunt est pariatur eiusmod ad sunt excepteur nostrud nisi",
         "contact": "630-509-6635",
-        "status": "",
+        "status": "INACTIVE",
         "photo": "",
         "password": "YAPTPHM1"
     },
@@ -32,7 +32,7 @@ export const UsersList =
         "occupation": "Reception",
         "description": "mollit duis nisi non deserunt",
         "contact": "725-648-8468",
-        "status": "",
+        "status": "ACTIVE",
         "photo": "",
         "password": "PRHRDOSD"
     },
@@ -44,7 +44,7 @@ export const UsersList =
         "occupation": "Reception",
         "description": "pariatur cupidatat anim id nostrud ullamco enim do",
         "contact": "016-583-2037",
-        "status": "",
+        "status": "ACTIVE",
         "photo": "",
         "password": "BPAZBOL1"
     },
@@ -56,7 +56,7 @@ export const UsersList =
         "occupation": "Room Service",
         "description": "do fugiat non amet cillum in dolor",
         "contact": "960-696-6133",
-        "status": "",
+        "status": "INACTIVE",
         "photo": "",
         "password": "CFLZLT21"
     },
@@ -68,7 +68,7 @@ export const UsersList =
         "occupation": "Room Service",
         "description": "id fugiat aliqua commodo nostrud excepteur Lorem minim veniam anim laborum ad consectetur ea",
         "contact": "674-479-0674",
-        "status": "",
+        "status": "INACTIVE",
         "photo": "",
         "password": "ICGHGHA1"
     },
@@ -80,7 +80,7 @@ export const UsersList =
         "occupation": "Room Service",
         "description": "nulla officia laboris minim ipsum",
         "contact": "500-317-1849",
-        "status": "",
+        "status": "INACTIVE",
         "photo": "",
         "password": "FIJDBA21"
     },
@@ -92,7 +92,7 @@ export const UsersList =
         "occupation": "Room Service",
         "description": "ut eiusmod",
         "contact": "268-687-1205",
-        "status": "",
+        "status": "ACTIVE",
         "photo": "",
         "password": "BJORSYDA"
     },
@@ -104,7 +104,7 @@ export const UsersList =
         "occupation": "Room Service",
         "description": "magna consectetur elit et mollit voluptate ipsum excepteur",
         "contact": "329-092-3636",
-        "status": "",
+        "status": "INACTIVE",
         "photo": "",
         "password": "LARIKZKA"
     },
@@ -116,7 +116,7 @@ export const UsersList =
         "occupation": "Room Service",
         "description": "nisi tempor id pariatur et commodo ut do nostrud non voluptate",
         "contact": "771-044-6414",
-        "status": "",
+        "status": "ACTIVE",
         "photo": "",
         "password": "NBADAEAAAML"
     }
