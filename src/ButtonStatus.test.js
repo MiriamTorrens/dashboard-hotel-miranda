@@ -20,7 +20,6 @@ describe('Button change color', () => {
     });
     test('Booked', () => {
         const props = "Booked"
-
         const { container } = render(
             <ButtonStatus status={props} />
         );

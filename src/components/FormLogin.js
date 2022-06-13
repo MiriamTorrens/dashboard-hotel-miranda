@@ -24,13 +24,12 @@ const InputSubmit = styled.input`
         color: white;
     };
 `
-
 export default function FormLogo(props){
     return(
         <form onSubmit={props.handleSubmit}>
-            <Input type="text" value={props.user} onChange={(e) => props.setUser(e.target.value)} placeholder="User"></Input><br/>
-            <Input type="password"value={props.password} onChange={(e) => props.setPassword(e.target.value)} placeholder="Password"></Input><br/>
-            <InputSubmit type="submit" value="Login"/>
+            <Input type="text" data-cy="user" value={props.user} onChange={(e) => props.setUser(e.target.value)} placeholder="User" required></Input><br/>
+            <Input type="password" data-cy="password" value={props.password} onChange={(e) => props.setPassword(e.target.value)} placeholder="Password" required></Input><br/>
+            <InputSubmit data-cy="submit" type="submit" value="Login"/>
         </form>
     )
 }

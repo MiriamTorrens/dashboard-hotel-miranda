@@ -19,7 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "jest": "react-scripts test",
     "eject": "react-scripts eject",
     "cypress:open": "cypress open"
   },
@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",
-    "cypress": "^10.0.3",
+    "cypress": "^10.1.0",
     "jest-styled-components": "^7.0.8",
     "react-test-renderer": "^18.1.0"
   }
