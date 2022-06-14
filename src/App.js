@@ -9,30 +9,19 @@ import MenuSup from "./components/MenuSup";
 import EditUser from './pages/EditUser';
 import NewUser from './pages/NewUser';
 import NewRoom from './pages/NewRoom';
-import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { ContainerApp, ContainerRutes } from './styles/Styles';
 import { useEffect, createContext, useReducer } from 'react';
+import  RequireAuth  from './RequireAuth';
 
-//Función para hacer las rutas privadas
-function RequireAuth({children, authenticated}) {
-  const auth = authenticated;
-  const location = useLocation();
-  if (!auth) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
-  return children;
-}
-
-const initialUser = {
-  authenticated: false,
-  name: null,
-  email: null
-}
+const initialUser = localStorage.getItem('authenticated') 
+  ? JSON.parse(localStorage.getItem('authenticated')) 
+  : {authenticated: false, name: null, email:null} ;
 
 const userReducer = (state, action) => {
   switch(action.type){
     case 'login':
-      localStorage.setItem('authenticated', 'true');
+      localStorage.setItem('authenticated', "true");
       return{
         ...state,
         authenticated: true,
@@ -61,27 +50,20 @@ const userReducer = (state, action) => {
       return state
   }
 }
-
 export const AuthContext = createContext();
 
 function App() {
   const [state, dispatch] = useReducer(userReducer, initialUser);
   let navigate = useNavigate();
 
-  console.log(initialUser.authenticated);
-  console.log(initialUser.name);
-  console.log(initialUser.email);
-  console.log("HOLA");
-
   useEffect(() => {
-    if(initialUser.authenticated){
-        //localStorage.setItem('authenticated', 'true');
-        navigate('/dashboard', { replace: true });  
+    if(state.authenticated){
+      localStorage.setItem('authenticated', JSON.stringify(state));
+      navigate('/dashboard', { replace: true });  
     }else{
-        //localStorage.removeItem('authenticated');
-        navigate('/login', { replace: true });
+      navigate('/login', { replace: true });
     }
-  }, [initialUser.authenticated]);
+  }, [state.authenticated]);
 
   return (
       <AuthContext.Provider value={{state, dispatch}}>

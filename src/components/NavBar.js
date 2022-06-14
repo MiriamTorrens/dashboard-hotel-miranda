@@ -9,6 +9,8 @@ import Logo from './Logo';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import user from '../img/user.png';
+import { AuthContext } from '../App';
+import { useContext } from 'react';
 
 const Container = styled.div`
   width: 350px;
@@ -113,8 +115,9 @@ const Copyright = styled.p`
     color: #799283;
     margin-top: 30px;
 `
-export default function NavBar(props){
-    const display = props.authenticated ?  'block' : 'none';
+export default function NavBar(){
+    const { state } = useContext(AuthContext);
+    const display = state.authenticated ?  'block' : 'none';
   
     return(
         <Container style={{display}}>
@@ -143,8 +146,8 @@ export default function NavBar(props){
             </Nav>
             <ContainerUser>
                 <ImgUser/>
-                <UserName>Miriam Torrens</UserName><br/>
-                <UserEmail>miriam_torrens@miranda.com</UserEmail><br/>
+                <UserName>{state.name}</UserName><br/>
+                <UserEmail>{state.email}</UserEmail><br/>
                 <NavLink to="/users/editUser"><ButtonContact>Edit</ButtonContact></NavLink>
             </ContainerUser>
             <Texts>

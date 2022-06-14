@@ -4,6 +4,8 @@ import {BiBell} from 'react-icons/bi';
 import {TbLogout} from 'react-icons/tb';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { AuthContext } from '../App';
+import { useContext } from 'react';
 
 const ContainerMenu = styled.div`
 display: flex;
@@ -34,8 +36,9 @@ const Icon = styled.span`
     }
 `
 
-export default function MenuSup(props){
-    const display = props.authenticated ?  'flex' : 'none';
+export default function MenuSup(){
+    const { state, dispatch } = useContext(AuthContext);
+    const display = state.authenticated ?  'flex' : 'none';
     const navigate = useNavigate();
     const location = useLocation();
     let currentLocation = location.pathname.substring(1);
@@ -53,8 +56,7 @@ export default function MenuSup(props){
     }  
     
     const Logout = () => {
-        localStorage.removeItem('authenticated');
-        props.setAuthenticated(false);
+        dispatch({type:'logout'});
         navigate('/login', { replace: true }); 
     }
     
