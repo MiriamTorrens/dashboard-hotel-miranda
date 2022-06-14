@@ -10,9 +10,9 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <DndProvider backend={HTML5Backend}>
+    {/* <DndProvider backend={HTML5Backend}> */}
       <App />
-    </DndProvider>
+    {/* </DndProvider> */}
   </BrowserRouter>
 );
 

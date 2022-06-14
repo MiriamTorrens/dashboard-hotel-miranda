@@ -10,6 +10,7 @@ import ButtonArchive from "../components/ButtonArchive";
 export default function Contact(){
     const menuOptions = ["All Contacts", "Archivated"];
     const selectOptions = ["Newest", "Guest"];
+   
     return(
         <ContainerAll>
         <Contacts></Contacts>

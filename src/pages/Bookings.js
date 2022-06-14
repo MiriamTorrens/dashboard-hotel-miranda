@@ -1,17 +1,18 @@
 import { ContainerAll, SubContainer, ContainerHeader, SelectDate, Table} from "../styles/Styles";
 import { BookingsList } from '../JSON/BookingsList';
-import Pagination from "../components/Pagination";
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import Header from "../components/Header";
 import Select from "../components/Select";
 import InputText from "../components/InputText";
 import ButtonView from "../components/ButtonView";
 import ButtonStatus from "../components/ButtonStatus";
+import Pagination from "../components/Pagination";
 
 export default function Bookings(){
     const menuOptions = ["All Bookings", "Pending", "Booked", "Canceled", "Refund"];
     const selectOptions = ["Newest", "Guest", "Check In", "Check Out"];
     const placeholder = "Search guest";
+    
     return(
         <ContainerAll>
             <SubContainer>

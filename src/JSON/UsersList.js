@@ -1,6 +1,18 @@
 export const UsersList = 
 [
     {
+        "fullName": "Miriam Torrens",
+        "idUser": "f4fd0bf0-64db",
+        "email": "m.torrens@miranda.com",
+        "startDate": "2022-04-02",
+        "occupation": "Manager",
+        "description": "cillum ea ea ullamco culpa veniam est aute Lorem exercitation irure veniam irure aliqua magna fugiat labore ex et",
+        "contact": "836-287-2369",
+        "status": "ACTIVE",
+        "photo": "",
+        "password": "1234"
+    },
+    {
         "fullName": "Antonio Emard",
         "idUser": "f4fd0bf0-54db",
         "email": "Lexi51@yahoo.com",

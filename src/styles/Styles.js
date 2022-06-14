@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const ContainerApp = styled.div`
+    display: flex;
+`
+export const ContainerRutes = styled.div`
+    display: block;
+    width: 100%;
+`
 export const ContainerAll = styled.div`
     background-color:#F8F8F8; 
     padding: 5px;
