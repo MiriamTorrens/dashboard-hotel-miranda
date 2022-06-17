@@ -1,4 +1,4 @@
-import {BsArrowBarLeft} from 'react-icons/bs';
+import {BsArrowBarLeft, BsArrowBarRight} from 'react-icons/bs';
 import {HiOutlineMail} from 'react-icons/hi';
 import {BiBell} from 'react-icons/bi';
 import {TbLogout} from 'react-icons/tb';
@@ -13,7 +13,6 @@ justify-content: space-between;
 box-shadow: 0px 3px 10px #00000005;
 height: 100px;
 width: 100%;
-margin-left:30px;
 `
 const Title = styled.h1`
 font-size: 28px;
@@ -36,7 +35,7 @@ const Icon = styled.span`
     }
 `
 
-export default function MenuSup(){
+export default function MenuSup(props){
     const { state, dispatch } = useContext(AuthContext);
     const display = state.authenticated ?  'flex' : 'none';
     const navigate = useNavigate();
@@ -52,8 +51,11 @@ export default function MenuSup(){
     }
 
     const handleClick = () => {
-        console.log('click');
-    }  
+        props.displayLat === "block" 
+        ? props.setDisplayLat("none")
+        : props.setDisplayLat("block");
+    }
+    const IconDisplayLat = props.displayLat === "block" ? BsArrowBarLeft : BsArrowBarRight  
     
     const Logout = () => {
         dispatch({type:'logout'});
@@ -63,7 +65,7 @@ export default function MenuSup(){
     return(
         <ContainerMenu style={{display}}>
             <div style={{display:'flex'}}>
-            <BsArrowBarLeft style={{marginTop:35, marginLeft: 15, fontSize: 'xx-large'}} onClick={()=> handleClick()}/>
+            <IconDisplayLat style={{marginTop:35, marginLeft: 15, fontSize: 'xx-large'}} onClick={()=> handleClick()}/>
             <Title>{currentLocation}</Title>
             </div>
             <ContainerIcons>

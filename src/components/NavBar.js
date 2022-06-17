@@ -8,7 +8,6 @@ import {AiOutlineCopyright}from 'react-icons/ai';
 import Logo from './Logo';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import user from '../img/user.png';
 import { AuthContext } from '../App';
 import { useContext } from 'react';
 
@@ -20,7 +19,10 @@ const Container = styled.div`
 const Nav = styled.nav`
     margin-top: 40px;
 `
-const DivLink = styled.div`
+const StyledNavLink = styled(NavLink)`
+    font-size: 18px;
+    text-decoration: none;
+    color: #799283;
     display: flex;
     align-items: center;
     width: 100%;
@@ -30,21 +32,10 @@ const DivLink = styled.div`
     color: #799283;
     font-family: "Poppins", sans-serif;
     cursor: pointer;
-    &:hover{
+    &:focus{
         color: #E23428;
         border-left: 5px solid #E23428;
-        a:visited{
-            color:red;
-        }
     }
-
-`
-const StyledNavLink = styled(NavLink)`
-    font-size: 18px;
-    margin-left: 20px;
-    text-decoration: none;
-    color: #799283;
-    margin-top: 5;
 `
 const ContainerUser = styled.div`
     width: 233px;
@@ -58,7 +49,7 @@ const ContainerUser = styled.div`
     text-align: center;
 `
 const ImgUser = styled.div`
-    background-image: url(${user});
+    background-image: url("https://xsgames.co/randomusers/assets/avatars/female/49.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-size: 100% 100%;
@@ -102,7 +93,8 @@ const Texts = styled.div`
     font-family: 'Poppins', sans-serif;
 `
 const StyleIcons = {
-    marginLeft: 63,
+    marginLeft: 50,
+    marginRight: 30,
     fontSize: 'xx-large'
 }
 const Admin = styled.p`
@@ -115,34 +107,35 @@ const Copyright = styled.p`
     color: #799283;
     margin-top: 30px;
 `
-export default function NavBar(){
+export default function NavBar(props){
     const { state } = useContext(AuthContext);
     const display = state.authenticated ?  'block' : 'none';
-  
+
     return(
+        <div style={{display: props.displayLat}}>
         <Container style={{display}}>
             <Logo/>
             <Nav>
-                <DivLink>
+                <StyledNavLink to="/dashboard" >
                     <TbLayoutDashboard style={StyleIcons}/>
-                    <StyledNavLink to="/dashboard" >Dashboard</StyledNavLink>
-                </DivLink>
-                <DivLink>
+                    <p>Dashboard</p>
+                </StyledNavLink>
+                <StyledNavLink to="/rooms">
                     <AiOutlineKey style={StyleIcons}/>
-                    <StyledNavLink to="/rooms">Rooms</StyledNavLink>
-                </DivLink>
-                <DivLink>
-                    <BsCalendarCheck style={{fontSize:'x-large', marginLeft: 63}}/>
-                    <StyledNavLink to="/bookings">Bookings</StyledNavLink>
-                </DivLink>
-                <DivLink>
+                    <p>Rooms</p>
+                </StyledNavLink>
+                <StyledNavLink to="/bookings">
+                    <BsCalendarCheck style={{fontSize:'x-large', marginLeft: 50, marginRight: 30}}/>
+                    <p>Bookings</p>
+                </StyledNavLink>
+                <StyledNavLink to="/users">
                     <HiOutlineUser style={StyleIcons}/>
-                    <StyledNavLink to="/users">Users</StyledNavLink>
-                </DivLink>
-                <DivLink>
+                    <p>Users</p>
+                </StyledNavLink>
+                <StyledNavLink to="/contact">
                     <HiOutlineMail style={StyleIcons}/>
-                    <StyledNavLink to="/contact">Contact</StyledNavLink>
-                </DivLink>
+                    <p>Contact</p>
+                </StyledNavLink>
             </Nav>
             <ContainerUser>
                 <ImgUser/>
@@ -156,5 +149,6 @@ export default function NavBar(){
                 <Copyright>Made with <BsSuitHeartFill/> by Miriam</Copyright>
             </Texts>
         </Container>
+        </div>
     )
 }

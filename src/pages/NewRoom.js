@@ -1,6 +1,6 @@
 
 export default function NewRoom(){
     return(
-        <h1>Crear habitación nueva</h1>
+        <h1>Create Room</h1>  
     )
 }

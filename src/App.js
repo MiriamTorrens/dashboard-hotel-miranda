@@ -13,6 +13,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import { ContainerApp, ContainerRutes } from './styles/Styles';
 import { useEffect, createContext, useReducer } from 'react';
 import  RequireAuth  from './RequireAuth';
+import { useState } from 'react';
 
 const initialUser = localStorage.getItem('authenticated') 
   ? JSON.parse(localStorage.getItem('authenticated')) 
@@ -37,11 +38,13 @@ const userReducer = (state, action) => {
         email: null
       }
     case 'changeName':
+      localStorage.setItem('authenticated', JSON.stringify(state));
       return {
         ...state,
         name: action.name
       }
     case 'changeEmail':
+      localStorage.setItem('authenticated', JSON.stringify(state));
       return {
         ...state,
         email: action.email
@@ -55,6 +58,7 @@ export const AuthContext = createContext();
 function App() {
   const [state, dispatch] = useReducer(userReducer, initialUser);
   let navigate = useNavigate();
+  const [displayLat, setDisplayLat] = useState("block");
 
   useEffect(() => {
     if(state.authenticated){
@@ -68,9 +72,9 @@ function App() {
   return (
       <AuthContext.Provider value={{state, dispatch}}>
         <ContainerApp>
-          <NavBar />
+          <NavBar displayLat={displayLat} />
           <ContainerRutes>
-            <MenuSup />
+            <MenuSup displayLat={displayLat} setDisplayLat={setDisplayLat}/>
             <Routes>
             <Route path="/" element={<Login />}/>
                 <Route path="login" element={<Login />}/>

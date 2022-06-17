@@ -10,7 +10,7 @@ export const ContainerRutes = styled.div`
 export const ContainerAll = styled.div`
     background-color:#F8F8F8; 
     padding: 5px;
-    margin-left: 30px;
+   
 `
 export const ContainerLogo = styled.div`
     width: 400px;
@@ -60,7 +60,6 @@ border-radius: 20px;
 text-align: left;
 border-spacing: 50px 5px;
     & tr{
-        border-bottom:1px solid black;
         height: 65px;
     }   
     & td{

@@ -1,15 +1,20 @@
 import styled from 'styled-components';
-import { ContactList } from '../JSON/ContactList';
-// import { AiOutlineCloseCircle } from 'react-icons/ai';
-// import { AiOutlineCheckCircle } from 'react-icons/ai';
+import { AiOutlineCloseCircle, AiOutlineCheckCircle } from 'react-icons/ai';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from "react";
+import { getContact, allContact, getThisContact, updateContact } from "../redux/slices/contactSlice";
+import { useState } from 'react';
+import ModalContact from './ModalContact';
 
 const Container = styled.div`
     box-shadow: 0px 4px 4px #00000005;
     border-radius: 20px;
     width:95%;
-    height: 400px;
+    padding-top: 10px;
+    padding-bottom: 30px;
     background-color: #FFFFFF;
     margin: 0 auto;
+    margin-top: 20px;
 `
 const Title = styled.h1`
     font-size: 20px;
@@ -28,48 +33,70 @@ const DivMsg = styled.div`
     border: 1px solid #EBEBEB;
     border-radius: 20px; 
 `
-const DivMsgText = styled.div`
+const Msg = styled.div`
     margin: 20px;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    display: -webkit-box; -webkit-line-clamp: 5; 
+    -webkit-box-orient: vertical; 
 `
 const DivUser = styled.div`
     display: flex;
+    justify-content: space-between;
     margin: 20px;
 `
-const DivUserImg = styled.div`
-    width: 65px;
-    height: 65px;
-    background-color: #C5C5C5;
-    border-radius: 8px;
-`
-const UserText = styled.div`
+const User = styled.div`
     margin-left: 10px;
 `
-// const DivIcons = styled.div`
-//    float: right;
-// `
+const Icon = styled.div`
+    float: right;
+    margin-top: 30px;
+`
+
 export default function Contacts(){
+    const dispatch = useDispatch();
+    const contactList = useSelector(allContact);
+    const [open, setOpen] = useState("none");
+    const [messageId, setMessageId] = useState("");
+
+    useEffect(()=> {
+        dispatch(getContact(allContact));
+    }, [allContact])
+
+   
+    const handleClick = (contact) => {
+        setOpen("block");
+        dispatch(updateContact({...contact, status: "YES"}));
+        setMessageId(contact.id);
+    }
+ 
     return(
+        <>
         <Container>
             <Title>Latest Review by Customers</Title>
             <DivMsgs>
-            {ContactList.map(contact => (
-                <DivMsg key={contact.idContact}>
-                    <DivMsgText><b>{contact.subjetc}</b><br/>{contact.comment}</DivMsgText>
+            {contactList.map(contact => (
+                <>
+                <DivMsg key={contact.id} onClick={() => handleClick(contact)}>
+                    <Msg><b>{contact.subject}</b><br/>{contact.comment}</Msg>
                     <DivUser>
-                        <DivUserImg/>
-                        <UserText>
+                        <User>
                             <b><span>{contact.customer.fullName}</span><br/></b>
                             <span>{contact.customer.email}</span><br/>
                             <span>{contact.customer.phoneNumber}</span>
-                            {/* <DivIcons>
-                                <AiOutlineCloseCircle style={{color:'red', fontSize:'x-large'}}/>
-                                <AiOutlineCheckCircle style={{color:'green', fontSize:'x-large'}}/>
-                            </DivIcons> */}
-                        </UserText>
+                        </User>
+                        <Icon>
+                            {contact.status === "NO" 
+                                ? <AiOutlineCloseCircle style={{color:'red', fontSize:'x-large'}} key=""/>
+                                : <AiOutlineCheckCircle style={{color:'green', fontSize:'x-large'}}/> }
+                    </Icon>
                     </DivUser>
                 </DivMsg>
+                </>
             ))}
+            <ModalContact open={open} setOpen={setOpen} message={messageId}/>
             </DivMsgs>
         </Container>
+        </>
     )
 }
