@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
 
 const ContainerCalendar = styled.div`
     box-shadow: 0px 4px 4px #00000005;
@@ -11,6 +13,11 @@ const ContainerCalendar = styled.div`
 
 export default function Calendar(){
     return(
-        <ContainerCalendar>Calendario</ContainerCalendar>
+        <ContainerCalendar>
+             <FullCalendar
+                plugins={[ dayGridPlugin ]}
+                initialView="dayGridMonth"
+            />
+        </ContainerCalendar>
     )
 }

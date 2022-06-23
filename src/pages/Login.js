@@ -22,7 +22,9 @@ export default function Login(){
     
     const handleSubmit = (event) => {
         event.preventDefault();
-        user === myUser.email && password === myUser.password && dispatch({type:'login', user: userData});
+        if(user === myUser.email && password === myUser.password){
+            dispatch({type:'login', user: userData});
+        }
     }
     
     return(

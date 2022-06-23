@@ -5,7 +5,7 @@ import InputText from "../components/InputText";
 import ButtonView from "../components/ButtonView";
 import ButtonStatus from "../components/ButtonStatus";
 import Pagination from "../components/Pagination";
-import { getBookings, allBookings, createBooking, updateBooking, deleteBooking } from "../redux/slices/bookingsSlice";
+import { getBookings, allBookings, createBooking, updateBooking, deleteBooking } from "../features/slices/bookingsSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from "react";
 import { MdOutlineDeleteOutline, MdOutlineUpdate } from 'react-icons/md';
@@ -21,7 +21,7 @@ export default function Bookings(){
 
     useEffect(()=> {
         dispatch(getBookings());
-    }, [allBookings]);
+    }, []);
 
     const handleClick = () => {
         dispatch(createBooking({

@@ -4,9 +4,8 @@ import { AuthContext } from './App';
 
 export default function RequireAuth({children}) {
     const { state } = useContext(AuthContext);
-    const auth = state.authenticated;
     const location = useLocation();
-    if (!auth) {
+    if (!state.authenticated) {
       return <Navigate to="/login" state={{ from: location }} replace />;
     }
     return children;

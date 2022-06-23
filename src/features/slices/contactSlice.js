@@ -23,18 +23,23 @@ export const contactSlice = createSlice({
                 },
                 subject: action.payload.subject,
                 comment: action.payload.comment,
-                status: action.payload.status
+                viewed: action.payload.status,
+                archived: action.payload.archived
             }
             state = state.unshift(newContact);
         },
         getThisContact: (state, action) => {
-            return state.find(contact => contact.id === action.payload);
+            const newState = [...state];
+            return newState.find(contact => contact.id === action.payload);
         },
         updateContact: (state, action) => {
             return state.map(contact => contact.id === action.payload.id ? action.payload : contact);
         },
         deleteContact: (state, action) => {
             return state.filter(contact => contact.id !== action.payload.id);
+        },
+        filterContact: (state, action) => {
+            return state.filter(contact => contact.archived === action.payload);
         }
       },
       extraReducers(builder) {
@@ -45,5 +50,5 @@ export const contactSlice = createSlice({
 })
 
 export const allContact = state => state.contact;
-export const {createContact, getThisContact, updateContact, deleteContact } = contactSlice.actions;
+export const {createContact, getThisContact, updateContact, deleteContact, filterContact } = contactSlice.actions;
 export default contactSlice.reducer;

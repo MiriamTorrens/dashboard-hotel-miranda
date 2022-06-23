@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { AiOutlineCloseCircle, AiOutlineCheckCircle } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from "react";
-import { getContact, allContact, getThisContact, updateContact } from "../redux/slices/contactSlice";
+import { getContact, allContact, getThisContact, updateContact } from "../features/slices/contactSlice";
 import { useState } from 'react';
 import ModalContact from './ModalContact';
 
@@ -53,21 +53,15 @@ const Icon = styled.div`
     margin-top: 30px;
 `
 
-export default function Contacts(){
+export default function ContactsDiv(){
     const dispatch = useDispatch();
     const contactList = useSelector(allContact);
     const [open, setOpen] = useState("none");
-    const [messageId, setMessageId] = useState("");
-
-    useEffect(()=> {
-        dispatch(getContact(allContact));
-    }, [allContact])
-
-   
+    const [message, setMessage] = useState({});
+    
     const handleClick = (contact) => {
         setOpen("block");
-        dispatch(updateContact({...contact, status: "YES"}));
-        setMessageId(contact.id);
+        setMessage(contact);
     }
  
     return(
@@ -76,7 +70,6 @@ export default function Contacts(){
             <Title>Latest Review by Customers</Title>
             <DivMsgs>
             {contactList.map(contact => (
-                <>
                 <DivMsg key={contact.id} onClick={() => handleClick(contact)}>
                     <Msg><b>{contact.subject}</b><br/>{contact.comment}</Msg>
                     <DivUser>
@@ -86,15 +79,14 @@ export default function Contacts(){
                             <span>{contact.customer.phoneNumber}</span>
                         </User>
                         <Icon>
-                            {contact.status === "NO" 
-                                ? <AiOutlineCloseCircle style={{color:'red', fontSize:'x-large'}} key=""/>
+                            {contact.viewed === "NO" 
+                                ? <AiOutlineCloseCircle style={{color:'red', fontSize:'x-large'}}/>
                                 : <AiOutlineCheckCircle style={{color:'green', fontSize:'x-large'}}/> }
-                    </Icon>
+                        </Icon>
                     </DivUser>
                 </DivMsg>
-                </>
             ))}
-            <ModalContact open={open} setOpen={setOpen} message={messageId}/>
+            <ModalContact open={open} setOpen={setOpen} message={message}/>
             </DivMsgs>
         </Container>
         </>

@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import Pagination from "../components/Pagination";
 import ButtonNew from "../components/ButtonNew";
 import Select from "../components/Select";
-import { getRooms, allRooms, createRoom, updateRoom, deleteRoom } from "../redux/slices/roomsSlice";
+import { getRooms, allRooms, createRoom, updateRoom, deleteRoom } from "../features/slices/roomsSlice";
 import { MdOutlineDeleteOutline, MdOutlineUpdate } from 'react-icons/md';
 import { IoMdAddCircleOutline } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,8 +20,8 @@ export default function Rooms(){
     const roomsList = useSelector(allRooms);
 
     useEffect(()=> {
-        dispatch(getRooms(allRooms));
-    }, [allRooms])
+        dispatch(getRooms());
+    }, [])
 
     const handleClick = () => {
         dispatch(createRoom({

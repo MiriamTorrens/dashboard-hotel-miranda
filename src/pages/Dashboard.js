@@ -3,7 +3,7 @@ import Calendar from "../components/Calendar";
 import Estadistics from "../components/Estadistics";
 import DataCalendar from "../components/DataCalendar";
 import Kpis from "../components/Kpis";
-import Contacts from "../components/Contacts";
+import ContactsDiv from "../components/ContactsDiv";
 
 export default function Dashboard(){
     return(
@@ -14,7 +14,7 @@ export default function Dashboard(){
                 <Estadistics/>
             </ContainerDashboard>
             <DataCalendar/>
-            <Contacts/>
+            <ContactsDiv/>
         </ContainerAll>  
     )
 }

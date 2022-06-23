@@ -1,6 +1,4 @@
 import { ContainerAll, SubContainer, ContainerHeader,Table } from "../styles/Styles";
-import { UsersList } from '../JSON/UsersList';
-import { BsThreeDotsVertical } from 'react-icons/bs';
 import { BsFillTelephoneFill } from 'react-icons/bs';
 import Pagination from "../components/Pagination";
 import { NavLink } from "react-router-dom";
@@ -8,7 +6,7 @@ import ButtonNew from "../components/ButtonNew";
 import Header from "../components/Header";
 import Select from "../components/Select";
 import InputText from "../components/InputText";
-import { getUsers, allUsers, createUser, getUser, updateUser, deleteUser} from "../redux/slices/usersSlice";
+import { getUsers, allUsers, createUser, updateUser, deleteUser} from "../features/slices/usersSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from "react";
 import { MdOutlineDeleteOutline, MdOutlineUpdate } from 'react-icons/md';
@@ -24,8 +22,8 @@ export default function Users(){
     const usersList = useSelector(allUsers);
 
     useEffect(()=> {
-        dispatch(getUsers(allUsers));
-    }, [allUsers])
+        dispatch(getUsers());
+    }, [])
     
     const handleClick = () => {
         dispatch(createUser({
@@ -37,7 +35,7 @@ export default function Users(){
             description: "mollit duis nisi non deserunt",
             contact: "789-965-4830",
             status: "ACTIVE",
-            photo: "",
+            photo: "https://xsgames.co/randomusers/assets/avatars/female/23.jpg",
             password: "BPA8BOL3"
         }));
     }
