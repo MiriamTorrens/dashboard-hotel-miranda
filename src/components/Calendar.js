@@ -49,16 +49,14 @@ const FullCalendarWrapper = styled.div`
   .fc-button-primary {
     background-color: #ffffff;
     color: #799283;
-    border: none;
+    border: 0;
     transition: 0.2s;
     :hover,
     :active {
       box-shadow: 0px 4px 4px #00000005;
       background-color: #ebf1ef;
       color: #135846;
-    }
-    :focus {
-      border: none;
+      border: 0
     }
   }
   .fc .fc-daygrid-day-frame,
@@ -95,8 +93,7 @@ const FullCalendarWrapper = styled.div`
     background-color: inherit;
     font-weight: bold;
   }
-`;
-
+`
 export default function Calendar(){
     const headerToolbar = {
         start: "",

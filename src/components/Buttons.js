@@ -28,7 +28,7 @@ export const ButtonNewRoom = styled.button`
     font-size: 16px;
     cursor: pointer;
     ::before{
-        content:"+ New Room"
+        content:"+ New Room";
     } 
 `
 export const ButtonNewEmployee = styled.button`
