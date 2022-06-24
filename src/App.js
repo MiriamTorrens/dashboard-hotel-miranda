@@ -10,7 +10,7 @@ import EditUser from './pages/EditUser';
 import NewUser from './pages/NewUser';
 import NewRoom from './pages/NewRoom';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { ContainerApp, ContainerRutes } from './styles/Styles';
+import { AppWrapper, RoutesWrapper } from "./styles/Styles";
 import { useEffect, createContext, useReducer } from 'react';
 import  RequireAuth  from './RequireAuth';
 import { useState } from 'react';
@@ -71,9 +71,9 @@ function App() {
 
   return (
       <AuthContext.Provider value={{state, dispatch}}>
-        <ContainerApp>
+        <AppWrapper>
           <NavBar displayLat={displayLat} />
-          <ContainerRutes>
+          <RoutesWrapper>
             <MenuSup displayLat={displayLat} setDisplayLat={setDisplayLat}/>
             <Routes>
             <Route path="/" element={<Login />}/>
@@ -89,8 +89,8 @@ function App() {
                 <Route path="users/editUser" element={<RequireAuth><EditUser/></RequireAuth>}/>
                 <Route path="*" element={<main>Not found</main>}/>
             </Routes>
-          </ContainerRutes>
-        </ContainerApp>
+          </RoutesWrapper>
+        </AppWrapper>
       </AuthContext.Provider>
   );
 }

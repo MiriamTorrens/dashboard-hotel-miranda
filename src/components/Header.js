@@ -6,14 +6,14 @@ const HeaderTab = styled.div`
   
 `
 const Tab = styled.div`
-    display: flex;
-    color: #6E6E6E;
-    height: 36px;
-    font-size: 16px;
-    font-weight: 600;
-    font-family: 'Poppins', sans-serif;
-    border-bottom: 1px solid #0000001A;
-`
+  display: flex;
+  color: #6e6e6e;
+  height: 36px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  border-bottom: 1px solid #0000001a;
+`;
 const MenuOPtions = styled.span`
     margin-right: 70px;
     &:hover{

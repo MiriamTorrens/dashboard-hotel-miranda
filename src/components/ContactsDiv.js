@@ -6,7 +6,7 @@ import { getContact, allContact, getThisContact, updateContact } from "../featur
 import { useState } from 'react';
 import ModalContact from './ModalContact';
 
-const Container = styled.div`
+const ContactsWrapper = styled.div`
     box-shadow: 0px 4px 4px #00000005;
     border-radius: 20px;
     width:95%;
@@ -60,13 +60,13 @@ export default function ContactsDiv(){
     const [message, setMessage] = useState({});
     
     const handleClick = (contact) => {
-        setOpen("block");
-        setMessage(contact);
-    }
+      setOpen("block");
+      setMessage(contact);
+    };
  
     return(
         <>
-        <Container>
+        <ContactsWrapper>
             <Title>Latest Review by Customers</Title>
             <DivMsgs>
             {contactList.map(contact => (
@@ -88,7 +88,7 @@ export default function ContactsDiv(){
             ))}
             <ModalContact open={open} setOpen={setOpen} message={message}/>
             </DivMsgs>
-        </Container>
+        </ContactsWrapper>
         </>
     )
 }

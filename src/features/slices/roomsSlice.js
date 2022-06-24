@@ -15,18 +15,18 @@ export const roomsSlice = createSlice({
       reducers: {
         createRoom: (state, action) => {
             const newRoom = {
-                id: action.payload.id,
-                images: action.payload.images,
-                roomType: action.payload.roomType,
-                roomNumber: action.payload.roomNumber,
-                offer: action.payload.offer,
-                price: action.payload.price,
-                discount: action.payload.discount,
-                cancellation: action.payload.cancellation,
-                amenities: action.payload.amenities,
-                status: action.payload.status,
-                roomName: action.payload.roomName
-            }
+              id: action.payload.id,
+              images: action.payload.images,
+              roomType: action.payload.roomType,
+              roomNumber: action.payload.roomNumber,
+              offer: action.payload.offer,
+              price: action.payload.price,
+              discount: action.payload.discount,
+              cancellation: action.payload.cancellation,
+              amenities: action.payload.amenities,
+              status: action.payload.status,
+              roomName: action.payload.roomName,
+            };
             state = state.unshift(newRoom);
         },
         getRoom: (state, action) => {

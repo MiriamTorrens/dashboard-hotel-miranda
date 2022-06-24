@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Container = styled.div`
+const DataCalendarWrapper = styled.div`
     box-shadow: 0px 4px 4px #00000005;
     border-radius: 20px;
     width:95%;
@@ -9,16 +9,16 @@ const Container = styled.div`
     margin: 0 auto;
 `
 export default function DataCalendar(){
-    return(
-        <Container>
-             <p>Datos que refleja el calendario</p>
-                <ul>
-                    <li>Foto habitación</li>
-                    <li>Número de habitación</li>
-                    <li>Nombre cliente</li>
-                    <li>Fecha entreda</li>
-                    <li>Fecha salida</li>
-                </ul>
-        </Container>
-    )
+    return (
+      <DataCalendarWrapper>
+        <p>Datos que refleja el calendario</p>
+        <ul>
+          <li>Foto habitación</li>
+          <li>Número de habitación</li>
+          <li>Nombre cliente</li>
+          <li>Fecha entreda</li>
+          <li>Fecha salida</li>
+        </ul>
+      </DataCalendarWrapper>
+    );
 }

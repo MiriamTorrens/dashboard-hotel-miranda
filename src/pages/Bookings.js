@@ -1,8 +1,8 @@
-import { ContainerAll, SubContainer, ContainerHeader, SelectDate, Table} from "../styles/Styles";
+import { AllWrapper, SubWrapper, HeaderTableWrapper, SelectDate, Table} from "../styles/Styles";
 import Header from "../components/Header";
 import Select from "../components/Select";
 import InputText from "../components/InputText";
-import ButtonView from "../components/ButtonView";
+import { ButtonView } from "../components/Buttons";
 import ButtonStatus from "../components/ButtonStatus";
 import Pagination from "../components/Pagination";
 import { getBookings, allBookings, createBooking, updateBooking, deleteBooking } from "../features/slices/bookingsSlice";
@@ -43,52 +43,77 @@ export default function Bookings(){
         }));
     }
 
-    return(
-        <ContainerAll>
-            <SubContainer>
-                <ContainerHeader>
-                    <Header menuOptions={menuOptions} selectOptions={selectOptions}/>
-                    <InputText placeholder={placeholder}></InputText>
-                    <div>
-                        <SelectDate>
-                            <option>1 November 2020 - 30 November 2020</option>
-                        </SelectDate>
-                        <Select selectOptions={selectOptions}/>
-                    </div>
-                </ContainerHeader>
-                <Table>
-                    <thead>
-                        <tr>
-                            <th>Guest</th>
-                            <th>Order Date</th>
-                            <th>Check in</th>
-                            <th>Check out</th>
-                            <th>Special Request</th>
-                            <th>Room Type</th>
-                            <th>Status</th>
-                            <th><IoMdAddCircleOutline style={{fontSize:30}} onClick={() => handleClick()}/></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {bookingsList.map(booking => (
-                            <tr key={booking.id}>
-                                <td>{booking.fullName}<br/>{booking.id}</td>
-                                <td>{booking.date}</td>
-                                <td>{booking.checkin}</td>
-                                <td>{booking.checkout}</td>
-                                <td><ButtonView/></td>
-                                <td>{booking.roomType.type} - {booking.roomType.roomNumber}</td>
-                                <td><ButtonStatus status={booking.status}></ButtonStatus></td>
-                                <td>
-                                    <MdOutlineDeleteOutline style={{fontSize:30}} onClick={() => dispatch(deleteBooking(booking))}/>
-                                    <MdOutlineUpdate style={{fontSize:30}} onClick={() => dispatch(updateBooking({...booking, status: "Check Out"}))}/>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </Table>
-                <Pagination/>
-            </SubContainer>
-        </ContainerAll>
-    )
+    return (
+      <AllWrapper>
+        <SubWrapper>
+          <HeaderTableWrapper>
+            <Header menuOptions={menuOptions} selectOptions={selectOptions} />
+            <InputText placeholder={placeholder}></InputText>
+            <div>
+              <SelectDate>
+                <option>1 November 2020 - 30 November 2020</option>
+              </SelectDate>
+              <Select selectOptions={selectOptions} />
+            </div>
+          </HeaderTableWrapper>
+          <Table>
+            <thead>
+              <tr>
+                <th>Guest</th>
+                <th>Order Date</th>
+                <th>Check in</th>
+                <th>Check out</th>
+                <th>Special Request</th>
+                <th>Room Type</th>
+                <th>Status</th>
+                <th>
+                  <IoMdAddCircleOutline
+                    style={{ fontSize: 30 }}
+                    onClick={() => handleClick()}
+                  />
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {bookingsList.map((booking) => (
+                <tr key={booking.id}>
+                  <td>
+                    {booking.fullName}
+                    <br />
+                    {booking.id}
+                  </td>
+                  <td>{booking.date}</td>
+                  <td>{booking.checkin}</td>
+                  <td>{booking.checkout}</td>
+                  <td>
+                    <ButtonView />
+                  </td>
+                  <td>
+                    {booking.roomType.type} - {booking.roomType.roomNumber}
+                  </td>
+                  <td>
+                    <ButtonStatus status={booking.status}></ButtonStatus>
+                  </td>
+                  <td>
+                    <MdOutlineDeleteOutline
+                      style={{ fontSize: 30 }}
+                      onClick={() => dispatch(deleteBooking(booking))}
+                    />
+                    <MdOutlineUpdate
+                      style={{ fontSize: 30 }}
+                      onClick={() =>
+                        dispatch(
+                          updateBooking({ ...booking, status: "Check Out" })
+                        )
+                      }
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+          <Pagination />
+        </SubWrapper>
+      </AllWrapper>
+    );
 }

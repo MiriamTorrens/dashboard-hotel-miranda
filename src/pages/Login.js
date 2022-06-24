@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { ContainerLogo } from '../styles/Styles';
+import { LogoWrapper } from '../styles/Styles';
 import Logo from '../components/Logo';
 import FormLogin from '../components/FormLogin';
 import { AuthContext } from '../App';
@@ -28,9 +28,9 @@ export default function Login(){
     }
     
     return(
-        <ContainerLogo>
+        <LogoWrapper>
             <Logo/>
             <FormLogin handleSubmit={handleSubmit} user={user} setUser={setUser} password={password} setPassword={setPassword}/>
-        </ContainerLogo> 
+        </LogoWrapper> 
     )
 }

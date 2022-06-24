@@ -4,14 +4,14 @@ import { BsCalendarCheck } from 'react-icons/bs';
 import {TbLogout} from 'react-icons/tb';
 import {TbLogin} from 'react-icons/tb';
 
-const ContainerKpis = styled.div`
+const KpisWrapper = styled.div`
     width: 95%;
     margin: 0 auto;
     margin-top: 30px;
     display: flex;
     justify-content: space-between;
 `
-const ContainerKpi = styled.div`
+const KpiWrapper = styled.div`
     display: flex;
     align-items: center;
     width: 23%;
@@ -21,7 +21,7 @@ const ContainerKpi = styled.div`
     box-shadow: 0px 4px 4px #00000005;
     border-radius: 12px;
 `
-const ContainerIcon = styled.div`
+const IconWrapper = styled.div`
     display: flex;
     background-color: #FFEDEC;
     width: 65px;
@@ -39,35 +39,107 @@ const Icon = styled.span`
 
 export default function Kpis(){
     return (
-        <ContainerKpis>
-        <ContainerKpi>
-        <ContainerIcon><Icon><BiBed/></Icon></ContainerIcon>
-        <div style={{display:'block'}}>
-            <span style={{fontSize:30, fontWeight:600, fontFamily:'Poppins'}}>8,461</span><br/>
-            <span style={{culor:'#787878', fontSize: 14, fontWeight: 300, fontFamily:'Poppins'}}>Total Bookings</span>
-        </div>
-        </ContainerKpi>
-        <ContainerKpi>
-        <ContainerIcon><Icon><BsCalendarCheck/></Icon></ContainerIcon>
-        <div style={{display:'block'}}>
-            <span style={{fontSize:30, fontWeight:600, fontFamily:'Poppins'}}>963</span><br/>
-            <span style={{culor:'#787878', fontSize: 14, fontWeight: 300, fontFamily:'Poppins'}}>Scheduled Room</span>
-        </div>
-        </ContainerKpi>
-        <ContainerKpi>
-        <ContainerIcon><Icon><TbLogout/></Icon></ContainerIcon>
-        <div style={{display:'block'}}>
-            <span style={{fontSize:30, fontWeight:600, fontFamily:'Poppins'}}>753</span><br/>
-            <span style={{culor:'#787878', fontSize: 14, fontWeight: 300, fontFamily:'Poppins'}}>Check In</span>
-        </div>
-        </ContainerKpi>
-        <ContainerKpi>
-        <ContainerIcon><Icon><TbLogin/></Icon></ContainerIcon>
-        <div style={{display:'block'}}>
-            <span style={{fontSize:30, fontWeight:600, fontFamily:'Poppins'}}>516</span><br/>
-            <span style={{culor:'#787878', fontSize: 14, fontWeight: 300, fontFamily:'Poppins'}}>Check Out</span>
-        </div>
-        </ContainerKpi>
-    </ContainerKpis>
-    )
+      <KpisWrapper>
+        <KpiWrapper>
+          <IconWrapper>
+            <Icon>
+              <BiBed />
+            </Icon>
+          </IconWrapper>
+          <div style={{ display: "block" }}>
+            <span
+              style={{ fontSize: 30, fontWeight: 600, fontFamily: "Poppins" }}
+            >
+              8,461
+            </span>
+            <br />
+            <span
+              style={{
+                culor: "#787878",
+                fontSize: 14,
+                fontWeight: 300,
+                fontFamily: "Poppins",
+              }}
+            >
+              Total Bookings
+            </span>
+          </div>
+        </KpiWrapper>
+        <KpiWrapper>
+          <IconWrapper>
+            <Icon>
+              <BsCalendarCheck />
+            </Icon>
+          </IconWrapper>
+          <div style={{ display: "block" }}>
+            <span
+              style={{ fontSize: 30, fontWeight: 600, fontFamily: "Poppins" }}
+            >
+              963
+            </span>
+            <br />
+            <span
+              style={{
+                culor: "#787878",
+                fontSize: 14,
+                fontWeight: 300,
+                fontFamily: "Poppins",
+              }}
+            >
+              Scheduled Room
+            </span>
+          </div>
+        </KpiWrapper>
+        <KpiWrapper>
+          <IconWrapper>
+            <Icon>
+              <TbLogout />
+            </Icon>
+          </IconWrapper>
+          <div style={{ display: "block" }}>
+            <span
+              style={{ fontSize: 30, fontWeight: 600, fontFamily: "Poppins" }}
+            >
+              753
+            </span>
+            <br />
+            <span
+              style={{
+                culor: "#787878",
+                fontSize: 14,
+                fontWeight: 300,
+                fontFamily: "Poppins",
+              }}
+            >
+              Check In
+            </span>
+          </div>
+        </KpiWrapper>
+        <KpiWrapper>
+          <IconWrapper>
+            <Icon>
+              <TbLogin />
+            </Icon>
+          </IconWrapper>
+          <div style={{ display: "block" }}>
+            <span
+              style={{ fontSize: 30, fontWeight: 600, fontFamily: "Poppins" }}
+            >
+              516
+            </span>
+            <br />
+            <span
+              style={{
+                culor: "#787878",
+                fontSize: 14,
+                fontWeight: 300,
+                fontFamily: "Poppins",
+              }}
+            >
+              Check Out
+            </span>
+          </div>
+        </KpiWrapper>
+      </KpisWrapper>
+    );
 }

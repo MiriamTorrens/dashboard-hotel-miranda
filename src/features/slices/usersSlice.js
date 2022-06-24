@@ -39,7 +39,7 @@ export const usersSlice = createSlice({
       },
       extraReducers(builder) {
           builder.addCase(getUsers.fulfilled, (state, action) => {
-              return state = action.payload;
+              return (state = action.payload);
           })
       }
 })

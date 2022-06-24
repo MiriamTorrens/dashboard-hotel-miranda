@@ -1,18 +1,18 @@
 import styled from 'styled-components';
 
-export const ContainerApp = styled.div`
+export const AppWrapper = styled.div`
     display: flex;
 `
-export const ContainerRutes = styled.div`
+export const RoutesWrapper = styled.div`
     display: block;
     width: 100%;
 `
-export const ContainerAll = styled.div`
+export const AllWrapper = styled.div`
     background-color:#F8F8F8; 
     padding: 5px;
    
 `
-export const ContainerLogo = styled.div`
+export const LogoWrapper = styled.div`
     width: 400px;
     height: 350px;
     text-align: center;
@@ -21,19 +21,19 @@ export const ContainerLogo = styled.div`
     margin-top: 150px;
     border-radius: 18px;
 `
-export const ContainerDashboard = styled.div`
+export const DashboardWrapper = styled.div`
     width: 95%;
     margin: 0 auto;
     margin-top: 30px;
     display: flex;
     justify-content: space-between;
 `
-export const SubContainer = styled.div`
-    width: 95%;
-    margin: 0 auto;
-    margin-top: 50px;
-`
-export const ContainerHeader = styled.div`
+export const SubWrapper = styled.div`
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 50px;
+`;
+export const HeaderTableWrapper = styled.div`
     display: flex;
     justify-content: space-between;
 `

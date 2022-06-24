@@ -14,18 +14,19 @@ export const contactSlice = createSlice({
         createContact: (state, action) => {
             const f = new Date();
             const newContact = {
-                id: action.payload.id,
-                date:  f.getFullYear() + "-" + (f.getMonth()+1) + "-" + f.getDate(),
-                customer:{
-                    fullName: action.payload.customer.fullName,
-                    email: action.payload.customer.email,
-                    phoneNumber: action.payload.customer.phoneNumber
-                },
-                subject: action.payload.subject,
-                comment: action.payload.comment,
-                viewed: action.payload.status,
-                archived: action.payload.archived
-            }
+              id: action.payload.id,
+              date:
+                f.getFullYear() + "-" + (f.getMonth() + 1) + "-" + f.getDate(),
+              customer: {
+                fullName: action.payload.customer.fullName,
+                email: action.payload.customer.email,
+                phoneNumber: action.payload.customer.phoneNumber,
+              },
+              subject: action.payload.subject,
+              comment: action.payload.comment,
+              viewed: action.payload.status,
+              archived: action.payload.archived,
+            };
             state = state.unshift(newContact);
         },
         getThisContact: (state, action) => {
