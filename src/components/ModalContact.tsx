@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { updateContact } from "../features/slices/contactSlice";
+import { PropsModalContact } from '../services/types';
 
 const Modal = styled.div`
   width: 500px;
@@ -34,22 +35,22 @@ const Subject = styled.h1`
   color: #135846;
 `;
 
-export default function ModalContact(props) {
+export default function ModalContact({open, setOpen, message}: PropsModalContact) {
   const dispatch = useDispatch();
 
   const handleClose = () => {
-    props.setOpen("none");
-    dispatch(updateContact({ ...props.message, viewed: "YES" }));
+    setOpen("none");
+    dispatch(updateContact({ ...message, viewed: true }));
   };
 
   return (
-    <Modal style={{ display: props.open }}>
+    <Modal style={{ display: open }}>
       <IconClose>
         <AiOutlineCloseCircle onClick={() => handleClose()} />
       </IconClose>
       <DataWrapper>
-        <Subject>{props.message.subject}</Subject>
-        <p>{props.message.comment}</p>
+        <Subject>{message.subject}</Subject>
+        <p>{message.comment}</p>
       </DataWrapper>
     </Modal>
   );

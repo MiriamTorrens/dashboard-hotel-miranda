@@ -6,6 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { AuthContext } from "../App";
 import { useContext } from "react";
+import { PropsNavBar } from '../services/types';
 
 const MenuWrapper = styled.div`
   display: flex;
@@ -33,31 +34,29 @@ const Icon = styled.span`
   &:hover {
     color: #e23428;
   }
-`;
+`
 
-export default function MenuSup(props) {
+export default function MenuSup({displayLat, setDisplayLat}: PropsNavBar) {
   const { state, dispatch } = useContext(AuthContext);
   const display = state.authenticated ? "flex" : "none";
   const navigate = useNavigate();
   const location = useLocation();
   let currentLocation = location.pathname.substring(1);
-
-  if (currentLocation === "users/newUser") {
-    currentLocation = "Users";
-  } else if (currentLocation === "users/editUser") {
-    currentLocation = "Users";
-  } else if (currentLocation === "rooms/newRoom") {
-    currentLocation = "Rooms";
-  }
+    if (currentLocation === "users/newUser") {
+      currentLocation = "Users";
+    } else if (currentLocation === "users/editUser") {
+      currentLocation = "Users";
+    } else if (currentLocation === "rooms/newRoom") {
+      currentLocation = "Rooms";
+    }
 
   const handleClick = () => {
-    props.displayLat === "block"
-      ? props.setDisplayLat("none")
-      : props.setDisplayLat("block");
+    displayLat === "block"
+      ? setDisplayLat("none")
+      : setDisplayLat("block");
   };
   const IconDisplayLat =
-    props.displayLat === "block" ? BsArrowBarLeft : BsArrowBarRight;
-
+    displayLat === "block" ? BsArrowBarLeft : BsArrowBarRight;
   const Logout = () => {
     dispatch({ type: "logout" });
     navigate("/login", { replace: true });

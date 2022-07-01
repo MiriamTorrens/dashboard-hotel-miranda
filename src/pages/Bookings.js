@@ -1,10 +1,10 @@
 import { AllWrapper, SubWrapper, HeaderTableWrapper, SelectDate, Table} from "../styles/Styles";
-import Header from "../components/Header";
-import Select from "../components/Select";
-import InputText from "../components/InputText";
-import { ButtonView } from "../components/Buttons";
-import ButtonStatus from "../components/ButtonStatus";
-import Pagination from "../components/Pagination";
+import Header from "../components/Header.tsx";
+import Select from "../components/Select.tsx";
+import InputText from "../components/InputText.tsx";
+import { ButtonView } from "../components/Buttons.tsx";
+import ButtonStatus from "../components/ButtonStatus.tsx";
+import Pagination from "../components/Pagination.tsx";
 import { getBookings, allBookings, createBooking, updateBooking, deleteBooking } from "../features/slices/bookingsSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from "react";

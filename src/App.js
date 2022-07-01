@@ -4,20 +4,20 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Rooms from './pages/Rooms';
 import Users from './pages/Users';
-import NavBar from "./components/NavBar";
-import MenuSup from "./components/MenuSup";
+import NavBar from "./components/NavBar.tsx";
+import MenuSup from "./components/MenuSup.tsx";
 import EditUser from './pages/EditUser';
 import NewUser from './pages/NewUser';
 import NewRoom from './pages/NewRoom';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { AppWrapper, RoutesWrapper } from "./styles/Styles";
 import { useEffect, createContext, useReducer } from 'react';
-import  RequireAuth  from './RequireAuth';
+import  RequireAuth  from './services/RequireAuth.tsx';
 import { useState } from 'react';
 
 const initialUser = localStorage.getItem('authenticated') 
   ? JSON.parse(localStorage.getItem('authenticated')) 
-  : {authenticated: false, name: null, email:null} ;
+  : { authenticated: false, name: null, email: null };
 
 const userReducer = (state, action) => {
   switch(action.type){

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { PropsForm } from '../services/types';
 
 const Input = styled.input`
     border-radius: 8px;
@@ -23,12 +24,13 @@ const InputSubmit = styled.input`
     background: #799283;
     color: white;
   }
-`;
-export default function FormLogo(props){
+`
+
+export default function FormLogo({handleSubmit, user, setUser, password, setPassword}: PropsForm){
     return(
-        <form onSubmit={props.handleSubmit}>
-            <Input type="email" data-cy="user" value={props.user} onChange={(e) => props.setUser(e.target.value)} placeholder="User" required></Input><br/>
-            <Input type="password" data-cy="password" value={props.password} onChange={(e) => props.setPassword(e.target.value)} placeholder="Password" required></Input><br/>
+        <form onSubmit={handleSubmit}>
+            <Input type="email" data-cy="user" value={user} onChange={(e) => setUser(e.target.value)} placeholder="User" required></Input><br/>
+            <Input type="password" data-cy="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required></Input><br/>
             <InputSubmit data-cy="submit" type="submit" value="Login"/>
         </form>
     )

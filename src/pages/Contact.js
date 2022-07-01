@@ -1,9 +1,9 @@
 import { AllWrapper, SubWrapper, HeaderTableWrapper, Table} from "../styles/Styles";
-import ContactsDiv from '../components/ContactsDiv';
-import Pagination from "../components/Pagination";
-import Header from "../components/Header";
-import Select from "../components/Select";
-import {ButtonArchive} from "../components/Buttons";
+import ContactsDiv from '../components/ContactsDiv.tsx';
+import Pagination from "../components/Pagination.tsx";
+import Header from "../components/Header.tsx";
+import Select from "../components/Select.tsx";
+import {ButtonArchive} from "../components/Buttons.tsx";
 import { getContact, allContact, createContact,} from "../features/slices/contactSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from "react";

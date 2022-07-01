@@ -1,10 +1,10 @@
 import { AllWrapper, SubWrapper, HeaderTableWrapper, Table} from "../styles/Styles";
 import { NavLink } from 'react-router-dom';
-import ButtonStatus from "../components/ButtonStatus";
-import Header from "../components/Header";
-import Pagination from "../components/Pagination";
-import { ButtonNewRoom } from "../components/Buttons";
-import Select from "../components/Select";
+import ButtonStatus from "../components/ButtonStatus.tsx";
+import Header from "../components/Header.tsx";
+import Pagination from "../components/Pagination.tsx";
+import { ButtonNewRoom } from "../components/Buttons.tsx";
+import Select from "../components/Select.tsx";
 import { getRooms, allRooms, createRoom, updateRoom, deleteRoom } from "../features/slices/roomsSlice";
 import { MdOutlineDeleteOutline, MdOutlineUpdate } from 'react-icons/md';
 import { IoMdAddCircleOutline } from 'react-icons/io';

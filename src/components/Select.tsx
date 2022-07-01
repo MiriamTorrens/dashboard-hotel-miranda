@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { PropsSelect } from '../services/types';
 
 export const SelectDiv = styled.select`
   border-color: #135846;
@@ -9,10 +10,10 @@ export const SelectDiv = styled.select`
   text-align: center;
   font-size: 16px;
 `;
-export default function Select(props) {
+export default function Select({selectOptions}: PropsSelect) {
   return (
     <SelectDiv>
-      {props.selectOptions.map((option) => (
+      {selectOptions.map((option) => (
         <option key={option} value={option}>
           {option}
         </option>

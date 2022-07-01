@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { PropsInputText } from '../services/types';
 
 const Input = styled.input`
   border-color: #135846;
@@ -7,9 +8,9 @@ const Input = styled.input`
   height: 40px;
   float: right;
   text-align: center;
-`;
-export default function InputText(props){
+`
+export default function InputText({placeholder}: PropsInputText){
     return(
-        <Input placeholder={props.placeholder}></Input>
+        <Input placeholder={placeholder}></Input>
     )
 }

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { PropsHeader } from '../services/types';
 
 const HeaderTab = styled.div`
     display: flex;
@@ -22,11 +23,11 @@ const MenuOPtions = styled.span`
         border-bottom: 3px solid #135846;
     }
 `
-export default function Header(props){
+export default function Header({menuOptions}: PropsHeader){
     return(
         <HeaderTab>
             <Tab>
-                {props.menuOptions.map(option => (
+                {menuOptions.map(option => (
                     <MenuOPtions key={option}>{option}</MenuOPtions>
                 ))}
             </Tab>

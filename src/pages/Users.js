@@ -1,11 +1,11 @@
 import { AllWrapper, SubWrapper, HeaderTableWrapper,Table } from "../styles/Styles";
 import { BsFillTelephoneFill } from 'react-icons/bs';
-import Pagination from "../components/Pagination";
+import Pagination from "../components/Pagination.tsx";
 import { NavLink } from "react-router-dom";
-import {ButtonNewEmployee} from "../components/Buttons";
-import Header from "../components/Header";
-import Select from "../components/Select";
-import InputText from "../components/InputText";
+import {ButtonNewEmployee} from "../components/Buttons.tsx";
+import Header from "../components/Header.tsx";
+import Select from "../components/Select.tsx";
+import InputText from "../components/InputText.tsx";
 import { getUsers, allUsers, createUser, updateUser, deleteUser} from "../features/slices/usersSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from "react";

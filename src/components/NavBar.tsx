@@ -5,11 +5,12 @@ import { HiOutlineUser } from "react-icons/hi";
 import { HiOutlineMail } from "react-icons/hi";
 import { BsSuitHeartFill } from "react-icons/bs";
 import { AiOutlineCopyright } from "react-icons/ai";
-import Logo from "./Logo";
+import Logo from "./Logo.tsx";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { AuthContext } from "../App";
 import { useContext } from "react";
+import { PropsNavBar } from '../services/types';
 
 const NavBarWrapper = styled.div`
   width: 350px;
@@ -106,13 +107,14 @@ const Copyright = styled.p`
   font: 14px;
   color: #799283;
   margin-top: 30px;
-`;
-export default function NavBar(props) {
+`
+
+export default function NavBar({displayLat}: PropsNavBar) {
   const { state } = useContext(AuthContext);
   const display = state.authenticated ? "block" : "none";
-
+ 
   return (
-    <div style={{ display: props.displayLat }}>
+    <div style={{ display: displayLat }}>
       <NavBarWrapper style={{ display }}>
         <Logo />
         <Nav>

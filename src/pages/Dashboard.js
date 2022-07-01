@@ -1,9 +1,9 @@
 import { AllWrapper, DashboardWrapper} from "../styles/Styles";
-import Calendar from "../components/Calendar";
-import Estadistics from "../components/Estadistics";
-import DataCalendar from "../components/DataCalendar";
-import Kpis from "../components/Kpis";
-import ContactsDiv from "../components/ContactsDiv";
+import Calendar from "../components/Calendar.tsx";
+import Estadistics from "../components/Estadistics.tsx";
+import DataCalendar from "../components/DataCalendar.tsx";
+import Kpis from "../components/Kpis.tsx";
+import ContactsDiv from "../components/ContactsDiv.tsx";
 
 export default function Dashboard(){
     return (

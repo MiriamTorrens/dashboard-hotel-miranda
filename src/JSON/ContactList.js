@@ -10,8 +10,8 @@ export const ContactList =
         },
         "subject": "do laborum ut",
         "comment": "culpa enim qui voluptate id ex aliqua veniam irure aute eu ad aliqua irure exercitation sint dolor et do nostrud eu dolore laboris ex tempor minim voluptate consectetur qui id ea laboris ut quis adipisicing officia sint consectetur labore qui tempor ipsum duis fugiat ad sunt et aliquip nisi commodo sit veniam magna aliqua culpa incididunt voluptate exercitation magna magna exercitation dolor occaecat sint do sint voluptate tempor commodo amet mollit fugiat magna tempor exercitation quis velit aliqua deserunt est consectetur elit",
-        "viewed": "NO",
-        "archived": "NO"
+        "viewed": false,
+        "archived": false
     },
     {
         "id": "4d575013-7f2a",
@@ -23,8 +23,8 @@ export const ContactList =
         },
         "subject": "pariatur pariatur ea dolor",
         "comment": "mollit sit labore commodo laboris nulla do irure ut ea reprehenderit irure sint velit ut pariatur sit fugiat ullamco ullamco ipsum qui sit dolore pariatur velit irure consectetur cillum et anim est sunt laboris fugiat magna dolore ipsum ipsum sit fugiat sunt labore sunt sit consectetur aliqua aute adipisicing eu nostrud",
-        "viewed": "NO",
-        "archived": "NO"
+        "viewed": false,
+        "archived": false
     },
     {
         "id": "4bf1fdce-2753",
@@ -36,7 +36,7 @@ export const ContactList =
         },
         "subject": "commodo magna ullamco culpa amet",
         "comment": "tempor amet aliquip eu voluptate id nulla ex aliqua velit do Lorem ad dolore consequat occaecat tempor qui fugiat cupidatat aute mollit est adipisicing et dolore nostrud et irure non minim nisi consectetur velit duis quis dolore excepteur adipisicing occaecat pariatur aliqua ad consectetur cillum commodo laborum fugiat aute deserunt do labore sunt esse duis minim cupidatat duis consequat nisi tempor et aliqua do labore sit magna laboris consectetur sint non",
-        "viewed": "NO",
-        "archived": "NO"
+        "viewed": false,
+        "archived": false,
     }
 ]

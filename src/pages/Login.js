@@ -1,7 +1,7 @@
-import { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { LogoWrapper } from '../styles/Styles';
-import Logo from '../components/Logo';
-import FormLogin from '../components/FormLogin';
+import Logo from '../components/Logo.tsx';
+import FormLogin from '../components/FormLogin.tsx';
 import { AuthContext } from '../App';
 
 export default function Login(){

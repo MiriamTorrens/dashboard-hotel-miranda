@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { PropsButtonStatus } from '../services/types';
 
 export const Button = styled.button`
     width: 125px;
@@ -13,9 +14,8 @@ export const Button = styled.button`
     align-items: center;
 `
 
-export default function ButtonStatus(props){
-  const status = props.status;
-  let color;
+export default function ButtonStatus({status}: PropsButtonStatus){
+  let color:string;
   if (status === "Available" || status === "Check In") {
     color = "#5AD07A";
   } else if (status === "Booked" || status === "Check Out") {
