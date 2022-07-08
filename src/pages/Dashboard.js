@@ -1,6 +1,6 @@
 import { AllWrapper, DashboardWrapper} from "../styles/Styles";
 import Calendar from "../components/Calendar.tsx";
-import Estadistics from "../components/Estadistics.tsx";
+import Stadistics from "../components/Stadistics.tsx";
 import DataCalendar from "../components/DataCalendar.tsx";
 import Kpis from "../components/Kpis.tsx";
 import ContactsDiv from "../components/ContactsDiv.tsx";
@@ -11,7 +11,7 @@ export default function Dashboard(){
         <Kpis />
         <DashboardWrapper>
           <Calendar />
-          <Estadistics />
+          <Stadistics />
         </DashboardWrapper>
         <DataCalendar />
         <ContactsDiv />

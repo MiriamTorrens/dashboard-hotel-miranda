@@ -50,7 +50,7 @@ const Data = styled.div`
 const Svg = styled.div`
     margin-top: 90px;
 `
-export default function Estadistics() {
+export default function Stadistics() {
   useEffect(() => {
     const margin = { top: 10, right: 30, bottom: 20, left: 50 };
     const width = 700 - margin.left - margin.right;
@@ -130,10 +130,10 @@ export default function Estadistics() {
     function mouseLeave(event, data) {
       divData.style("visibility", "hidden");
     }
-    function mouseMove() {
+    function mouseMove(event) {
           divData
-          .style("top", parseInt(window.event.pageY-110) + "px")
-          .style("left", parseInt(window.event.pageX) + "px")
+          .style("top", (parseInt(event.pageY)-110).toString() + "px")
+          .style("left", event.pageX + "px")
     }  
   }, []);
     
