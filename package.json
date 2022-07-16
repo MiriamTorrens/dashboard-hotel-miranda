@@ -1,5 +1,6 @@
 {
   "name": "dashboard",
+  "homepage":"https://github.com/MiriamTorrens/hotel-miranda",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -26,6 +27,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "jest": "react-scripts test",
     "eject": "react-scripts eject",
@@ -52,6 +55,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "cypress": "^10.1.0",
+    "gh-pages": "^4.0.0",
     "jest-styled-components": "^7.0.8",
     "react-test-renderer": "^18.1.0"
   }
