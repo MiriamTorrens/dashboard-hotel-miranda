@@ -1,6 +1,6 @@
 {
   "name": "dashboard",
-  "homepage": "https://github.com/MiriamTorrens/hotel-miranda",
+  "homepage": "https://github.com/MiriamTorrens/hotel-miranda.git",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
