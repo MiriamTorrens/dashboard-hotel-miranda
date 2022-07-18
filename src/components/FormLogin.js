@@ -1,12 +1,12 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Input = styled.input`
-    border-radius: 8px;
-    width: 50%;
-    height: 30px;
-    margin:10px;
-    text-indent: 10px;
-`
+  border-radius: 8px;
+  width: 50%;
+  height: 30px;
+  margin: 10px;
+  text-indent: 10px;
+`;
 const InputSubmit = styled.input`
   font-size: 16px;
   font-family: "Poppins", sans-serif;
@@ -24,12 +24,28 @@ const InputSubmit = styled.input`
     color: white;
   }
 `;
-export default function FormLogo(props){
-    return(
-        <form onSubmit={props.handleSubmit}>
-            <Input type="email" data-cy="user" value={props.user} onChange={(e) => props.setUser(e.target.value)} placeholder="User" required></Input><br/>
-            <Input type="password" data-cy="password" value={props.password} onChange={(e) => props.setPassword(e.target.value)} placeholder="Password" required></Input><br/>
-            <InputSubmit data-cy="submit" type="submit" value="Login"/>
-        </form>
-    )
+export default function FormLogo(props) {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <Input
+        type="email"
+        data-cy="user"
+        value={props.user}
+        onChange={(e) => props.setUser(e.target.value)}
+        placeholder="User"
+        required
+      ></Input>
+      <br />
+      <Input
+        type="password"
+        data-cy="password"
+        value={props.password}
+        onChange={(e) => props.setPassword(e.target.value)}
+        placeholder="Password"
+        required
+      ></Input>
+      <br />
+      <InputSubmit data-cy="submit" type="submit" value="Login" />
+    </form>
+  );
 }
