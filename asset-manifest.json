@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/dashboard-hotel-miranda/static/css/main.25159b98.css",
-    "main.js": "/dashboard-hotel-miranda/static/js/main.21d6a4ff.js",
+    "main.js": "/dashboard-hotel-miranda/static/js/main.cac0d99a.js",
     "static/js/787.545aecf5.chunk.js": "/dashboard-hotel-miranda/static/js/787.545aecf5.chunk.js",
     "static/media/logo.png": "/dashboard-hotel-miranda/static/media/logo.08935cec324253719aaa.png",
     "index.html": "/dashboard-hotel-miranda/index.html",
     "main.25159b98.css.map": "/dashboard-hotel-miranda/static/css/main.25159b98.css.map",
-    "main.21d6a4ff.js.map": "/dashboard-hotel-miranda/static/js/main.21d6a4ff.js.map",
+    "main.cac0d99a.js.map": "/dashboard-hotel-miranda/static/js/main.cac0d99a.js.map",
     "787.545aecf5.chunk.js.map": "/dashboard-hotel-miranda/static/js/787.545aecf5.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.25159b98.css",
-    "static/js/main.21d6a4ff.js"
+    "static/js/main.cac0d99a.js"
   ]
 }
