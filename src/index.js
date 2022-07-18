@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 //import { DndProvider } from 'react-dnd';
 //import { HTML5Backend } from 'react-dnd-html5-backend';
 import "./index.css";
@@ -12,11 +12,11 @@ import { store } from "./store";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <HashRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       {/* <DndProvider backend={HTML5Backend}> */}
       <App />
       {/* </DndProvider> */}
-    </HashRouter>
+    </BrowserRouter>
   </Provider>
 );
 
