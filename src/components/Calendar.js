@@ -1,13 +1,13 @@
-import styled from 'styled-components';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
+import styled from "styled-components";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
 
 const CalendarWrapper = styled.div`
-    box-shadow: 0px 4px 4px #00000005;
-    border-radius: 20px;
-    width: 49%;
-    background-color: #FFFFFF;
-`
+  box-shadow: 0px 4px 4px #00000005;
+  border-radius: 20px;
+  width: 49%;
+  background-color: #ffffff;
+`;
 const FullCalendarWrapper = styled.div`
   grid-column: 1/3;
   padding: 2rem 2rem;
@@ -56,7 +56,7 @@ const FullCalendarWrapper = styled.div`
       box-shadow: 0px 4px 4px #00000005;
       background-color: #ebf1ef;
       color: #135846;
-      border: 0
+      border: 0;
     }
   }
   .fc .fc-daygrid-day-frame,
@@ -93,22 +93,22 @@ const FullCalendarWrapper = styled.div`
     background-color: inherit;
     font-weight: bold;
   }
-`
-export default function Calendar(){
-    const headerToolbar = {
-        start: "",
-        center: "",
-        end: "prev,title,next"
-    };
-    return(
-       <CalendarWrapper>
-            <FullCalendarWrapper>
-                <FullCalendar
-                plugins={[dayGridPlugin]}
-                initialView="dayGridMonth"
-                headerToolbar={headerToolbar}
-                />
-        </FullCalendarWrapper>
-      </CalendarWrapper>
-    )
+`;
+export default function Calendar() {
+  const headerToolbar = {
+    start: "",
+    center: "",
+    end: "prev,title,next",
+  };
+  return (
+    <CalendarWrapper>
+      <FullCalendarWrapper>
+        <FullCalendar
+          plugins={[dayGridPlugin]}
+          initialView="dayGridMonth"
+          headerToolbar={headerToolbar}
+        />
+      </FullCalendarWrapper>
+    </CalendarWrapper>
+  );
 }

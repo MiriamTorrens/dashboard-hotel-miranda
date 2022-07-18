@@ -17,12 +17,12 @@ const LogoImage = styled.div`
   background-size: 100% 100%;
   background-position: center;
   margin-top: 5px;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
 `;
 const Title = styled.h1`
   margin-bottom: 0;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 1000;
 `;
 const Subtitle = styled.p`

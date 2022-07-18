@@ -12,7 +12,7 @@ import { AuthContext } from "../App";
 import { useContext } from "react";
 
 const NavBarWrapper = styled.div`
-  width: 350px;
+  width: 280px;
   background-color: white;
   margin-top: 30px;
 `;
@@ -20,7 +20,7 @@ const Nav = styled.nav`
   margin-top: 40px;
 `;
 const StyledNavLink = styled(NavLink)`
-  font-size: 18px;
+  font-size: 16px;
   text-decoration: none;
   color: #799283;
   display: flex;
@@ -38,9 +38,9 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 const UserWrapper = styled.div`
-  width: 233px;
+  width: 200px;
   height: 221px;
-  margin-left: 46px;
+  margin-left: 35px;
   margin-top: 50px;
   background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -95,15 +95,15 @@ const Texts = styled.div`
 const StyleIcons = {
   marginLeft: 50,
   marginRight: 30,
-  fontSize: "xx-large",
+  fontSize: "x-large",
 };
 const Admin = styled.p`
-  font-size: 16;
+  font-size: 14px;
   font-weight: bold;
-  margin-bottom: 0px;
+  margin: 0px;
 `;
 const Copyright = styled.p`
-  font: 14px;
+  font-size: 12px;
   color: #799283;
   margin-top: 30px;
 `;
@@ -126,7 +126,7 @@ export default function NavBar(props) {
           </StyledNavLink>
           <StyledNavLink to="/bookings">
             <BsCalendarCheck
-              style={{ fontSize: "x-large", marginLeft: 50, marginRight: 30 }}
+              style={{ fontSize: "large", marginLeft: 50, marginRight: 30 }}
             />
             <p>Bookings</p>
           </StyledNavLink>
