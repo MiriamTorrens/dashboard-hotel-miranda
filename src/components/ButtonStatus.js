@@ -1,19 +1,19 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Button = styled.button`
-    width: 125px;
-    height: 48px;
-    border: none;
-    border-radius: 12px;
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
+  width: 100px;
+  height: 48px;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
-export default function ButtonStatus(props){
+export default function ButtonStatus(props) {
   const status = props.status;
   let color;
   if (status === "Available" || status === "Check In") {
@@ -25,5 +25,3 @@ export default function ButtonStatus(props){
   }
   return <Button style={{ backgroundColor: color }}>{status}</Button>;
 }
-
-

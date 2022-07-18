@@ -4,10 +4,10 @@ export const SelectDiv = styled.select`
   border-color: #135846;
   color: #135846;
   border-radius: 12px;
-  width: 129px;
+  width: 100px;
   height: 49px;
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
 `;
 export default function Select(props) {
   return (

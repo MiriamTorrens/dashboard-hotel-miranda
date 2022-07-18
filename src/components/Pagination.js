@@ -5,7 +5,7 @@ const PaginationWrapper = styled.div`
   margin-top: 50px;
   display: flex;
   justify-content: space-between;
-  font-size: 16px;
+  font-size: 14px;
   font-family: "Poppins", sans-serif;
 `;
 const ButtonPagination = styled.button`
@@ -13,8 +13,8 @@ const ButtonPagination = styled.button`
   border-color: #135846;
   border-radius: 12px;
   color: #135846;
-  width: 91px;
-  height: 52px;
+  width: 70px;
+  height: 40px;
   margin-left: 10px;
 `;
 export default function Pagination() {

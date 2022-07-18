@@ -15,7 +15,7 @@ const MenuWrapper = styled.div`
   width: 100%;
 `;
 const Title = styled.h1`
-  font-size: 28px;
+  font-size: 25px;
   font-weight: 600;
   font-family: "Poppins", sans-serif;
   margin-left: 30px;
@@ -28,7 +28,7 @@ const IconsWrapper = styled.div`
 `;
 const Icon = styled.span`
   color: #135846;
-  font-size: xx-large;
+  font-size: x-large;
   margin-left: 30px;
   &:hover {
     color: #e23428;
