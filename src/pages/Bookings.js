@@ -9,7 +9,7 @@ import {
   Tab,
   MenuOptions,
 } from "../styles/Styles";
-import { ButtonView } from "../components/Buttons";
+import { ButtonView, ButtonNewBooking } from "../components/Buttons";
 import ButtonStatus from "../components/ButtonStatus";
 import Pagination from "../components/Pagination";
 import { getBookings, allBookings } from "../features/slices/bookingsSlice";
@@ -87,6 +87,7 @@ export default function Bookings() {
               </MenuOptions>
             </Tab>
           </HeaderTab>
+          <ButtonNewBooking />
           <SelectDiv>
             <option>Newest</option>
             <option>Guest</option>

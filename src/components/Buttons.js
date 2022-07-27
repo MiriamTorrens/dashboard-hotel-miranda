@@ -16,7 +16,7 @@ export const ButtonArchive = styled.button`
     content: "Archive";
   }
 `;
-export const ButtonNewRoom = styled.button`
+export const ButtonNewBooking = styled.button`
   background-color: #135846;
   color: white;
   width: 200px;
@@ -28,7 +28,7 @@ export const ButtonNewRoom = styled.button`
   font-size: 14px;
   cursor: pointer;
   ::before {
-    content: "+ New Room";
+    content: "+ New Booking";
   }
 `;
 export const ButtonNewEmployee = styled.button`

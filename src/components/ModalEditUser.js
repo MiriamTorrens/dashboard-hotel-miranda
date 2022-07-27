@@ -1,10 +1,7 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import styled from "styled-components";
 import { useState, useContext } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { updateUser } from "../features/slices/usersSlice";
 import { AuthContext } from "../App";
 
 const style = {

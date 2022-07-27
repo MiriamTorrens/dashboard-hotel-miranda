@@ -8,10 +8,8 @@ import {
   Tab,
   MenuOptions,
 } from "../styles/Styles";
-import { NavLink } from "react-router-dom";
 import ButtonStatus from "../components/ButtonStatus";
 import Pagination from "../components/Pagination";
-import { ButtonNewRoom } from "../components/Buttons";
 import { getRooms, allRooms } from "../features/slices/roomsSlice";
 // import { MdOutlineDeleteOutline, MdOutlineUpdate } from "react-icons/md";
 // import { IoMdAddCircleOutline } from "react-icons/io";
@@ -36,9 +34,6 @@ export default function Rooms() {
             </Tab>
           </HeaderTab>
           <div>
-            <NavLink to="/rooms/newRoom">
-              <ButtonNewRoom />
-            </NavLink>
             <SelectDiv>
               <option>Status</option>
               <option>Price Men.</option>
