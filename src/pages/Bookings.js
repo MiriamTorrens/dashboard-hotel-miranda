@@ -20,6 +20,7 @@ export default function Bookings() {
   const dispatch = useDispatch();
   const bookingsList = useSelector(allBookings);
   const [bookingsState, setBookingsState] = useState(bookingsList);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     dispatch(getBookings());
@@ -28,6 +29,19 @@ export default function Bookings() {
   useEffect(() => {
     dispatch(getBookings(bookingsState));
   }, [dispatch, bookingsState]);
+
+  const handleChange = (query) => {
+    setQuery(query);
+    if (!query.length) {
+      setBookingsState(bookingsList);
+    } else {
+      setBookingsState(
+        bookingsState.filter((booking) =>
+          booking.guest_name.toLowerCase().includes(query)
+        )
+      );
+    }
+  };
 
   return (
     <AllWrapper>
@@ -79,7 +93,11 @@ export default function Bookings() {
             <option>Check In</option>
             <option>Check Out</option>
           </SelectDiv>
-          <InputText placeholder="Search Guest"></InputText>
+          <InputText
+            placeholder="Search Guest"
+            value={query}
+            onChange={(e) => handleChange(e.target.value)}
+          ></InputText>
         </HeaderTableWrapper>
         <Table>
           <thead>

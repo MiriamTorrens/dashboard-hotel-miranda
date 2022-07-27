@@ -57,32 +57,7 @@ export default function ModalNewUser(props) {
 
   const handlerSubmit = (e) => {
     e.preventDefault();
-    // dispatch(
-    //   createUser(
-    //     JSON.parse({
-    //       user_name: inputName,
-    //       user_email: inputEmail,
-    //       user_phone: inputPhone,
-    //       start_date: new Date(inputDate),
-    //       occupation: inputOccupation.toLowerCase(),
-    //       user_image: inputImage,
-    //       password: inputPassword,
-    //       status: true,
-    //     })
-    //   )
-    // );
-    console.log(
-      {
-        user_name: inputName,
-        user_email: inputEmail,
-        user_phone: inputPhone,
-        start_date: new Date(inputDate),
-        occupation: inputOccupation.toLowerCase(),
-        user_image: inputImage,
-        password: inputPassword,
-        status: true,
-      }.json()
-    );
+    dispatch(createUser());
   };
 
   return (

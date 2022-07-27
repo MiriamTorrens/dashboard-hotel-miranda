@@ -12,13 +12,7 @@ import {
 import { BsFillTelephoneFill } from "react-icons/bs";
 import Pagination from "../components/Pagination";
 import { ButtonNewEmployee } from "../components/Buttons";
-import {
-  getUsers,
-  getUser,
-  allUsers,
-  findUser,
-  sortUser,
-} from "../features/slices/usersSlice";
+import { getUsers, allUsers } from "../features/slices/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import ModalNewUser from "../components/ModalNewUser";
@@ -45,12 +39,27 @@ export default function Users() {
 
   const handleChange = (order) => {
     setOrder(order);
-    dispatch(sortUser(order));
+    const sortedUsers = [...usersState];
+    if (order === "newest") {
+      console.log(order);
+      setUsersState(sortedUsers.sort((a, b) => a.start_date - b.start_date));
+    } else {
+      console.log(order);
+      setUsersState(sortedUsers.sort((a, b) => a.user_name - b.user_name));
+    }
   };
 
   const searchEmployee = (query) => {
     setQuery(query);
-    dispatch(findUser(query));
+    if (!query.length) {
+      setUsersState(usersList);
+    } else {
+      setUsersState(
+        usersState.filter((user) =>
+          user.user_name.toLowerCase().includes(query)
+        )
+      );
+    }
   };
 
   return (

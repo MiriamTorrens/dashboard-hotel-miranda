@@ -50,7 +50,7 @@ const UserWrapper = styled.div`
   text-align: center;
 `;
 const ImgUser = styled.div`
-  background-image: url("https://xsgames.co/randomusers/assets/avatars/female/49.jpg");
+  background-image: url("https://xsgames.co/randomusers/assets/avatars/female/56.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-size: 100% 100%;
