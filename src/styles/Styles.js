@@ -37,17 +37,6 @@ export const HeaderTableWrapper = styled.div`
   justify-content: space-between;
   width: 95%;
 `;
-export const SelectDate = styled.select`
-  background-color: #135846;
-  width: 300px;
-  height: 49px;
-  border-radius: 12px;
-  color: white;
-  margin-right: 20px;
-  text-align: center;
-  font-size: 12px;
-  font-family: "Poppins", sans-serif;
-`;
 export const Table = styled.table`
   margin-top: 30px;
   width: 100%;

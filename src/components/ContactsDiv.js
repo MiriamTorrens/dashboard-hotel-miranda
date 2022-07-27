@@ -80,7 +80,7 @@ export default function ContactsDiv() {
         <Title>Latest Review by Customers</Title>
         <DivMsgs>
           {contactList.map((contact) => (
-            <DivMsg key={contact.id} onClick={() => handleClick(contact)}>
+            <DivMsg key={contact._id} onClick={() => handleClick(contact)}>
               <Msg>
                 <b>{contact.subject}</b>
                 <br />
@@ -89,15 +89,15 @@ export default function ContactsDiv() {
               <DivUser>
                 <User>
                   <b>
-                    <span>{contact.customer.fullName}</span>
+                    <span>{contact.contact_name}</span>
                     <br />
                   </b>
-                  <span>{contact.customer.email}</span>
+                  <span>{contact.contact_email}</span>
                   <br />
-                  <span>{contact.customer.phoneNumber}</span>
+                  <span>{contact.contact_phone}</span>
                 </User>
                 <Icon>
-                  {contact.viewed === "NO" ? (
+                  {contact.viewed === false ? (
                     <AiOutlineCloseCircle
                       style={{ color: "red", fontSize: "x-large" }}
                     />

@@ -2,7 +2,6 @@ import {
   AllWrapper,
   SubWrapper,
   HeaderTableWrapper,
-  SelectDate,
   Table,
 } from "../styles/Styles";
 import Header from "../components/Header";
@@ -14,14 +13,14 @@ import Pagination from "../components/Pagination";
 import {
   getBookings,
   allBookings,
-  createBooking,
-  updateBooking,
-  deleteBooking,
+  // createBooking,
+  // updateBooking,
+  // deleteBooking,
 } from "../features/slices/bookingsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { MdOutlineDeleteOutline, MdOutlineUpdate } from "react-icons/md";
-import { IoMdAddCircleOutline } from "react-icons/io";
+// import { MdOutlineDeleteOutline, MdOutlineUpdate } from "react-icons/md";
+// import { IoMdAddCircleOutline } from "react-icons/io";
 
 export default function Bookings() {
   const menuOptions = ["All Bookings", "Check In", "Check Out", "In Progress"];
@@ -35,76 +34,43 @@ export default function Bookings() {
     dispatch(getBookings());
   }, []);
 
-  const handleClick = () => {
-    dispatch(
-      createBooking({
-        fullName: "Lauren Abshire",
-        id: "3bbee4c3-0074",
-        checkin: "2021-12-11",
-        checkout: "2021-07-06",
-        roomInfo: 21,
-        price: 80,
-        specialRequest: "minim eiusmod amet id duis id",
-        amenities: {},
-        images: [],
-        roomType: {
-          type: "MAFRQAQU",
-          roomNumber: 21,
-        },
-        roomDescription: "velit nulla ea velit exercitation consectetur",
-        status: "In Progress",
-      })
-    );
-  };
-
   return (
     <AllWrapper>
       <SubWrapper>
         <HeaderTableWrapper>
           <Header menuOptions={menuOptions} selectOptions={selectOptions} />
-          <div>
-            <SelectDate>
-              <option>1 November 2020 - 30 November 2020</option>
-            </SelectDate>
-            <Select selectOptions={selectOptions} />
-          </div>
+          <Select selectOptions={selectOptions} />
+          <InputText placeholder={placeholder}></InputText>
         </HeaderTableWrapper>
-        <InputText placeholder={placeholder}></InputText>
         <Table>
           <thead>
             <tr>
               <th>Guest</th>
-              <th>OrderDate</th>
-              <th>CheckIn</th>
-              <th>CheckOut</th>
+              <th>Order Date</th>
+              <th>Check In</th>
+              <th>Check Out</th>
               <th>Special Request</th>
-              <th>Room Type</th>
+              {/* <th>Room Type</th> */}
               <th>Status</th>
-              {/* <th>
-                <IoMdAddCircleOutline
-                  style={{ fontSize: 30 }}
-                  onClick={() => handleClick()}
-                />
-              </th> */}
             </tr>
           </thead>
           <tbody>
             {bookingsList.map((booking) => (
-              <tr key={booking.id}>
+              <tr key={booking._id}>
                 <td>
-                  {booking.fullName}
+                  {booking.guest_name}
                   <br />
-                  {booking.id}
+                  {booking._id}
                 </td>
-                <td>{booking.date}</td>
+                <td>{booking.order_date}</td>
                 <td>{booking.checkin}</td>
                 <td>{booking.checkout}</td>
                 <td>
                   <ButtonView />
                 </td>
-                <td>
+                {/* <td>
                   {booking.roomType.type} - {booking.roomType.roomNumber}
-                </td>
+                </td> */}
                 <td>
                   <ButtonStatus status={booking.status}></ButtonStatus>
                 </td>

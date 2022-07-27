@@ -14,12 +14,17 @@ export const Button = styled.button`
 `;
 
 export default function ButtonStatus(props) {
-  const status = props.status;
+  let status = props.status;
   let color;
-  if (status === "Available" || status === "Check In") {
+  if (status === "Available" || status === "checkin") {
+    status = "Check in";
     color = "#5AD07A";
-  } else if (status === "Booked" || status === "Check Out") {
+  } else if (status === "Booked" || status === "checkout") {
+    status = "Check Out";
     color = "#E23428";
+  } else if (status === "in_progress") {
+    status = "In progress";
+    color = "#FF9C3A";
   } else {
     color = "#FF9C3A";
   }

@@ -33,38 +33,6 @@ export default function Rooms() {
     dispatch(getRooms());
   }, []);
 
-  const handleClick = () => {
-    dispatch(
-      createRoom({
-        id: "8e8e7c2f-9706",
-        images: [
-          "https://d2wiks2irojx7z.cloudfront.net/cache/img/hotel-marais-bastille-chambre-30813-1600-900-auto.jpeg?q=1528112600",
-          "https://d2wiks2irojx7z.cloudfront.net/cache/img/hotel-marais-bastille-chambre-30807-1600-900-auto.jpeg?q=1528112601",
-          "https://d2wiks2irojx7z.cloudfront.net/cache/img/hotel-marais-bastille-chambre-30819-1600-900-auto.jpeg?q=1528112602",
-          "https://d2wiks2irojx7z.cloudfront.net/cache/img/hotel-marais-bastille-chambre-30831-1600-900-auto.jpeg?q=1528112603",
-        ],
-        roomType: "Single bed",
-        roomNumber: 40,
-        offer: false,
-        price: 78,
-        discount: 15,
-        cancellation: "",
-        amenities: [
-          "AC",
-          "Shower",
-          "Single Bed",
-          "Towel",
-          "Bathup",
-          "Coffe Set",
-          "LED TV",
-          "WiFi",
-        ],
-        status: "Available",
-        roomName: "New Room",
-      })
-    );
-  };
-
   return (
     <AllWrapper>
       <SubWrapper>
@@ -80,7 +48,7 @@ export default function Rooms() {
         <Table>
           <thead>
             <tr>
-              <th>Room Name</th>
+              <th>Room Number</th>
               <th>Bed type</th>
               <th>Facilities</th>
               <th>Rate</th>
@@ -96,7 +64,7 @@ export default function Rooms() {
           </thead>
           <tbody>
             {roomsList.map((room) => (
-              <tr key={room.id}>
+              <tr key={room._id}>
                 <td style={{ width: 150 }}>
                   <div style={{ display: "flex" }}>
                     <div
@@ -111,13 +79,19 @@ export default function Rooms() {
                       }}
                     ></div>
                     <div style={{ marginLeft: 20, marginTop: 8 }}>
-                      {room.idRoom}
-                      <br />
-                      {room.roomName}
+                      {room.room_number}
                     </div>
                   </div>
                 </td>
-                <td>{room.roomType}</td>
+                <td>
+                  {room.bed_type === "single_bed"
+                    ? "Single Bed"
+                    : room.bed_type === "double_superior"
+                    ? "Double Superior"
+                    : room.bed_type === "double_bed"
+                    ? "Double Bed"
+                    : "Suite"}
+                </td>
                 <td>{room.amenities}</td>
                 <td>${room.price}</td>
                 <td>

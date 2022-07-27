@@ -35,23 +35,6 @@ export default function Users() {
     dispatch(getUsers());
   }, []);
 
-  const handleClick = () => {
-    dispatch(
-      createUser({
-        fullName: "Lauren Abshire",
-        id: "3bbee4c3-0074",
-        email: "l.abshire@miranda.com",
-        startDate: "2021-07-12",
-        occupation: "Reception",
-        description: "mollit duis nisi non deserunt",
-        contact: "789-965-4830",
-        status: "ACTIVE",
-        photo: "https://xsgames.co/randomusers/assets/avatars/female/23.jpg",
-        password: "BPA8BOL3",
-      })
-    );
-  };
-
   return (
     <AllWrapper>
       <SubWrapper>
@@ -83,14 +66,14 @@ export default function Users() {
           </thead>
           <tbody>
             {usersList.map((user) => (
-              <tr key={user.id}>
+              <tr key={user._id}>
                 <td style={{ width: 250 }}>
                   <div style={{ display: "flex" }}>
                     <div
                       style={{
                         width: 77,
                         height: 77,
-                        backgroundImage: `url(${user.photo})`,
+                        backgroundImage: `url(${user.user_image})`,
                         backgroundRepeat: "no-repeat",
                         backgroundSize: "cover",
                         backgroundPosition: "center",
@@ -99,25 +82,25 @@ export default function Users() {
                       }}
                     ></div>
                     <div style={{ marginLeft: 20, marginTop: 8 }}>
-                      {user.fullName}
+                      {user.user_name}
                       <br />
-                      {user.id}
+                      {user._id}
                       <br />
-                      {user.email}
+                      {user.user_email}
                     </div>
                   </div>
                 </td>
-                <td>{user.startDate}</td>
+                <td>{user.star_date}</td>
                 <td>{user.occupation}</td>
                 <td>
                   <BsFillTelephoneFill /> {user.contact}
                 </td>
                 <td
                   style={{
-                    color: user.status === "ACTIVE" ? "#5AD07A" : "#E23428",
+                    color: user.status === true ? "#5AD07A" : "#E23428",
                   }}
                 >
-                  {user.status}
+                  {user.status === true ? "ACTIVE" : "INACTIVE"}
                 </td>
                 {/* <td>
                   <MdOutlineDeleteOutline
