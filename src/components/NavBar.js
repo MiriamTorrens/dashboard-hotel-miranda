@@ -9,7 +9,8 @@ import Logo from "./Logo";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { AuthContext } from "../App";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import ModalEditUser from "./ModalEditUser";
 
 const NavBarWrapper = styled.div`
   width: 280px;
@@ -110,6 +111,10 @@ const Copyright = styled.p`
 export default function NavBar(props) {
   const { state } = useContext(AuthContext);
   const display = state.authenticated ? "block" : "none";
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <div style={{ display: props.displayLat }}>
@@ -145,9 +150,7 @@ export default function NavBar(props) {
           <br />
           <UserEmail>{state.email}</UserEmail>
           <br />
-          <NavLink to="/users/editUser">
-            <ButtonContact>Edit</ButtonContact>
-          </NavLink>
+          <ButtonContact onClick={handleOpen}>Edit</ButtonContact>
         </UserWrapper>
         <Texts>
           <Admin>Travl Hotel Admin Dashboard</Admin>
@@ -159,6 +162,7 @@ export default function NavBar(props) {
           </Copyright>
         </Texts>
       </NavBarWrapper>
+      <ModalEditUser open={open} handleClose={handleClose}></ModalEditUser>
     </div>
   );
 }

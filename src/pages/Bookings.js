@@ -3,44 +3,83 @@ import {
   SubWrapper,
   HeaderTableWrapper,
   Table,
+  SelectDiv,
+  InputText,
+  HeaderTab,
+  Tab,
+  MenuOptions,
 } from "../styles/Styles";
-import Header from "../components/Header";
-import Select from "../components/Select";
-import InputText from "../components/InputText";
 import { ButtonView } from "../components/Buttons";
 import ButtonStatus from "../components/ButtonStatus";
 import Pagination from "../components/Pagination";
-import {
-  getBookings,
-  allBookings,
-  // createBooking,
-  // updateBooking,
-  // deleteBooking,
-} from "../features/slices/bookingsSlice";
+import { getBookings, allBookings } from "../features/slices/bookingsSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-// import { MdOutlineDeleteOutline, MdOutlineUpdate } from "react-icons/md";
-// import { IoMdAddCircleOutline } from "react-icons/io";
+import { useEffect, useState } from "react";
 
 export default function Bookings() {
-  const menuOptions = ["All Bookings", "Check In", "Check Out", "In Progress"];
-  const selectOptions = ["Newest", "Guest", "Check In", "Check Out"];
-  const placeholder = "Search guest";
-
   const dispatch = useDispatch();
   const bookingsList = useSelector(allBookings);
+  const [bookingsState, setBookingsState] = useState(bookingsList);
 
   useEffect(() => {
     dispatch(getBookings());
-  }, []);
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getBookings(bookingsState));
+  }, [dispatch, bookingsState]);
 
   return (
     <AllWrapper>
       <SubWrapper>
         <HeaderTableWrapper>
-          <Header menuOptions={menuOptions} selectOptions={selectOptions} />
-          <Select selectOptions={selectOptions} />
-          <InputText placeholder={placeholder}></InputText>
+          <HeaderTab>
+            <Tab>
+              <MenuOptions onClick={() => setBookingsState(bookingsList)}>
+                All Bookings
+              </MenuOptions>
+              <MenuOptions
+                onClick={() =>
+                  setBookingsState(
+                    bookingsList.filter(
+                      (booking) => booking.status === "checkin"
+                    )
+                  )
+                }
+              >
+                Check In
+              </MenuOptions>
+              <MenuOptions
+                onClick={() =>
+                  setBookingsState(
+                    bookingsList.filter(
+                      (booking) => booking.status === "checkout"
+                    )
+                  )
+                }
+              >
+                Check Out
+              </MenuOptions>
+              <MenuOptions
+                onClick={() =>
+                  setBookingsState(
+                    bookingsList.filter(
+                      (booking) => booking.status === "in_progress"
+                    )
+                  )
+                }
+              >
+                In progress
+              </MenuOptions>
+            </Tab>
+          </HeaderTab>
+          <SelectDiv>
+            <option>Newest</option>
+            <option>Guest</option>
+            <option>Check In</option>
+            <option>Check Out</option>
+          </SelectDiv>
+          <InputText placeholder="Search Guest"></InputText>
         </HeaderTableWrapper>
         <Table>
           <thead>
@@ -55,7 +94,7 @@ export default function Bookings() {
             </tr>
           </thead>
           <tbody>
-            {bookingsList.map((booking) => (
+            {bookingsState.map((booking) => (
               <tr key={booking._id}>
                 <td>
                   {booking.guest_name}

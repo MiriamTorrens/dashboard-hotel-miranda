@@ -3,51 +3,101 @@ import {
   SubWrapper,
   HeaderTableWrapper,
   Table,
+  SelectDiv,
+  InputText,
+  HeaderTab,
+  Tab,
+  MenuOptions,
 } from "../styles/Styles";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import Pagination from "../components/Pagination";
-import { NavLink } from "react-router-dom";
 import { ButtonNewEmployee } from "../components/Buttons";
-import Header from "../components/Header";
-import Select from "../components/Select";
-import InputText from "../components/InputText";
 import {
   getUsers,
+  getUser,
   allUsers,
-  createUser,
-  updateUser,
-  deleteUser,
+  findUser,
+  sortUser,
 } from "../features/slices/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { MdOutlineDeleteOutline, MdOutlineUpdate } from "react-icons/md";
-import { IoMdAddCircleOutline } from "react-icons/io";
+import { useEffect, useState } from "react";
+import ModalNewUser from "../components/ModalNewUser";
+// import { MdOutlineDeleteOutline, MdOutlineUpdate } from "react-icons/md";
+// import { IoMdAddCircleOutline } from "react-icons/io";
 
 export default function Users() {
-  const menuOptions = ["All Employee", "Active Employee", "Inactive Employee"];
-  const selectOptions = ["Newest", "Guest"];
-  const placeholder = "Search employee";
-
-  const dispatch = useDispatch();
   const usersList = useSelector(allUsers);
+  const [usersState, setUsersState] = useState(usersList);
+  const [open, setOpen] = useState(false);
+  const [order, setOrder] = useState("");
+  const [query, setQuery] = useState("");
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getUsers());
-  }, []);
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getUsers(usersState));
+  }, [dispatch, usersState]);
+
+  const handleChange = (order) => {
+    setOrder(order);
+    dispatch(sortUser(order));
+  };
+
+  const searchEmployee = (query) => {
+    setQuery(query);
+    dispatch(findUser(query));
+  };
 
   return (
     <AllWrapper>
       <SubWrapper>
         <HeaderTableWrapper>
-          <Header menuOptions={menuOptions} />
+          <HeaderTab>
+            <Tab>
+              <MenuOptions onClick={() => setUsersState(usersList)}>
+                All Employee
+              </MenuOptions>
+              <MenuOptions
+                onClick={() =>
+                  setUsersState(
+                    usersList.filter((user) => user.status === true)
+                  )
+                }
+              >
+                Active Employee
+              </MenuOptions>
+              <MenuOptions
+                onClick={() =>
+                  setUsersState(
+                    usersList.filter((user) => user.status === false)
+                  )
+                }
+              >
+                Inactive Employee
+              </MenuOptions>
+            </Tab>
+          </HeaderTab>
           <div>
-            <NavLink to="/users/newUser">
-              <ButtonNewEmployee />
-            </NavLink>
-            <Select selectOptions={selectOptions} />
+            <ButtonNewEmployee onClick={handleOpen} />
+            <SelectDiv
+              value={order}
+              onChange={(e) => handleChange(e.target.value)}
+            >
+              <option value="newest">Newest</option>
+              <option value="name">Name</option>
+            </SelectDiv>
+            <InputText
+              placeholder="Search employee"
+              value={query}
+              onChange={(e) => searchEmployee(e.target.value)}
+            />
           </div>
         </HeaderTableWrapper>
-        <InputText placeholder={placeholder} />
         <Table>
           <thead>
             <tr>
@@ -56,16 +106,10 @@ export default function Users() {
               <th>Description</th>
               <th>Contact</th>
               <th>Status</th>
-              {/* <th>
-                <IoMdAddCircleOutline
-                  style={{ fontSize: 30 }}
-                  onClick={() => handleClick()}
-                />
-              </th> */}
             </tr>
           </thead>
           <tbody>
-            {usersList.map((user) => (
+            {usersState.map((user) => (
               <tr key={user._id}>
                 <td style={{ width: 250 }}>
                   <div style={{ display: "flex" }}>
@@ -90,10 +134,14 @@ export default function Users() {
                     </div>
                   </div>
                 </td>
-                <td>{user.star_date}</td>
-                <td>{user.occupation}</td>
+                <td>{user.start_date}</td>
                 <td>
-                  <BsFillTelephoneFill /> {user.contact}
+                  {user.occupation === "room_service"
+                    ? "room service"
+                    : user.occupation}
+                </td>
+                <td>
+                  <BsFillTelephoneFill /> {user.user_phone}
                 </td>
                 <td
                   style={{
@@ -102,24 +150,13 @@ export default function Users() {
                 >
                   {user.status === true ? "ACTIVE" : "INACTIVE"}
                 </td>
-                {/* <td>
-                  <MdOutlineDeleteOutline
-                    style={{ fontSize: 30 }}
-                    onClick={() => dispatch(deleteUser(user))}
-                  />
-                  <MdOutlineUpdate
-                    style={{ fontSize: 30 }}
-                    onClick={() =>
-                      dispatch(updateUser({ ...user, status: "INACTIVE" }))
-                    }
-                  />
-                </td> */}
               </tr>
             ))}
           </tbody>
         </Table>
         <Pagination />
       </SubWrapper>
+      <ModalNewUser open={open} handleClose={handleClose} />
     </AllWrapper>
   );
 }

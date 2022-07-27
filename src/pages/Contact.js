@@ -3,38 +3,57 @@ import {
   SubWrapper,
   HeaderTableWrapper,
   Table,
+  SelectDiv,
+  HeaderTab,
+  Tab,
+  MenuOptions,
+  Archived,
 } from "../styles/Styles";
 import ContactsDiv from "../components/ContactsDiv";
 import Pagination from "../components/Pagination";
-import Header from "../components/Header";
-import Select from "../components/Select";
 import { ButtonArchive } from "../components/Buttons";
-import {
-  getContact,
-  allContact,
-  createContact,
-} from "../features/slices/contactSlice";
+import { getContact, allContact } from "../features/slices/contactSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Contact() {
-  const menuOptions = ["All Contacts", "Archived"];
-  const selectOptions = ["Newest", "Guest"];
-
   const dispatch = useDispatch();
   const contactList = useSelector(allContact);
+  const [contactState, setContactState] = useState(contactList);
 
   useEffect(() => {
     dispatch(getContact());
-  }, []);
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getContact(contactState));
+  }, [dispatch, contactState]);
 
   return (
     <AllWrapper>
       <ContactsDiv />
       <SubWrapper>
         <HeaderTableWrapper>
-          <Header menuOptions={menuOptions} />
-          <Select selectOptions={selectOptions} />
+          <HeaderTab>
+            <Tab>
+              <MenuOptions onClick={() => setContactState(contactList)}>
+                All Contacts
+              </MenuOptions>
+              <MenuOptions
+                onClick={() =>
+                  setContactState(
+                    contactList.filter((contact) => contact.archived === true)
+                  )
+                }
+              >
+                Archived
+              </MenuOptions>
+            </Tab>
+          </HeaderTab>
+          <SelectDiv>
+            <option>Newest</option>
+            <option>Guest</option>
+          </SelectDiv>
         </HeaderTableWrapper>
         <Table>
           <thead>
@@ -46,7 +65,7 @@ export default function Contact() {
             </tr>
           </thead>
           <tbody style={{ verticalAlign: "top" }}>
-            {contactList.map((contact) => (
+            {contactState.map((contact) => (
               <tr key={contact._id}>
                 <td>
                   {contact._id}
@@ -63,7 +82,7 @@ export default function Contact() {
                 </td>
                 <td style={{ width: 600 }}>{contact.comment}</td>
                 <td>
-                  <ButtonArchive />
+                  {contact.archived === true ? <Archived /> : <ButtonArchive />}
                 </td>
               </tr>
             ))}

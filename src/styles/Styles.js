@@ -55,3 +55,57 @@ export const Table = styled.table`
     height: 121px;
   }
 `;
+export const SelectDiv = styled.select`
+  border-color: #135846;
+  color: #135846;
+  border-radius: 12px;
+  width: 100px;
+  height: 49px;
+  text-align: center;
+  font-size: 14px;
+`;
+export const InputText = styled.input`
+  border-color: #135846;
+  border-radius: 5px;
+  width: 200px;
+  height: 40px;
+  text-align: center;
+  margin-left: 15px;
+`;
+export const HeaderTab = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+export const Tab = styled.div`
+  display: flex;
+  color: #6e6e6e;
+  height: 36px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  border-bottom: 1px solid #0000001a;
+`;
+export const MenuOptions = styled.span`
+  margin-right: 70px;
+  &:hover {
+    color: #135846;
+    cursor: pointer;
+    border-bottom: 3px solid #135846;
+  }
+`;
+
+export const Archived = styled.button`
+  background-color: white;
+  color: #135846;
+  width: 150px;
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid #135846;
+  margin-right: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  ::before {
+    content: "Archived";
+  }
+`;

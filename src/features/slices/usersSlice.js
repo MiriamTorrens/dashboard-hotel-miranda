@@ -1,8 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchData } from "../../env";
+import { fetchData } from "../../api";
 
 const initialState = {
   usersList: [],
+  filteredUsers: [],
+  oneUser: [],
 };
 
 export const getUsers = createAsyncThunk("users/getUsers", async () => {
@@ -10,45 +12,61 @@ export const getUsers = createAsyncThunk("users/getUsers", async () => {
   return response;
 });
 
+export const getUser = createAsyncThunk("users/getUser", async (id) => {
+  const response = await fetchData(`users/${id}`, "GET");
+  return response;
+});
+
+export const updateUser = createAsyncThunk("users/updateUser", async (id) => {
+  const response = await fetchData(`users/${id}`, "PATCH");
+  return response;
+});
+
+export const createUser = createAsyncThunk("users/createUser", async () => {
+  const response = await fetchData("users", "POST");
+  return response;
+});
+
 export const usersSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
-    createUser: (state, action) => {
-      const newUser = {
-        fullName: action.payload.fullName,
-        id: action.payload.id,
-        email: action.payload.email,
-        startDate: action.payload.startDate,
-        occupation: action.payload.occupation,
-        description: action.payload.description,
-        contact: action.payload.contact,
-        status: action.payload.status,
-        photo: action.payload.photo,
-        password: action.payload.password,
-      };
-      state = state.unshift(newUser);
-    },
-    getUser: (state, action) => {
-      return state.find((user) => user.id === action.payload);
-    },
-    updateUser: (state, action) => {
-      return state.map((user) =>
-        user.id === action.payload.id ? action.payload : user
+    findUser: (state, action) => {
+      console.log("dentro");
+      const user = state.usersList.find(
+        (user) => user.user_name === action.payload
       );
+      return user;
     },
-    deleteUser: (state, action) => {
-      return state.filter((user) => user.id !== action.payload.id);
+    sortUser: (state, action) => {
+      if (action.payload === "newest") {
+        console.log(action.payload);
+        state.usersList.sort((a, b) => a.star_date - b.start_date);
+      } else {
+        console.log(action.payload);
+        state.usersList.sort((a, b) => a.user_name - b.user_name);
+      }
     },
   },
   extraReducers(builder) {
-    builder.addCase(getUsers.fulfilled, (state, action) => {
-      return void (state.usersList = action.payload);
-    });
+    builder
+      .addCase(getUsers.fulfilled, (state, action) => {
+        return void (state.usersList = action.payload);
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        return void (state.oneUser = action.payload);
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        return void (state.oneUser = action.payload);
+      })
+      .addCase(createUser.fulfilled, (state, action) => {
+        return void (state.usersList = action.payload);
+      });
   },
 });
 
-export const { createUser, getUser, updateUser, deleteUser } =
-  usersSlice.actions;
+export const { findUser, sortUser } = usersSlice.actions;
 export const allUsers = (state) => state.users.usersList;
+export const filteredUsers = (state) => state.users.filteredUsers;
+export const oneUser = (state) => state.users.oneUser;
 export default usersSlice.reducer;

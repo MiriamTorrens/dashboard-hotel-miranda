@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchData } from "../../env";
+import { fetchData } from "../../api";
 
 const initialState = {
   roomsList: [],

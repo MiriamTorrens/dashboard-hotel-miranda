@@ -3,29 +3,22 @@ import {
   SubWrapper,
   HeaderTableWrapper,
   Table,
+  SelectDiv,
+  HeaderTab,
+  Tab,
+  MenuOptions,
 } from "../styles/Styles";
 import { NavLink } from "react-router-dom";
 import ButtonStatus from "../components/ButtonStatus";
-import Header from "../components/Header";
 import Pagination from "../components/Pagination";
 import { ButtonNewRoom } from "../components/Buttons";
-import Select from "../components/Select";
-import {
-  getRooms,
-  allRooms,
-  createRoom,
-  updateRoom,
-  deleteRoom,
-} from "../features/slices/roomsSlice";
-import { MdOutlineDeleteOutline, MdOutlineUpdate } from "react-icons/md";
-import { IoMdAddCircleOutline } from "react-icons/io";
+import { getRooms, allRooms } from "../features/slices/roomsSlice";
+// import { MdOutlineDeleteOutline, MdOutlineUpdate } from "react-icons/md";
+// import { IoMdAddCircleOutline } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 export default function Rooms() {
-  const menuOptions = ["All Rooms"];
-  const selectOptions = ["Status", "Price <", "Price >"];
-
   const dispatch = useDispatch();
   const roomsList = useSelector(allRooms);
 
@@ -37,12 +30,20 @@ export default function Rooms() {
     <AllWrapper>
       <SubWrapper>
         <HeaderTableWrapper>
-          <Header menuOptions={menuOptions} selectOptions={selectOptions} />
+          <HeaderTab>
+            <Tab>
+              <MenuOptions>All Rooms</MenuOptions>
+            </Tab>
+          </HeaderTab>
           <div>
             <NavLink to="/rooms/newRoom">
               <ButtonNewRoom />
             </NavLink>
-            <Select selectOptions={selectOptions} />
+            <SelectDiv>
+              <option>Status</option>
+              <option>Price Men.</option>
+              <option>Price May.</option>
+            </SelectDiv>
           </div>
         </HeaderTableWrapper>
         <Table>
