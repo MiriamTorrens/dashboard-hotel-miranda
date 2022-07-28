@@ -16,12 +16,10 @@ import { getUsers, allUsers } from "../features/slices/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import ModalNewUser from "../components/ModalNewUser";
-// import { MdOutlineDeleteOutline, MdOutlineUpdate } from "react-icons/md";
-// import { IoMdAddCircleOutline } from "react-icons/io";
 
 export default function Users() {
   const usersList = useSelector(allUsers);
-  const [usersState, setUsersState] = useState(usersList);
+  const [usersState, setUsersState] = useState([]);
   const [open, setOpen] = useState(false);
   const [order, setOrder] = useState("");
   const [query, setQuery] = useState("");
@@ -34,19 +32,26 @@ export default function Users() {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getUsers(usersState));
-  }, [dispatch, usersState]);
+    setUsersState(usersList);
+  }, [usersList]);
 
   const handleChange = (order) => {
     setOrder(order);
     const sortedUsers = [...usersState];
-    if (order === "newest") {
-      console.log(order);
-      setUsersState(sortedUsers.sort((a, b) => a.start_date - b.start_date));
-    } else {
-      console.log(order);
-      setUsersState(sortedUsers.sort((a, b) => a.user_name - b.user_name));
-    }
+    const orderKeys = {
+      newest: "start_date",
+      name: "user_name",
+    };
+    sortedUsers.sort((a, b) => {
+      if (a[orderKeys[order]] < b[orderKeys[order]]) {
+        return -1;
+      } else if (a[orderKeys[order]] > b[orderKeys[order]]) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+    setUsersState(sortedUsers);
   };
 
   const searchEmployee = (query) => {
@@ -56,7 +61,7 @@ export default function Users() {
     } else {
       setUsersState(
         usersState.filter((user) =>
-          user.user_name.toLowerCase().includes(query)
+          user.user_name.toLowerCase().includes(query.toLowerCase())
         )
       );
     }

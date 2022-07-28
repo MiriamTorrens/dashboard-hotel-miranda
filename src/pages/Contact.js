@@ -19,16 +19,36 @@ import { useEffect, useState } from "react";
 export default function Contact() {
   const dispatch = useDispatch();
   const contactList = useSelector(allContact);
-  const [contactState, setContactState] = useState(contactList);
+  const [contactState, setContactState] = useState([]);
+  const [order, setOrder] = useState("");
 
   useEffect(() => {
     dispatch(getContact());
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getContact(contactState));
-  }, [dispatch, contactState]);
+    setContactState(contactList);
+  }, [contactList]);
 
+  const handleChange = (order) => {
+    setOrder(order);
+    const sortedContact = [...contactState];
+    const orderKeys = {
+      newest: "contact_date",
+      guest: "contact_name",
+    };
+    sortedContact.sort((a, b) => {
+      if (a[orderKeys[order]] < b[orderKeys[order]]) {
+        return -1;
+      } else if (a[orderKeys[order]] > b[orderKeys[order]]) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+
+    setContactState(sortedContact);
+  };
   return (
     <AllWrapper>
       <ContactsDiv />
@@ -50,9 +70,12 @@ export default function Contact() {
               </MenuOptions>
             </Tab>
           </HeaderTab>
-          <SelectDiv>
-            <option>Newest</option>
-            <option>Guest</option>
+          <SelectDiv
+            value={order}
+            onChange={(e) => handleChange(e.target.value)}
+          >
+            <option value="newest">Newest</option>
+            <option value="guest">Guest</option>
           </SelectDiv>
         </HeaderTableWrapper>
         <Table>
@@ -70,7 +93,7 @@ export default function Contact() {
                 <td>
                   {contact._id}
                   <br />
-                  {contact.date}
+                  {contact.contact_date}
                 </td>
                 <td>
                   {contact.contact_name}

@@ -16,10 +16,14 @@ export const Button = styled.button`
 export default function ButtonStatus(props) {
   let status = props.status;
   let color;
-  if (status === "Available" || status === "checkin") {
+  if (status === "Available") {
+    color = "#5AD07A";
+  } else if (status === "checkin") {
     status = "Check in";
     color = "#5AD07A";
-  } else if (status === "Booked" || status === "checkout") {
+  } else if (status === "Booked") {
+    color = "#E23428";
+  } else if (status === "checkout") {
     status = "Check Out";
     color = "#E23428";
   } else if (status === "in_progress") {

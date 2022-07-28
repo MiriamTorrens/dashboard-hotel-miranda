@@ -19,16 +19,17 @@ import { useEffect, useState } from "react";
 export default function Bookings() {
   const dispatch = useDispatch();
   const bookingsList = useSelector(allBookings);
-  const [bookingsState, setBookingsState] = useState(bookingsList);
+  const [bookingsState, setBookingsState] = useState([]);
   const [query, setQuery] = useState("");
+  const [order, setOrder] = useState("");
 
   useEffect(() => {
     dispatch(getBookings());
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getBookings(bookingsState));
-  }, [dispatch, bookingsState]);
+    setBookingsState(bookingsList);
+  }, [bookingsList]);
 
   const handleChange = (query) => {
     setQuery(query);
@@ -37,10 +38,31 @@ export default function Bookings() {
     } else {
       setBookingsState(
         bookingsState.filter((booking) =>
-          booking.guest_name.toLowerCase().includes(query)
+          booking.guest_name.toLowerCase().includes(query.toLowerCase())
         )
       );
     }
+  };
+
+  const handleChangeOrder = (order) => {
+    setOrder(order);
+    const orderKeys = {
+      newest: "order_date",
+      guest: "guest_name",
+      checkin: "checkin",
+      checkout: "checkout",
+    };
+    const sortedBookings = [...bookingsState];
+    sortedBookings.sort((a, b) => {
+      if (a[orderKeys[order]] < b[orderKeys[order]]) {
+        return -1;
+      } else if (a[orderKeys[order]] > b[orderKeys[order]]) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+    setBookingsState(sortedBookings);
   };
 
   return (
@@ -88,11 +110,14 @@ export default function Bookings() {
             </Tab>
           </HeaderTab>
           <ButtonNewBooking />
-          <SelectDiv>
-            <option>Newest</option>
-            <option>Guest</option>
-            <option>Check In</option>
-            <option>Check Out</option>
+          <SelectDiv
+            value={order}
+            onChange={(e) => handleChangeOrder(e.target.value)}
+          >
+            <option value="newest">Newest</option>
+            <option value="guest">Guest</option>
+            <option value="checkin">Check In</option>
+            <option value="checkout">Check Out</option>
           </SelectDiv>
           <InputText
             placeholder="Search Guest"

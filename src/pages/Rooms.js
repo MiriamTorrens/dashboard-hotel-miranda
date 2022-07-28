@@ -14,15 +14,48 @@ import { getRooms, allRooms } from "../features/slices/roomsSlice";
 // import { MdOutlineDeleteOutline, MdOutlineUpdate } from "react-icons/md";
 // import { IoMdAddCircleOutline } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Rooms() {
   const dispatch = useDispatch();
   const roomsList = useSelector(allRooms);
+  const [roomsState, setRoomsState] = useState([]);
+  const [order, setOrder] = useState("");
 
   useEffect(() => {
     dispatch(getRooms());
   }, []);
+
+  useEffect(() => {
+    setRoomsState(roomsList);
+  }, [roomsList]);
+
+  const handleChange = (order) => {
+    setOrder(order);
+    const sortedRooms = [...roomsState];
+    if (order === "price <") {
+      sortedRooms.sort((a, b) => {
+        if (a.price < b.price) {
+          return -1;
+        } else if (a.price > b.price) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    } else {
+      sortedRooms.sort((a, b) => {
+        if (a.price > b.price) {
+          return -1;
+        } else if (a.price < b.price) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
+    setRoomsState(sortedRooms);
+  };
 
   return (
     <AllWrapper>
@@ -30,14 +63,36 @@ export default function Rooms() {
         <HeaderTableWrapper>
           <HeaderTab>
             <Tab>
-              <MenuOptions>All Rooms</MenuOptions>
+              <MenuOptions onClick={() => setRoomsState(roomsList)}>
+                All Rooms
+              </MenuOptions>
+              <MenuOptions
+                onClick={() =>
+                  setRoomsState(
+                    roomsList.filter((room) => room.status === "Available")
+                  )
+                }
+              >
+                Available
+              </MenuOptions>
+              <MenuOptions
+                onClick={() =>
+                  setRoomsState(
+                    roomsList.filter((room) => room.status === "Booked")
+                  )
+                }
+              >
+                Booked
+              </MenuOptions>
             </Tab>
           </HeaderTab>
           <div>
-            <SelectDiv>
-              <option>Status</option>
-              <option>Price Men.</option>
-              <option>Price May.</option>
+            <SelectDiv
+              value={order}
+              onChange={(e) => handleChange(e.target.value)}
+            >
+              <option value="price <">Price -</option>
+              <option value="price >">Price +</option>
             </SelectDiv>
           </div>
         </HeaderTableWrapper>
@@ -59,7 +114,7 @@ export default function Rooms() {
             </tr>
           </thead>
           <tbody>
-            {roomsList.map((room) => (
+            {roomsState.map((room) => (
               <tr key={room._id}>
                 <td style={{ width: 150 }}>
                   <div style={{ display: "flex" }}>

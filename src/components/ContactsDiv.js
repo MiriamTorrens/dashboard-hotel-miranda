@@ -2,14 +2,8 @@ import styled from "styled-components";
 import { AiOutlineCloseCircle, AiOutlineCheckCircle } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import {
-  getContact,
-  allContact,
-  getThisContact,
-  updateContact,
-} from "../features/slices/contactSlice";
+import { getContact, allContact } from "../features/slices/contactSlice";
 import { useState } from "react";
-import ModalContact from "./ModalContact";
 
 const ContactsWrapper = styled.div`
   box-shadow: 0px 4px 4px #00000005;
@@ -62,17 +56,10 @@ const Icon = styled.div`
 export default function ContactsDiv() {
   const dispatch = useDispatch();
   const contactList = useSelector(allContact);
-  const [open, setOpen] = useState("none");
-  const [message, setMessage] = useState({});
 
   useEffect(() => {
     dispatch(getContact());
   }, []);
-
-  const handleClick = (contact) => {
-    setOpen("block");
-    setMessage(contact);
-  };
 
   return (
     <>
@@ -80,7 +67,7 @@ export default function ContactsDiv() {
         <Title>Latest Review by Customers</Title>
         <DivMsgs>
           {contactList.map((contact) => (
-            <DivMsg key={contact._id} onClick={() => handleClick(contact)}>
+            <DivMsg key={contact._id}>
               <Msg>
                 <b>{contact.subject}</b>
                 <br />
@@ -110,7 +97,6 @@ export default function ContactsDiv() {
               </DivUser>
             </DivMsg>
           ))}
-          <ModalContact open={open} setOpen={setOpen} message={message} />
         </DivMsgs>
       </ContactsWrapper>
     </>
