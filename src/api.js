@@ -24,6 +24,30 @@ export const fetchData = async (url, type) => {
   }
 };
 
+export const fetchDataBody = async (url, type, data) => {
+  try {
+    const response = await fetch(host + url, {
+      method: type,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json charset=utf-8",
+      },
+      body: JSON.stringify(data),
+    });
+    if (response.ok) {
+      const jsonResponse = await response.json();
+      const message = jsonResponse.message;
+      toast.success(message);
+    } else {
+      const jsonResponse = await response.json();
+      const error = jsonResponse.message;
+      toast.error(error);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const loginDB = async (user, password) => {
   try {
     const response = await fetch(

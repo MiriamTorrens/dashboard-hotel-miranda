@@ -3,6 +3,7 @@ import { fetchData } from "../../api";
 
 const initialState = {
   roomsList: [],
+  oneRoom: [],
 };
 
 export const getRooms = createAsyncThunk("rooms/getRooms", async () => {
@@ -39,19 +40,11 @@ export const roomsSlice = createSlice({
         return void (state.roomsList = action.payload);
       })
       .addCase(getRoom.fulfilled, (state, action) => {
-        return void (state.roomsList = action.payload);
-      })
-      .addCase(updateRoom.fulfilled, (state, action) => {
-        return void (state.roomsList = action.payload);
-      })
-      .addCase(createRoom.fulfilled, (state, action) => {
-        return void (state.roomsList = action.payload);
-      })
-      .addCase(deleteRoom.fulfilled, (state, action) => {
-        return void (state.roomsList = action.payload);
+        return void (state.oneRoom = action.payload);
       });
   },
 });
 
 export const allRooms = (state) => state.rooms.roomsList;
+export const oneRoom = (state) => state.rooms.oneRoom;
 export default roomsSlice.reducer;

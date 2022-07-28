@@ -3,6 +3,7 @@ import { fetchData } from "../../api";
 
 const initialState = {
   bookingsList: [],
+  oneBooking: [],
 };
 
 export const getBookings = createAsyncThunk(
@@ -54,19 +55,11 @@ export const bookingsSlice = createSlice({
         return void (state.bookingsList = action.payload);
       })
       .addCase(getBooking.fulfilled, (state, action) => {
-        return void (state.bookingsList = action.payload);
-      })
-      .addCase(updateBooking.fulfilled, (state, action) => {
-        return void (state.bookingsList = action.payload);
-      })
-      .addCase(createBooking.fulfilled, (state, action) => {
-        return void (state.bookingsList = action.payload);
-      })
-      .addCase(deleteBooking.fulfilled, (state, action) => {
-        return void (state.bookingsList = action.payload);
+        return void (state.oneBooking = action.payload);
       });
   },
 });
 
 export const allBookings = (state) => state.bookings.bookingsList;
+export const oneBooking = (state) => state.bookings.oneBooking;
 export default bookingsSlice.reducer;

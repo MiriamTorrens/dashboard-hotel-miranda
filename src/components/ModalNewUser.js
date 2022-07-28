@@ -2,8 +2,8 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { allUsers, createUser } from "../features/slices/usersSlice";
+import { useDispatch } from "react-redux";
+import { createUser } from "../features/slices/usersSlice";
 
 const style = {
   position: "absolute",
@@ -53,11 +53,20 @@ export default function ModalNewUser(props) {
   const [inputPassword, setInputPassword] = useState("");
 
   const dispatch = useDispatch();
-  //const usersList = useSelector(allUsers);
 
   const handlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(createUser());
+    const user = {
+      user_name: inputName,
+      user_email: inputEmail,
+      user_phone: inputPhone,
+      start_date: new Date(inputDate),
+      occupation: inputOccupation,
+      status: true,
+      user_image: inputImage,
+      password: inputPassword,
+    };
+    dispatch(createUser(user));
   };
 
   return (

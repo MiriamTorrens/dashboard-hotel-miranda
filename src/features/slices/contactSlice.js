@@ -3,6 +3,7 @@ import { fetchData } from "../../api";
 
 const initialState = {
   contactList: [],
+  oneContact: [],
 };
 
 export const getContact = createAsyncThunk("contact/getContact", async () => {
@@ -51,19 +52,11 @@ export const contactSlice = createSlice({
         return void (state.contactList = action.payload);
       })
       .addCase(getContactMessage.fulfilled, (state, action) => {
-        return void (state.contactList = action.payload);
-      })
-      .addCase(updateContact.fulfilled, (state, action) => {
-        return void (state.contactList = action.payload);
-      })
-      .addCase(createContact.fulfilled, (state, action) => {
-        return void (state.contactList = action.payload);
-      })
-      .addCase(deleteContact.fulfilled, (state, action) => {
-        return void (state.contactList = action.payload);
+        return void (state.oneContact = action.payload);
       });
   },
 });
 
 export const allContact = (state) => state.contact.contactList;
+export const oneContact = (state) => state.contact.oneContact;
 export default contactSlice.reducer;
