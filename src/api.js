@@ -1,6 +1,6 @@
 import fetch from "cross-fetch";
-import { json } from "d3";
 import { host, token } from "./env";
+import { toast } from "react-toastify";
 
 export const fetchData = async (url, type) => {
   try {
@@ -14,6 +14,10 @@ export const fetchData = async (url, type) => {
     if (response.ok) {
       const jsonResponse = await response.json();
       return jsonResponse;
+    } else {
+      const jsonResponse = await response.json();
+      const error = jsonResponse.message;
+      toast.error(error);
     }
   } catch (error) {
     console.log(error);
@@ -31,6 +35,10 @@ export const loginDB = async (user, password) => {
     if (response.ok) {
       const jsonResponse = await response.json();
       return jsonResponse.token;
+    } else {
+      const jsonResponse = await response.json();
+      const error = jsonResponse.message;
+      toast.error(error);
     }
   } catch (error) {
     console.log(error);

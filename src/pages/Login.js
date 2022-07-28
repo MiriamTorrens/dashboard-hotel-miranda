@@ -10,11 +10,15 @@ export default function Login() {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
 
+  const userData = {
+    userName: "Miriam Torrens",
+    userEmail: "m.torrens@miranda.com",
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const token = await loginDB(user, password);
-    if (token) dispatch({ type: "login", user: user });
-    console.log(token);
+    if (token) dispatch({ type: "login", user: userData });
   };
 
   return (

@@ -11,6 +11,8 @@ import { AppWrapper, RoutesWrapper } from "./styles/Styles";
 import { useEffect, createContext, useReducer } from "react";
 import RequireAuth from "./RequireAuth";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const initialUser = localStorage.getItem("authenticated")
   ? JSON.parse(localStorage.getItem("authenticated"))
@@ -127,6 +129,7 @@ function App() {
           </Routes>
         </RoutesWrapper>
       </AppWrapper>
+      <ToastContainer autoClose={2000} />
     </AuthContext.Provider>
   );
 }
