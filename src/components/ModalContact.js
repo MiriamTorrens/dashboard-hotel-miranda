@@ -33,7 +33,22 @@ const Subject = styled.h3`
 export default function ModalContact(props) {
   const { open, handleClose } = props;
   const contactMessage = useSelector(oneContact);
-  //const dispatch = useDispatch();
+
+  const dispatch = useDispatch();
+  if (open) {
+    dispatch(
+      updateContact(contactMessage._id, {
+        contact_name: contactMessage.contact_name,
+        contact_email: contactMessage.contact_email,
+        contact_phone: contactMessage.contact_phone,
+        contact_date: new Date(contactMessage.contact_date),
+        subject: contactMessage.subject,
+        comment: contactMessage.comment,
+        viewed: true,
+        archived: contactMessage.archived,
+      })
+    );
+  }
 
   return (
     <div>

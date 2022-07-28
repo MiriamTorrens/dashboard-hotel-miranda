@@ -6,7 +6,6 @@ import {
   getContact,
   getContactMessage,
   allContact,
-  oneContact,
 } from "../features/slices/contactSlice";
 import { useState } from "react";
 import ModalContact from "./ModalContact";
@@ -62,7 +61,6 @@ const Icon = styled.div`
 export default function ContactsDiv() {
   const dispatch = useDispatch();
   const contactList = useSelector(allContact);
-
   const [open, setOpen] = useState(false);
 
   const handleOpen = (id) => {
