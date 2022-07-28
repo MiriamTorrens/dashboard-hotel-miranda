@@ -62,7 +62,7 @@ const Icon = styled.div`
 export default function ContactsDiv() {
   const dispatch = useDispatch();
   const contactList = useSelector(allContact);
-  const contactMessage = useSelector(oneContact);
+
   const [open, setOpen] = useState(false);
 
   const handleOpen = (id) => {

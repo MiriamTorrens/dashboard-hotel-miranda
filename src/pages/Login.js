@@ -18,7 +18,10 @@ export default function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const token = await loginDB(user, password);
-    if (token) dispatch({ type: "login", user: userData });
+    if (token) {
+      dispatch({ type: "login", user: userData });
+      localStorage.setItem("token", token);
+    }
   };
 
   return (

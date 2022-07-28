@@ -15,6 +15,7 @@ import Pagination from "../components/Pagination";
 import { getBookings, allBookings } from "../features/slices/bookingsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import ModalNewBooking from "../components/ModalNewBooking";
 
 export default function Bookings() {
   const dispatch = useDispatch();
@@ -22,6 +23,9 @@ export default function Bookings() {
   const [bookingsState, setBookingsState] = useState([]);
   const [query, setQuery] = useState("");
   const [order, setOrder] = useState("");
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     dispatch(getBookings());
@@ -109,7 +113,7 @@ export default function Bookings() {
               </MenuOptions>
             </Tab>
           </HeaderTab>
-          <ButtonNewBooking />
+          <ButtonNewBooking onClick={handleOpen} />
           <SelectDiv
             value={order}
             onChange={(e) => handleChangeOrder(e.target.value)}
@@ -151,32 +155,16 @@ export default function Bookings() {
                 <td>
                   <ButtonView />
                 </td>
-                {/* <td>
-                  {booking.roomType.type} - {booking.roomType.roomNumber}
-                </td> */}
                 <td>
                   <ButtonStatus status={booking.status}></ButtonStatus>
                 </td>
-                {/* <td>
-                  <MdOutlineDeleteOutline
-                    style={{ fontSize: 30 }}
-                    onClick={() => dispatch(deleteBooking(booking))}
-                  />
-                  <MdOutlineUpdate
-                    style={{ fontSize: 30 }}
-                    onClick={() =>
-                      dispatch(
-                        updateBooking({ ...booking, status: "Check Out" })
-                      )
-                    }
-                  />
-                </td> */}
               </tr>
             ))}
           </tbody>
         </Table>
         <Pagination />
       </SubWrapper>
+      <ModalNewBooking open={open} handleClose={handleClose} />
     </AllWrapper>
   );
 }
