@@ -28,6 +28,7 @@ export default function Bookings() {
   const [bookingsState, setBookingsState] = useState([]);
   const [query, setQuery] = useState("");
   const [order, setOrder] = useState("newest");
+  const [filter, setFilter] = useState("");
   const [open, setOpen] = useState(false);
   const [openNotes, setOpenNotes] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -48,9 +49,13 @@ export default function Bookings() {
       checkout: "checkout",
     };
     const orderedFilterBookings = bookingsList.filter((booking) =>
-      booking.guest_name.toLowerCase().includes(query.toLowerCase())
+      booking.status.includes(filter)
     );
-    orderedFilterBookings.sort((a, b) => {
+    const orderedFilterSearchBookings = orderedFilterBookings.filter(
+      (booking) =>
+        booking.guest_name.toLowerCase().includes(query.toLowerCase())
+    );
+    orderedFilterSearchBookings.sort((a, b) => {
       if (a[orderKeys[order]] < b[orderKeys[order]]) {
         return -1;
       } else if (a[orderKeys[order]] > b[orderKeys[order]]) {
@@ -59,8 +64,8 @@ export default function Bookings() {
         return 0;
       }
     });
-    setBookingsState(orderedFilterBookings);
-  }, [bookingsList, order, query]);
+    setBookingsState(orderedFilterSearchBookings);
+  }, [bookingsList, order, query, filter]);
 
   const handleClick = (id) => {
     setOpenNotes(true);
@@ -76,37 +81,13 @@ export default function Bookings() {
               <MenuOptions onClick={() => setBookingsState(bookingsList)}>
                 All Bookings
               </MenuOptions>
-              <MenuOptions
-                onClick={() =>
-                  setBookingsState(
-                    bookingsList.filter(
-                      (booking) => booking.status === "checkin"
-                    )
-                  )
-                }
-              >
+              <MenuOptions onClick={() => setFilter("checkin")}>
                 Check In
               </MenuOptions>
-              <MenuOptions
-                onClick={() =>
-                  setBookingsState(
-                    bookingsList.filter(
-                      (booking) => booking.status === "checkout"
-                    )
-                  )
-                }
-              >
+              <MenuOptions onClick={() => setFilter("checkout")}>
                 Check Out
               </MenuOptions>
-              <MenuOptions
-                onClick={() =>
-                  setBookingsState(
-                    bookingsList.filter(
-                      (booking) => booking.status === "in_progress"
-                    )
-                  )
-                }
-              >
+              <MenuOptions onClick={() => setFilter("in_progress")}>
                 In progress
               </MenuOptions>
             </Tab>
