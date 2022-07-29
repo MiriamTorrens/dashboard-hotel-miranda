@@ -2,74 +2,91 @@ import {
   AllWrapper,
   SubWrapper,
   HeaderTableWrapper,
-  SelectDate,
   Table,
+  HeaderTab,
+  Tab,
+  MenuOPtions,
+  InputText,
+  SelectDiv,
 } from "../styles/Styles";
-import Header from "../components/Header";
-import Select from "../components/Select";
-import InputText from "../components/InputText";
 import { ButtonView } from "../components/Buttons";
 import ButtonStatus from "../components/ButtonStatus";
 import Pagination from "../components/Pagination";
-import {
-  getBookings,
-  allBookings,
-  createBooking,
-  updateBooking,
-  deleteBooking,
-} from "../features/slices/bookingsSlice";
+import { getBookings, allBookings } from "../features/slices/bookingsSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { MdOutlineDeleteOutline, MdOutlineUpdate } from "react-icons/md";
-import { IoMdAddCircleOutline } from "react-icons/io";
+import { useEffect, useState } from "react";
 
 export default function Bookings() {
-  const menuOptions = ["All Bookings", "Check In", "Check Out", "In Progress"];
-  const selectOptions = ["Newest", "Guest", "Check In", "Check Out"];
-  const placeholder = "Search guest";
-
   const dispatch = useDispatch();
   const bookingsList = useSelector(allBookings);
+  const [bookingsState, setBookingsState] = useState([]);
+  const [filter, setFilter] = useState("");
+  const [query, setQuery] = useState("");
+  const [order, setOrder] = useState("newest");
 
   useEffect(() => {
     dispatch(getBookings());
-  }, []);
+  }, [dispatch]);
 
-  const handleClick = () => {
-    dispatch(
-      createBooking({
-        fullName: "Lauren Abshire",
-        id: "3bbee4c3-0074",
-        checkin: "2021-12-11",
-        checkout: "2021-07-06",
-        roomInfo: 21,
-        price: 80,
-        specialRequest: "minim eiusmod amet id duis id",
-        amenities: {},
-        images: [],
-        roomType: {
-          type: "MAFRQAQU",
-          roomNumber: 21,
-        },
-        roomDescription: "velit nulla ea velit exercitation consectetur",
-        status: "In Progress",
-      })
+  useEffect(() => {
+    const orderKeys = {
+      newest: "date",
+      guest: "fullName",
+      checkin: "checkin",
+      checkout: "checkout",
+    };
+    const filteredBookings = bookingsList.filter((booking) =>
+      booking.status.includes(filter)
     );
-  };
+    const filteredSearchBookings = filteredBookings.filter((booking) =>
+      booking.fullName.toLowerCase().includes(query.toLowerCase())
+    );
+    filteredSearchBookings.sort((a, b) => {
+      if (a[orderKeys[order]] > b[orderKeys[order]]) {
+        return 1;
+      } else if (a[orderKeys[order]] < b[orderKeys[order]]) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+    setBookingsState(filteredSearchBookings);
+  }, [bookingsList, filter, query, order]);
 
   return (
     <AllWrapper>
       <SubWrapper>
         <HeaderTableWrapper>
-          <Header menuOptions={menuOptions} selectOptions={selectOptions} />
+          <HeaderTab>
+            <Tab>
+              <MenuOPtions onClick={() => setFilter("")}>
+                All Bookings
+              </MenuOPtions>
+              <MenuOPtions onClick={() => setFilter("Check In")}>
+                Check In
+              </MenuOPtions>
+              <MenuOPtions onClick={() => setFilter("Check Out")}>
+                Check Out
+              </MenuOPtions>
+              <MenuOPtions onClick={() => setFilter("In Progress")}>
+                In Progress
+              </MenuOPtions>
+            </Tab>
+          </HeaderTab>
           <div>
-            <SelectDate>
-              <option>1 November 2020 - 30 November 2020</option>
-            </SelectDate>
-            <Select selectOptions={selectOptions} />
+            <SelectDiv value={order} onChange={(e) => setOrder(e.target.value)}>
+              <option value="newest">Newest</option>
+              <option value="guest">Guest</option>
+              <option value="checkin">Check In</option>
+              <option value="checkout">Check Out</option>
+            </SelectDiv>
+            <InputText
+              placeholder="Search Guest"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            ></InputText>
           </div>
         </HeaderTableWrapper>
-        <InputText placeholder={placeholder}></InputText>
         <Table>
           <thead>
             <tr>
@@ -78,18 +95,12 @@ export default function Bookings() {
               <th>CheckIn</th>
               <th>CheckOut</th>
               <th>Special Request</th>
-              <th>Room Type</th>
+              <th>Room Number</th>
               <th>Status</th>
-              {/* <th>
-                <IoMdAddCircleOutline
-                  style={{ fontSize: 30 }}
-                  onClick={() => handleClick()}
-                />
-              </th> */}
             </tr>
           </thead>
           <tbody>
-            {bookingsList.map((booking) => (
+            {bookingsState.map((booking) => (
               <tr key={booking.id}>
                 <td>
                   {booking.fullName}
@@ -102,26 +113,10 @@ export default function Bookings() {
                 <td>
                   <ButtonView />
                 </td>
-                <td>
-                  {booking.roomType.type} - {booking.roomType.roomNumber}
-                </td>
+                <td>{booking.roomType.roomNumber}</td>
                 <td>
                   <ButtonStatus status={booking.status}></ButtonStatus>
                 </td>
-                {/* <td>
-                  <MdOutlineDeleteOutline
-                    style={{ fontSize: 30 }}
-                    onClick={() => dispatch(deleteBooking(booking))}
-                  />
-                  <MdOutlineUpdate
-                    style={{ fontSize: 30 }}
-                    onClick={() =>
-                      dispatch(
-                        updateBooking({ ...booking, status: "Check Out" })
-                      )
-                    }
-                  />
-                </td> */}
               </tr>
             ))}
           </tbody>

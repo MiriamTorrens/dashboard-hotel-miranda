@@ -37,17 +37,6 @@ export const HeaderTableWrapper = styled.div`
   justify-content: space-between;
   width: 95%;
 `;
-export const SelectDate = styled.select`
-  background-color: #135846;
-  width: 300px;
-  height: 49px;
-  border-radius: 12px;
-  color: white;
-  margin-right: 20px;
-  text-align: center;
-  font-size: 12px;
-  font-family: "Poppins", sans-serif;
-`;
 export const Table = styled.table`
   margin-top: 30px;
   width: 100%;
@@ -95,4 +84,12 @@ export const SelectDiv = styled.select`
   height: 49px;
   text-align: center;
   font-size: 14px;
+`;
+export const InputText = styled.input`
+  border-color: #135846;
+  border-radius: 12px;
+  width: 250px;
+  height: 40px;
+  margin-left: 15px;
+  text-align: center;
 `;

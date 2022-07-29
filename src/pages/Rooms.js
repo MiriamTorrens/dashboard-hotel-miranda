@@ -10,14 +10,11 @@ import {
 } from "../styles/Styles";
 import ButtonStatus from "../components/ButtonStatus";
 import Pagination from "../components/Pagination";
-import Select from "../components/Select";
 import { getRooms, allRooms } from "../features/slices/roomsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 export default function Rooms() {
-  const selectOptions = ["Status", "Price <", "Price >"];
-
   const dispatch = useDispatch();
   const roomsList = useSelector(allRooms);
   const [roomsState, setRoomsState] = useState([]);
