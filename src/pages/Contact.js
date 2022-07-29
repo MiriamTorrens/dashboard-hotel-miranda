@@ -27,17 +27,12 @@ export default function Contact() {
   }, [dispatch]);
 
   useEffect(() => {
-    setContactState(contactList);
-  }, [contactList]);
-
-  const handleChange = (order) => {
-    setOrder(order);
-    const sortedContact = [...contactState];
     const orderKeys = {
       newest: "contact_date",
       guest: "contact_name",
     };
-    sortedContact.sort((a, b) => {
+    const orderedContact = [...contactList];
+    orderedContact.sort((a, b) => {
       if (a[orderKeys[order]] < b[orderKeys[order]]) {
         return -1;
       } else if (a[orderKeys[order]] > b[orderKeys[order]]) {
@@ -46,9 +41,9 @@ export default function Contact() {
         return 0;
       }
     });
+    setContactState(orderedContact);
+  }, [contactList, order]);
 
-    setContactState(sortedContact);
-  };
   return (
     <AllWrapper>
       <ContactsDiv />
@@ -70,10 +65,7 @@ export default function Contact() {
               </MenuOptions>
             </Tab>
           </HeaderTab>
-          <SelectDiv
-            value={order}
-            onChange={(e) => handleChange(e.target.value)}
-          >
+          <SelectDiv value={order} onChange={(e) => setOrder(e.target.value)}>
             <option value="newest">Newest</option>
             <option value="guest">Guest</option>
           </SelectDiv>
