@@ -21,6 +21,7 @@ export default function Contact() {
   const contactList = useSelector(allContact);
   const [contactState, setContactState] = useState([]);
   const [order, setOrder] = useState("newest");
+  const [filter, setFilter] = useState("");
 
   useEffect(() => {
     dispatch(getContact());
@@ -31,8 +32,10 @@ export default function Contact() {
       newest: "contact_date",
       guest: "contact_name",
     };
-    const orderedContact = [...contactList];
-    orderedContact.sort((a, b) => {
+    const orderedFilterContact = contactList.filter((contact) =>
+      contact.archived.toString().includes(filter)
+    );
+    orderedFilterContact.sort((a, b) => {
       if (a[orderKeys[order]] < b[orderKeys[order]]) {
         return -1;
       } else if (a[orderKeys[order]] > b[orderKeys[order]]) {
@@ -41,8 +44,8 @@ export default function Contact() {
         return 0;
       }
     });
-    setContactState(orderedContact);
-  }, [contactList, order]);
+    setContactState(orderedFilterContact);
+  }, [contactList, order, filter]);
 
   return (
     <AllWrapper>
@@ -55,11 +58,12 @@ export default function Contact() {
                 All Contacts
               </MenuOptions>
               <MenuOptions
-                onClick={() =>
-                  setContactState(
-                    contactList.filter((contact) => contact.archived === true)
-                  )
-                }
+                onClick={() => setFilter("true")}
+                // onClick={() =>
+                //   setContactState(
+                //     contactList.filter((contact) => contact.archived === true)
+                //   )
+                // }
               >
                 Archived
               </MenuOptions>

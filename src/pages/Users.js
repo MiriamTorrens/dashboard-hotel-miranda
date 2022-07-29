@@ -23,6 +23,7 @@ export default function Users() {
   const [open, setOpen] = useState(false);
   const [order, setOrder] = useState("newest");
   const [query, setQuery] = useState("");
+  const [filter, setFilter] = useState("");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const dispatch = useDispatch();
@@ -37,9 +38,12 @@ export default function Users() {
       name: "user_name",
     };
     const orderedFilterUsers = usersList.filter((user) =>
+      user.status.toString().includes(filter)
+    );
+    const orderedFilterSearchUsers = orderedFilterUsers.filter((user) =>
       user.user_name.toLowerCase().includes(query.toLowerCase())
     );
-    orderedFilterUsers.sort((a, b) => {
+    orderedFilterSearchUsers.sort((a, b) => {
       if (a[orderKeys[order]] < b[orderKeys[order]]) {
         return -1;
       } else if (a[orderKeys[order]] > b[orderKeys[order]]) {
@@ -48,8 +52,8 @@ export default function Users() {
         return 0;
       }
     });
-    setUsersState(orderedFilterUsers);
-  }, [usersList, order, query]);
+    setUsersState(orderedFilterSearchUsers);
+  }, [usersList, order, query, filter]);
 
   return (
     <AllWrapper>
@@ -60,22 +64,10 @@ export default function Users() {
               <MenuOptions onClick={() => setUsersState(usersList)}>
                 All Employee
               </MenuOptions>
-              <MenuOptions
-                onClick={() =>
-                  setUsersState(
-                    usersList.filter((user) => user.status === true)
-                  )
-                }
-              >
+              <MenuOptions onClick={() => setFilter("true")}>
                 Active Employee
               </MenuOptions>
-              <MenuOptions
-                onClick={() =>
-                  setUsersState(
-                    usersList.filter((user) => user.status === false)
-                  )
-                }
-              >
+              <MenuOptions onClick={() => setFilter("false")}>
                 Inactive Employee
               </MenuOptions>
             </Tab>
