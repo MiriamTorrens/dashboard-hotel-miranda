@@ -32,17 +32,14 @@ export default function Users() {
   }, [dispatch]);
 
   useEffect(() => {
-    setUsersState(usersList);
-  }, [usersList]);
-
-  const handleChange = (order) => {
-    setOrder(order);
-    const sortedUsers = [...usersState];
     const orderKeys = {
       newest: "start_date",
       name: "user_name",
     };
-    sortedUsers.sort((a, b) => {
+    const orderedFilterUsers = usersList.filter((user) =>
+      user.user_name.toLowerCase().includes(query.toLowerCase())
+    );
+    orderedFilterUsers.sort((a, b) => {
       if (a[orderKeys[order]] < b[orderKeys[order]]) {
         return -1;
       } else if (a[orderKeys[order]] > b[orderKeys[order]]) {
@@ -51,21 +48,40 @@ export default function Users() {
         return 0;
       }
     });
-    setUsersState(sortedUsers);
-  };
+    setUsersState(orderedFilterUsers);
+  }, [usersList, order, query]);
 
-  const searchEmployee = (query) => {
-    setQuery(query);
-    if (!query.length) {
-      setUsersState(usersList);
-    } else {
-      setUsersState(
-        usersState.filter((user) =>
-          user.user_name.toLowerCase().includes(query.toLowerCase())
-        )
-      );
-    }
-  };
+  // const handleChange = (order) => {
+  //   setOrder(order);
+  //   const sortedUsers = [...usersState];
+  //   const orderKeys = {
+  //     newest: "start_date",
+  //     name: "user_name",
+  //   };
+  //   sortedUsers.sort((a, b) => {
+  //     if (a[orderKeys[order]] < b[orderKeys[order]]) {
+  //       return -1;
+  //     } else if (a[orderKeys[order]] > b[orderKeys[order]]) {
+  //       return 1;
+  //     } else {
+  //       return 0;
+  //     }
+  //   });
+  //   setUsersState(sortedUsers);
+  // };
+
+  // const searchEmployee = (query) => {
+  //   setQuery(query);
+  //   if (!query.length) {
+  //     setUsersState(usersList);
+  //   } else {
+  //     setUsersState(
+  //       usersState.filter((user) =>
+  //         user.user_name.toLowerCase().includes(query.toLowerCase())
+  //       )
+  //     );
+  //   }
+  // };
 
   return (
     <AllWrapper>
@@ -98,17 +114,14 @@ export default function Users() {
           </HeaderTab>
           <div>
             <ButtonNewEmployee onClick={handleOpen} />
-            <SelectDiv
-              value={order}
-              onChange={(e) => handleChange(e.target.value)}
-            >
+            <SelectDiv value={order} onChange={(e) => setOrder(e.target.value)}>
               <option value="newest">Newest</option>
               <option value="name">Name</option>
             </SelectDiv>
             <InputText
               placeholder="Search employee"
               value={query}
-              onChange={(e) => searchEmployee(e.target.value)}
+              onChange={(e) => setQuery(e.target.value)}
             />
           </div>
         </HeaderTableWrapper>
