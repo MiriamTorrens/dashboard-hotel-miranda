@@ -11,8 +11,6 @@ import {
 import ButtonStatus from "../components/ButtonStatus";
 import Pagination from "../components/Pagination";
 import { getRooms, allRooms } from "../features/slices/roomsSlice";
-// import { MdOutlineDeleteOutline, MdOutlineUpdate } from "react-icons/md";
-// import { IoMdAddCircleOutline } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
@@ -24,17 +22,12 @@ export default function Rooms() {
 
   useEffect(() => {
     dispatch(getRooms());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-    setRoomsState(roomsList);
-  }, [roomsList]);
-
-  const handleChange = (order) => {
-    setOrder(order);
-    const sortedRooms = [...roomsState];
+    const orderedRooms = [...roomsList];
     if (order === "price <") {
-      sortedRooms.sort((a, b) => {
+      orderedRooms.sort((a, b) => {
         if (a.price < b.price) {
           return -1;
         } else if (a.price > b.price) {
@@ -44,7 +37,7 @@ export default function Rooms() {
         }
       });
     } else {
-      sortedRooms.sort((a, b) => {
+      orderedRooms.sort((a, b) => {
         if (a.price > b.price) {
           return -1;
         } else if (a.price < b.price) {
@@ -54,8 +47,8 @@ export default function Rooms() {
         }
       });
     }
-    setRoomsState(sortedRooms);
-  };
+    setRoomsState(orderedRooms);
+  }, [roomsList, order]);
 
   return (
     <AllWrapper>
@@ -87,10 +80,7 @@ export default function Rooms() {
             </Tab>
           </HeaderTab>
           <div>
-            <SelectDiv
-              value={order}
-              onChange={(e) => handleChange(e.target.value)}
-            >
+            <SelectDiv value={order} onChange={(e) => setOrder(e.target.value)}>
               <option value="price <">Price -</option>
               <option value="price >">Price +</option>
             </SelectDiv>
@@ -105,12 +95,6 @@ export default function Rooms() {
               <th>Rate</th>
               <th>Offer price</th>
               <th>Status</th>
-              {/* <th>
-                <IoMdAddCircleOutline
-                  style={{ fontSize: 30 }}
-                  onClick={() => handleClick()}
-                />
-              </th> */}
             </tr>
           </thead>
           <tbody>
@@ -152,18 +136,6 @@ export default function Rooms() {
                 <td>
                   <ButtonStatus status={room.status}></ButtonStatus>
                 </td>
-                {/* <td>
-                  <MdOutlineDeleteOutline
-                    style={{ fontSize: 30 }}
-                    onClick={() => dispatch(deleteRoom(room))}
-                  />
-                  <MdOutlineUpdate
-                    style={{ fontSize: 30 }}
-                    onClick={() =>
-                      dispatch(updateRoom({ ...room, status: "Booked" }))
-                    }
-                  />
-                </td> */}
               </tr>
             ))}
           </tbody>
