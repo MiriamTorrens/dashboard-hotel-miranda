@@ -3,99 +3,97 @@ import {
   SubWrapper,
   HeaderTableWrapper,
   Table,
+  HeaderTab,
+  Tab,
+  MenuOPtions,
+  SelectDiv,
 } from "../styles/Styles";
-import { NavLink } from "react-router-dom";
 import ButtonStatus from "../components/ButtonStatus";
-import Header from "../components/Header";
 import Pagination from "../components/Pagination";
-import { ButtonNewRoom } from "../components/Buttons";
 import Select from "../components/Select";
-import {
-  getRooms,
-  allRooms,
-  createRoom,
-  updateRoom,
-  deleteRoom,
-} from "../features/slices/roomsSlice";
-import { MdOutlineDeleteOutline, MdOutlineUpdate } from "react-icons/md";
-import { IoMdAddCircleOutline } from "react-icons/io";
+import { getRooms, allRooms } from "../features/slices/roomsSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Rooms() {
-  const menuOptions = ["All Rooms"];
   const selectOptions = ["Status", "Price <", "Price >"];
 
   const dispatch = useDispatch();
   const roomsList = useSelector(allRooms);
+  const [roomsState, setRoomsState] = useState([]);
+  const [filter, setFilter] = useState("");
+  const [order, setOrder] = useState("roomNumber");
 
   useEffect(() => {
     dispatch(getRooms());
-  }, []);
+  }, [dispatch]);
 
-  const handleClick = () => {
-    dispatch(
-      createRoom({
-        id: "8e8e7c2f-9706",
-        images: [
-          "https://d2wiks2irojx7z.cloudfront.net/cache/img/hotel-marais-bastille-chambre-30813-1600-900-auto.jpeg?q=1528112600",
-          "https://d2wiks2irojx7z.cloudfront.net/cache/img/hotel-marais-bastille-chambre-30807-1600-900-auto.jpeg?q=1528112601",
-          "https://d2wiks2irojx7z.cloudfront.net/cache/img/hotel-marais-bastille-chambre-30819-1600-900-auto.jpeg?q=1528112602",
-          "https://d2wiks2irojx7z.cloudfront.net/cache/img/hotel-marais-bastille-chambre-30831-1600-900-auto.jpeg?q=1528112603",
-        ],
-        roomType: "Single bed",
-        roomNumber: 40,
-        offer: false,
-        price: 78,
-        discount: 15,
-        cancellation: "",
-        amenities: [
-          "AC",
-          "Shower",
-          "Single Bed",
-          "Towel",
-          "Bathup",
-          "Coffe Set",
-          "LED TV",
-          "WiFi",
-        ],
-        status: "Available",
-        roomName: "New Room",
-      })
+  useEffect(() => {
+    const orderKeys = {
+      roomNumber: "roomNumber",
+      "price <": "price",
+    };
+    const orderedFilterRooms = roomsList.filter((room) =>
+      room.status.includes(filter)
     );
-  };
+    orderedFilterRooms.sort((a, b) => {
+      if (order === "price >") {
+        if (a.order > b.order) {
+          return 1;
+        } else if (a.order < b.order) {
+          return -1;
+        } else {
+          return 0;
+        }
+      } else {
+        if (a[orderKeys[order]] > b[orderKeys[order]]) {
+          return 1;
+        } else if (a[orderKeys[order]] < b[orderKeys[order]]) {
+          return -1;
+        } else {
+          return 0;
+        }
+      }
+    });
+    setRoomsState(orderedFilterRooms);
+  }, [roomsList, filter, order]);
 
   return (
     <AllWrapper>
       <SubWrapper>
         <HeaderTableWrapper>
-          <Header menuOptions={menuOptions} selectOptions={selectOptions} />
+          <HeaderTab>
+            <Tab>
+              <MenuOPtions onClick={() => setFilter("")}>All Rooms</MenuOPtions>
+              <MenuOPtions onClick={() => setFilter("Available")}>
+                Available Rooms
+              </MenuOPtions>
+              <MenuOPtions onClick={() => setFilter("Booked")}>
+                Booked Rooms
+              </MenuOPtions>
+            </Tab>
+          </HeaderTab>
           <div>
-            <NavLink to="/rooms/newRoom">
-              <ButtonNewRoom />
-            </NavLink>
-            <Select selectOptions={selectOptions} />
+            <SelectDiv value={order} onChange={(e) => setOrder(e.target.value)}>
+              <option value="roomNumber">Room Number</option>
+              <option value="price <">Price -</option>
+              <option value="price >">Price +</option>
+            </SelectDiv>
           </div>
         </HeaderTableWrapper>
         <Table>
           <thead>
             <tr>
-              <th>Room Name</th>
+              <th>Room Number</th>
               <th>Bed type</th>
               <th>Facilities</th>
               <th>Rate</th>
               <th>Offer price</th>
               <th>Status</th>
-              {/* <th>
-                <IoMdAddCircleOutline
-                  style={{ fontSize: 30 }}
-                  onClick={() => handleClick()}
-                />
-              </th> */}
             </tr>
           </thead>
           <tbody>
-            {roomsList.map((room) => (
+            {roomsState.map((room) => (
               <tr key={room.id}>
                 <td style={{ width: 150 }}>
                   <div style={{ display: "flex" }}>
@@ -113,7 +111,7 @@ export default function Rooms() {
                     <div style={{ marginLeft: 20, marginTop: 8 }}>
                       {room.idRoom}
                       <br />
-                      {room.roomName}
+                      {room.roomNumber}
                     </div>
                   </div>
                 </td>
@@ -127,18 +125,6 @@ export default function Rooms() {
                 <td>
                   <ButtonStatus status={room.status}></ButtonStatus>
                 </td>
-                {/* <td>
-                  <MdOutlineDeleteOutline
-                    style={{ fontSize: 30 }}
-                    onClick={() => dispatch(deleteRoom(room))}
-                  />
-                  <MdOutlineUpdate
-                    style={{ fontSize: 30 }}
-                    onClick={() =>
-                      dispatch(updateRoom({ ...room, status: "Booked" }))
-                    }
-                  />
-                </td> */}
               </tr>
             ))}
           </tbody>

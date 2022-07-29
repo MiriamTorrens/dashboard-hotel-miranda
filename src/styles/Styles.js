@@ -66,3 +66,33 @@ export const Table = styled.table`
     height: 121px;
   }
 `;
+export const HeaderTab = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+export const Tab = styled.div`
+  display: flex;
+  color: #6e6e6e;
+  height: 36px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  border-bottom: 1px solid #0000001a;
+`;
+export const MenuOPtions = styled.span`
+  margin-right: 70px;
+  &:hover {
+    color: #135846;
+    cursor: pointer;
+    border-bottom: 3px solid #135846;
+  }
+`;
+export const SelectDiv = styled.select`
+  border-color: #135846;
+  color: #135846;
+  border-radius: 12px;
+  width: 150px;
+  height: 49px;
+  text-align: center;
+  font-size: 14px;
+`;
