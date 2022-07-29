@@ -32,32 +32,16 @@ export default function Bookings() {
   }, [dispatch]);
 
   useEffect(() => {
-    setBookingsState(bookingsList);
-  }, [bookingsList]);
-
-  const handleChange = (query) => {
-    setQuery(query);
-    if (!query.length) {
-      setBookingsState(bookingsList);
-    } else {
-      setBookingsState(
-        bookingsState.filter((booking) =>
-          booking.guest_name.toLowerCase().includes(query.toLowerCase())
-        )
-      );
-    }
-  };
-
-  const handleChangeOrder = (order) => {
-    setOrder(order);
     const orderKeys = {
       newest: "order_date",
       guest: "guest_name",
       checkin: "checkin",
       checkout: "checkout",
     };
-    const sortedBookings = [...bookingsState];
-    sortedBookings.sort((a, b) => {
+    const orderedFilterBookings = bookingsList.filter((booking) =>
+      booking.guest_name.toLowerCase().includes(query.toLowerCase())
+    );
+    orderedFilterBookings.sort((a, b) => {
       if (a[orderKeys[order]] < b[orderKeys[order]]) {
         return -1;
       } else if (a[orderKeys[order]] > b[orderKeys[order]]) {
@@ -66,8 +50,8 @@ export default function Bookings() {
         return 0;
       }
     });
-    setBookingsState(sortedBookings);
-  };
+    setBookingsState(orderedFilterBookings);
+  }, [bookingsList, order, query]);
 
   return (
     <AllWrapper>
@@ -114,10 +98,7 @@ export default function Bookings() {
             </Tab>
           </HeaderTab>
           <ButtonNewBooking onClick={handleOpen} />
-          <SelectDiv
-            value={order}
-            onChange={(e) => handleChangeOrder(e.target.value)}
-          >
+          <SelectDiv value={order} onChange={(e) => setOrder(e.target.value)}>
             <option value="newest">Newest</option>
             <option value="guest">Guest</option>
             <option value="checkin">Check In</option>
@@ -126,7 +107,7 @@ export default function Bookings() {
           <InputText
             placeholder="Search Guest"
             value={query}
-            onChange={(e) => handleChange(e.target.value)}
+            onChange={(e) => setQuery(e.target.value)}
           ></InputText>
         </HeaderTableWrapper>
         <Table>
