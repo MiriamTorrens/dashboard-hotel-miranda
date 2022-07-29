@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchData } from "../../api";
+import { requestApi, requestApiBody } from "../../api";
 
 const initialState = {
   bookingsList: [],
@@ -9,7 +9,7 @@ const initialState = {
 export const getBookings = createAsyncThunk(
   "bookings/getBookings",
   async () => {
-    const response = await fetchData("bookings", "GET");
+    const response = await requestApi("bookings", "GET");
     return response;
   }
 );
@@ -17,15 +17,15 @@ export const getBookings = createAsyncThunk(
 export const getBooking = createAsyncThunk(
   "bookings/getBooking",
   async (id) => {
-    const response = await fetchData(`bookings/${id}`, "GET");
+    const response = await requestApi(`bookings/${id}`, "GET");
     return response;
   }
 );
 
 export const updateBooking = createAsyncThunk(
   "bookings/updateBooking",
-  async (id) => {
-    const response = await fetchData(`bookings/${id}`, "PATCH");
+  async (id, data) => {
+    const response = await requestApiBody(`bookings/${id}`, "PATCH", data);
     return response;
   }
 );
@@ -33,15 +33,15 @@ export const updateBooking = createAsyncThunk(
 export const deleteBooking = createAsyncThunk(
   "bookings/deleteBooking",
   async (id) => {
-    const response = await fetchData(`bookings/${id}`, "DELETE");
+    const response = await requestApi(`bookings/${id}`, "DELETE");
     return response;
   }
 );
 
 export const createBooking = createAsyncThunk(
   "bookings/createBookings",
-  async () => {
-    const response = await fetchData("bookings", "POST");
+  async (data) => {
+    const response = await requestApiBody("bookings", "POST", data);
     return response;
   }
 );

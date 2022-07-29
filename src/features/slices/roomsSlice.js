@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchData } from "../../api";
+import { requestApi, requestApiBody } from "../../api";
 
 const initialState = {
   roomsList: [],
@@ -7,29 +7,35 @@ const initialState = {
 };
 
 export const getRooms = createAsyncThunk("rooms/getRooms", async () => {
-  const response = await fetchData("rooms", "GET");
+  const response = await requestApi("rooms", "GET");
   return response;
 });
 
 export const getRoom = createAsyncThunk("rooms/getRoom", async (id) => {
-  const response = await fetchData(`rooms/${id}`, "GET");
+  const response = await requestApi(`rooms/${id}`, "GET");
   return response;
 });
 
-export const updateRoom = createAsyncThunk("rooms/updateRoom", async (id) => {
-  const response = await fetchData(`rooms/${id}`, "PATCH");
-  return response;
-});
+export const updateRoom = createAsyncThunk(
+  "rooms/updateRoom",
+  async (id, data) => {
+    const response = await requestApiBody(`rooms/${id}`, "PATCH", data);
+    return response;
+  }
+);
 
 export const deleteRoom = createAsyncThunk("rooms/deleteRoom", async (id) => {
-  const response = await fetchData(`rooms/${id}`, "DELETE");
+  const response = await requestApi(`rooms/${id}`, "DELETE");
   return response;
 });
 
-export const createRoom = createAsyncThunk("rooms/createRooms", async () => {
-  const response = await fetchData("rooms", "POST");
-  return response;
-});
+export const createRoom = createAsyncThunk(
+  "rooms/createRooms",
+  async (data) => {
+    const response = await requestApiBody("rooms", "POST", data);
+    return response;
+  }
+);
 
 export const roomsSlice = createSlice({
   name: "rooms",

@@ -2,7 +2,7 @@ import fetch from "cross-fetch";
 import { host, token } from "./env";
 import { toast } from "react-toastify";
 
-export const fetchData = async (url, type) => {
+export const requestApi = async (url, type) => {
   try {
     const response = await fetch(host + url, {
       method: type,
@@ -24,7 +24,7 @@ export const fetchData = async (url, type) => {
   }
 };
 
-export const fetchDataBody = async (url, type, data) => {
+export const requestApiBody = async (url, type, data) => {
   try {
     const response = await fetch(host + url, {
       method: type,

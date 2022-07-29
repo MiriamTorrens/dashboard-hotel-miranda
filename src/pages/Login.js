@@ -7,8 +7,8 @@ import { loginDB } from "../api";
 
 export default function Login() {
   const { dispatch } = useContext(AuthContext);
-  const [user, setUser] = useState("");
-  const [password, setPassword] = useState("");
+  const [user, setUser] = useState("m.torrens@miranda.com");
+  const [password, setPassword] = useState("1234");
 
   const userData = {
     userName: "Miriam Torrens",

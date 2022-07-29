@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchData } from "../../api";
+import { requestApi, requestApiBody } from "../../api";
 
 const initialState = {
   contactList: [],
@@ -7,22 +7,22 @@ const initialState = {
 };
 
 export const getContact = createAsyncThunk("contact/getContact", async () => {
-  const response = await fetchData("contact", "GET");
+  const response = await requestApi("contact", "GET");
   return response;
 });
 
 export const getContactMessage = createAsyncThunk(
   "contact/getContactMessage",
   async (id) => {
-    const response = await fetchData(`contact/${id}`, "GET");
+    const response = await requestApi(`contact/${id}`, "GET");
     return response;
   }
 );
 
 export const updateContact = createAsyncThunk(
   "contact/updateContact",
-  async (id) => {
-    const response = await fetchData(`contact/${id}`, "PATCH");
+  async (id, data) => {
+    const response = await requestApiBody(`contact/${id}`, "PATCH", data);
     return response;
   }
 );
@@ -30,15 +30,15 @@ export const updateContact = createAsyncThunk(
 export const deleteContact = createAsyncThunk(
   "contact/deleteContact",
   async (id) => {
-    const response = await fetchData(`contact/${id}`, "DELETE");
+    const response = await requestApi(`contact/${id}`, "DELETE");
     return response;
   }
 );
 
 export const createContact = createAsyncThunk(
   "contact/createContact",
-  async () => {
-    const response = await fetchData("contact", "POST");
+  async (data) => {
+    const response = await requestApiBody("contact", "POST", data);
     return response;
   }
 );
