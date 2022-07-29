@@ -12,10 +12,15 @@ import {
 import { ButtonView, ButtonNewBooking } from "../components/Buttons";
 import ButtonStatus from "../components/ButtonStatus";
 import Pagination from "../components/Pagination";
-import { getBookings, allBookings } from "../features/slices/bookingsSlice";
+import {
+  getBookings,
+  allBookings,
+  getBooking,
+} from "../features/slices/bookingsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import ModalNewBooking from "../components/ModalNewBooking";
+import ModalViewNotes from "../components/ModalViewNotes";
 
 export default function Bookings() {
   const dispatch = useDispatch();
@@ -24,8 +29,12 @@ export default function Bookings() {
   const [query, setQuery] = useState("");
   const [order, setOrder] = useState("newest");
   const [open, setOpen] = useState(false);
+  const [openNotes, setOpenNotes] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setOpenNotes(false);
+  };
 
   useEffect(() => {
     dispatch(getBookings());
@@ -52,6 +61,11 @@ export default function Bookings() {
     });
     setBookingsState(orderedFilterBookings);
   }, [bookingsList, order, query]);
+
+  const handleClick = (id) => {
+    setOpenNotes(true);
+    dispatch(getBooking(id));
+  };
 
   return (
     <AllWrapper>
@@ -134,7 +148,7 @@ export default function Bookings() {
                 <td>{booking.checkin}</td>
                 <td>{booking.checkout}</td>
                 <td>
-                  <ButtonView />
+                  <ButtonView onClick={() => handleClick(booking._id)} />
                 </td>
                 <td>
                   <ButtonStatus status={booking.status}></ButtonStatus>
@@ -146,6 +160,7 @@ export default function Bookings() {
         <Pagination />
       </SubWrapper>
       <ModalNewBooking open={open} handleClose={handleClose} />
+      <ModalViewNotes openNotes={openNotes} handleClose={handleClose} />
     </AllWrapper>
   );
 }
