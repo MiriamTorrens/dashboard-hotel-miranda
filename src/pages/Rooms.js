@@ -19,6 +19,7 @@ export default function Rooms() {
   const roomsList = useSelector(allRooms);
   const [roomsState, setRoomsState] = useState([]);
   const [order, setOrder] = useState("room_number");
+  const [filter, setFilter] = useState("");
 
   useEffect(() => {
     dispatch(getRooms());
@@ -29,8 +30,12 @@ export default function Rooms() {
       room_number: "room_number",
       "price <": "price",
     };
-    const orderedRooms = [...roomsList];
-    orderedRooms.sort((a, b) => {
+
+    const orderedfilteredRooms = roomsList.filter((room) =>
+      room.status.includes(filter)
+    );
+
+    orderedfilteredRooms.sort((a, b) => {
       if (a[orderKeys[order]] < b[orderKeys[order]]) {
         return -1;
       } else if (a[orderKeys[order]] > b[orderKeys[order]]) {
@@ -40,7 +45,7 @@ export default function Rooms() {
       }
     });
     if (order === "price >") {
-      orderedRooms.sort((a, b) => {
+      orderedfilteredRooms.sort((a, b) => {
         if (a.price > b.price) {
           return -1;
         } else if (a.price < b.price) {
@@ -50,8 +55,8 @@ export default function Rooms() {
         }
       });
     }
-    setRoomsState(orderedRooms);
-  }, [roomsList, order]);
+    setRoomsState(orderedfilteredRooms);
+  }, [roomsList, order, filter]);
 
   return (
     <AllWrapper>
@@ -63,20 +68,16 @@ export default function Rooms() {
                 All Rooms
               </MenuOptions>
               <MenuOptions
-                onClick={() =>
-                  setRoomsState(
-                    roomsList.filter((room) => room.status === "Available")
-                  )
-                }
+                onClick={() => {
+                  setFilter("Available");
+                }}
               >
                 Available
               </MenuOptions>
               <MenuOptions
-                onClick={() =>
-                  setRoomsState(
-                    roomsList.filter((room) => room.status === "Booked")
-                  )
-                }
+                onClick={() => {
+                  setFilter("Booked");
+                }}
               >
                 Booked
               </MenuOptions>
