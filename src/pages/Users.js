@@ -21,7 +21,7 @@ export default function Users() {
   const usersList = useSelector(allUsers);
   const [usersState, setUsersState] = useState([]);
   const [open, setOpen] = useState(false);
-  const [order, setOrder] = useState("");
+  const [order, setOrder] = useState("newest");
   const [query, setQuery] = useState("");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -50,38 +50,6 @@ export default function Users() {
     });
     setUsersState(orderedFilterUsers);
   }, [usersList, order, query]);
-
-  // const handleChange = (order) => {
-  //   setOrder(order);
-  //   const sortedUsers = [...usersState];
-  //   const orderKeys = {
-  //     newest: "start_date",
-  //     name: "user_name",
-  //   };
-  //   sortedUsers.sort((a, b) => {
-  //     if (a[orderKeys[order]] < b[orderKeys[order]]) {
-  //       return -1;
-  //     } else if (a[orderKeys[order]] > b[orderKeys[order]]) {
-  //       return 1;
-  //     } else {
-  //       return 0;
-  //     }
-  //   });
-  //   setUsersState(sortedUsers);
-  // };
-
-  // const searchEmployee = (query) => {
-  //   setQuery(query);
-  //   if (!query.length) {
-  //     setUsersState(usersList);
-  //   } else {
-  //     setUsersState(
-  //       usersState.filter((user) =>
-  //         user.user_name.toLowerCase().includes(query.toLowerCase())
-  //       )
-  //     );
-  //   }
-  // };
 
   return (
     <AllWrapper>

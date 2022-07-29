@@ -18,25 +18,28 @@ export default function Rooms() {
   const dispatch = useDispatch();
   const roomsList = useSelector(allRooms);
   const [roomsState, setRoomsState] = useState([]);
-  const [order, setOrder] = useState("");
+  const [order, setOrder] = useState("room_number");
 
   useEffect(() => {
     dispatch(getRooms());
   }, [dispatch]);
 
   useEffect(() => {
+    const orderKeys = {
+      room_number: "room_number",
+      "price <": "price",
+    };
     const orderedRooms = [...roomsList];
-    if (order === "price <") {
-      orderedRooms.sort((a, b) => {
-        if (a.price < b.price) {
-          return -1;
-        } else if (a.price > b.price) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
-    } else {
+    orderedRooms.sort((a, b) => {
+      if (a[orderKeys[order]] < b[orderKeys[order]]) {
+        return -1;
+      } else if (a[orderKeys[order]] > b[orderKeys[order]]) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+    if (order === "price >") {
       orderedRooms.sort((a, b) => {
         if (a.price > b.price) {
           return -1;
@@ -81,6 +84,7 @@ export default function Rooms() {
           </HeaderTab>
           <div>
             <SelectDiv value={order} onChange={(e) => setOrder(e.target.value)}>
+              <option value="room_number">Room Number</option>
               <option value="price <">Price -</option>
               <option value="price >">Price +</option>
             </SelectDiv>

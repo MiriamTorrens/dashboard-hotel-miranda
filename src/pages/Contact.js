@@ -20,7 +20,7 @@ export default function Contact() {
   const dispatch = useDispatch();
   const contactList = useSelector(allContact);
   const [contactState, setContactState] = useState([]);
-  const [order, setOrder] = useState("");
+  const [order, setOrder] = useState("newest");
 
   useEffect(() => {
     dispatch(getContact());

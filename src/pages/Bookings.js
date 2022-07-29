@@ -22,7 +22,7 @@ export default function Bookings() {
   const bookingsList = useSelector(allBookings);
   const [bookingsState, setBookingsState] = useState([]);
   const [query, setQuery] = useState("");
-  const [order, setOrder] = useState("");
+  const [order, setOrder] = useState("newest");
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

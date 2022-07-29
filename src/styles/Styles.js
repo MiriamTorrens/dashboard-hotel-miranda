@@ -59,7 +59,7 @@ export const SelectDiv = styled.select`
   border-color: #135846;
   color: #135846;
   border-radius: 12px;
-  width: 100px;
+  width: 150px;
   height: 49px;
   text-align: center;
   font-size: 14px;
