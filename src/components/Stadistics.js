@@ -56,7 +56,7 @@ const Data = styled.div`
   z-index: 1;
 `;
 const Svg = styled.div`
-  margin-top: 90px;
+  margin-top: 150px;
 `;
 export default function Estadistics() {
   useEffect(() => {
