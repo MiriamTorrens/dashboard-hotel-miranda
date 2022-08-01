@@ -1,11 +1,15 @@
 import { BsArrowBarLeft, BsArrowBarRight } from "react-icons/bs";
 import { HiOutlineMail } from "react-icons/hi";
-import { BiBell } from "react-icons/bi";
+import Badge from "@mui/material/Badge";
+//import { BiBell } from "react-icons/bi";
+import { NavLink } from "react-router-dom";
 import { TbLogout } from "react-icons/tb";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { AuthContext } from "../App";
 import { useContext } from "react";
+import { allContact } from "../features/slices/contactSlice";
+import { useSelector } from "react-redux";
 
 const MenuWrapper = styled.div`
   display: flex;
@@ -23,15 +27,16 @@ const Title = styled.h1`
   text-transform: capitalize;
 `;
 const IconsWrapper = styled.div`
-  margin-top: 30px;
   margin-right: 60px;
+  margin-top: 30px;
 `;
 const Icon = styled.span`
   color: #135846;
   font-size: x-large;
   margin-left: 30px;
   &:hover {
-    color: #e23428;
+    filter: brightness(1.5);
+    cursor: pointer;
   }
 `;
 
@@ -40,8 +45,12 @@ export default function MenuSup(props) {
   const display = state.authenticated ? "flex" : "none";
   const navigate = useNavigate();
   const location = useLocation();
-  let currentLocation = location.pathname.substring(1);
+  const contact = useSelector(allContact);
+  const contactNoViewed = contact.filter(
+    (contact) => contact.viewed === "false"
+  );
 
+  let currentLocation = location.pathname.substring(1);
   if (currentLocation === "users/newUser") {
     currentLocation = "Users";
   } else if (currentLocation === "users/editUser") {
@@ -73,12 +82,20 @@ export default function MenuSup(props) {
         <Title>{currentLocation}</Title>
       </div>
       <IconsWrapper>
-        <Icon>
-          <HiOutlineMail />
-        </Icon>
-        <Icon>
+        <NavLink to="/contact">
+          <Icon>
+            <Badge
+              badgeContent={contactNoViewed.length}
+              color="success"
+              style={{ marginTop: -10 }}
+            >
+              <HiOutlineMail color="action" />
+            </Badge>
+          </Icon>
+        </NavLink>
+        {/* <Icon>
           <BiBell />
-        </Icon>
+        </Icon> */}
         <Icon>
           <TbLogout onClick={() => Logout()} />
         </Icon>

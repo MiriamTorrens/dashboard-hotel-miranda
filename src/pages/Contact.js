@@ -75,10 +75,10 @@ export default function Contact() {
         <HeaderTableWrapper>
           <HeaderTab>
             <Tab>
-              <MenuOPtions onClick={(e) => setFilter("")}>
+              <MenuOPtions onClick={() => setFilter("")}>
                 All Contacts
               </MenuOPtions>
-              <MenuOPtions onClick={(e) => setFilter("true")}>
+              <MenuOPtions onClick={() => setFilter("true")}>
                 Archived
               </MenuOPtions>
             </Tab>
