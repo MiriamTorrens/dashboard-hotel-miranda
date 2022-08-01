@@ -10,8 +10,12 @@ import {
 } from "../styles/Styles";
 import ContactsDiv from "../components/ContactsDiv";
 import Pagination from "../components/Pagination";
-import { ButtonArchive } from "../components/Buttons";
-import { getContact, allContact } from "../features/slices/contactSlice";
+import { ButtonArchive, ButtonArchived } from "../components/Buttons";
+import {
+  getContact,
+  allContact,
+  updateContact,
+} from "../features/slices/contactSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
@@ -45,6 +49,24 @@ export default function Contact() {
     });
     setContactState(filteredOrderContact);
   }, [contactList, filter, order]);
+
+  const handleClick = (contact) => {
+    dispatch(
+      updateContact({
+        id: contact.id,
+        date: contact.date,
+        customer: {
+          fullName: contact.customer.fullName,
+          email: contact.customer.email,
+          phoneNumber: contact.customer.phoneNumber,
+        },
+        subject: contact.subject,
+        comment: contact.comment,
+        viewed: contact.viewed,
+        archived: "true",
+      })
+    );
+  };
 
   return (
     <AllWrapper>
@@ -93,7 +115,11 @@ export default function Contact() {
                 </td>
                 <td style={{ width: 600 }}>{contact.comment}</td>
                 <td>
-                  <ButtonArchive />
+                  {contact.archived === "true" ? (
+                    <ButtonArchived />
+                  ) : (
+                    <ButtonArchive onClick={() => handleClick(contact)} />
+                  )}
                 </td>
               </tr>
             ))}

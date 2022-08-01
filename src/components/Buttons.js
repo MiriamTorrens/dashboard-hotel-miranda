@@ -16,6 +16,23 @@ export const ButtonArchive = styled.button`
     content: "Archive";
   }
 `;
+
+export const ButtonArchived = styled.button`
+  background-color: white;
+  color: #135846;
+  width: 150px;
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid #135846;
+  margin-right: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  ::before {
+    content: "Archived";
+  }
+`;
 export const ButtonNewRoom = styled.button`
   background-color: #135846;
   color: white;

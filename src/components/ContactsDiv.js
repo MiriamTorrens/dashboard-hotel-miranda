@@ -5,8 +5,7 @@ import { useEffect } from "react";
 import {
   getContact,
   allContact,
-  getThisContact,
-  updateContact,
+  getOneContact,
 } from "../features/slices/contactSlice";
 import { useState } from "react";
 import ModalContact from "./ModalContact";
@@ -62,17 +61,17 @@ const Icon = styled.div`
 export default function ContactsDiv() {
   const dispatch = useDispatch();
   const contactList = useSelector(allContact);
-  const [open, setOpen] = useState("none");
-  const [message, setMessage] = useState({});
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
+
+  const handeClick = (id) => {
+    setOpen(true);
+    dispatch(getOneContact(id));
+  };
 
   useEffect(() => {
     dispatch(getContact());
-  }, []);
-
-  const handleClick = (contact) => {
-    setOpen("block");
-    setMessage(contact);
-  };
+  }, [dispatch]);
 
   return (
     <>
@@ -80,7 +79,7 @@ export default function ContactsDiv() {
         <Title>Latest Review by Customers</Title>
         <DivMsgs>
           {contactList.map((contact) => (
-            <DivMsg key={contact.id} onClick={() => handleClick(contact)}>
+            <DivMsg key={contact.id} onClick={() => handeClick(contact.id)}>
               <Msg>
                 <b>{contact.subject}</b>
                 <br />
@@ -110,7 +109,7 @@ export default function ContactsDiv() {
               </DivUser>
             </DivMsg>
           ))}
-          <ModalContact open={open} setOpen={setOpen} message={message} />
+          <ModalContact open={open} handleClose={handleClose} />
         </DivMsgs>
       </ContactsWrapper>
     </>

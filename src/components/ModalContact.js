@@ -1,56 +1,97 @@
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import {
+  oneContact,
+  updateContact,
+  allContact,
+} from "../features/slices/contactSlice";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { AiOutlineCloseCircle } from "react-icons/ai";
-import { useDispatch } from "react-redux";
-import { updateContact } from "../features/slices/contactSlice";
+import { BsCheck2Square } from "react-icons/bs";
 
-const Modal = styled.div`
-  width: 500px;
-  position: absolute;
-  margin-top: 5%;
-  margin-left: 25%;
-  background-color: white;
-  box-shadow: 2px 2px 100px 50px #ebf1ef;
-  border-radius: 50px;
-`;
-const IconClose = styled.div`
-  float: right;
-  margin-top: 30px;
-  margin-right: 30px;
-  font-size: 30px;
-  cursor: pointer;
-  color: #799283;
-  &:hover {
-    color: #135846;
-  }
-`;
-const DataWrapper = styled.div`
-  width: 80%;
-  margin: 0 auto;
-  padding: 30px;
-  font-family: "Poppins", sans-serif;
-  text-transform: capitalize;
-`;
-const Subject = styled.h1`
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+  borderRadius: 8,
+  fontFamily: "Poppins",
+};
+
+const Subject = styled.h3`
   color: #135846;
 `;
 
+const Icon = styled.div`
+  float: right;
+  color: #135846;
+  font-size: xx-large;
+`;
+
 export default function ModalContact(props) {
+  const { open, handleClose } = props;
+  const thisContact = useSelector(oneContact);
+  const contactList = useSelector(allContact);
   const dispatch = useDispatch();
 
-  const handleClose = () => {
-    props.setOpen("none");
-    dispatch(updateContact({ ...props.message, viewed: "YES" }));
+  const handleClick = (contact) => {
+    handleClose();
+    dispatch(
+      updateContact({
+        id: contact.id,
+        date: contact.date,
+        customer: {
+          fullName: contact.customer.fullName,
+          email: contact.customer.email,
+          phoneNumber: contact.customer.phoneNumber,
+        },
+        subject: contact.subject,
+        comment: contact.comment,
+        viewed: "true",
+        archived: contact.archived,
+      })
+    );
+    console.log(contact.id);
+    console.log(contactList);
   };
 
   return (
-    <Modal style={{ display: props.open }}>
-      <IconClose>
-        <AiOutlineCloseCircle onClick={() => handleClose()} />
-      </IconClose>
-      <DataWrapper>
-        <Subject>{props.message.subject}</Subject>
-        <p>{props.message.comment}</p>
-      </DataWrapper>
-    </Modal>
+    <div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          {thisContact.map((contact) => (
+            <div key={contact.id}>
+              <div>
+                <Subject>{contact.subject}</Subject>
+                <p>{contact.comment}</p>
+                <p>
+                  <b> {contact.customer.fullName}</b>
+                </p>
+                <p>
+                  <b>Email: </b>
+                  {contact.customer.email}
+                  <br />
+                  <b>Phone Number: </b>
+                  {contact.customer.phoneNumber}
+                </p>
+              </div>
+              <Icon>
+                <BsCheck2Square onClick={() => handleClick(contact)} />
+              </Icon>
+            </div>
+          ))}
+        </Box>
+      </Modal>
+    </div>
   );
 }

@@ -6,8 +6,6 @@ import Rooms from "./pages/Rooms";
 import Users from "./pages/Users";
 import NavBar from "./components/NavBar";
 import MenuSup from "./components/MenuSup";
-import EditUser from "./pages/EditUser";
-import NewUser from "./pages/NewUser";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { AppWrapper, RoutesWrapper } from "./styles/Styles";
 import { useEffect, createContext, useReducer } from "react";
@@ -122,22 +120,6 @@ function App() {
               element={
                 <RequireAuth>
                   <Users />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="users/newUser"
-              element={
-                <RequireAuth>
-                  <NewUser />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="users/editUser"
-              element={
-                <RequireAuth>
-                  <EditUser />
                 </RequireAuth>
               }
             />
