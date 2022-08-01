@@ -4,7 +4,7 @@ export const ContactList = [
     date: "2022-5-06",
     customer: {
       fullName: "Brandi Cremin",
-      email: "Charley.Pouros2@hotmail.com",
+      email: "b.cremin2@hotmail.com",
       phoneNumber: "014-993-0360",
     },
     subject: "do laborum ut",
@@ -18,7 +18,7 @@ export const ContactList = [
     date: "2021-8-02",
     customer: {
       fullName: "Freda Considine",
-      email: "Felicita79@yahoo.com",
+      email: "f.considine@yahoo.com",
       phoneNumber: "249-007-9045",
     },
     subject: "pariatur pariatur ea dolor",
@@ -32,7 +32,7 @@ export const ContactList = [
     date: "2021-11-27",
     customer: {
       fullName: "Jean Farrell",
-      email: "Annamarie80@gmail.com",
+      email: "j.farrell@gmail.com",
       phoneNumber: "737-943-5966",
     },
     subject: "commodo magna ullamco culpa amet",

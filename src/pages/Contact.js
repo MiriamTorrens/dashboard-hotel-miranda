@@ -88,10 +88,10 @@ export default function Contact() {
             <option value="guest">Guest</option>
           </SelectDiv>
         </HeaderTableWrapper>
-        <Table>
+        <Table style={{ borderSpacing: "40px 5px" }}>
           <thead>
             <tr>
-              <th>ID / Date</th>
+              <th>Date</th>
               <th>Customer</th>
               <th>Comment</th>
               <th>Archive</th>
@@ -100,11 +100,7 @@ export default function Contact() {
           <tbody style={{ verticalAlign: "top" }}>
             {contactState.map((contact) => (
               <tr key={contact.id}>
-                <td>
-                  {contact.id}
-                  <br />
-                  {contact.date}
-                </td>
+                <td>{contact.date}</td>
                 <td>
                   {contact.customer.fullName}
                   <br />
@@ -113,7 +109,7 @@ export default function Contact() {
                   {contact.customer.phoneNumber}
                   <br />
                 </td>
-                <td style={{ width: 600 }}>{contact.comment}</td>
+                <td>{contact.comment}</td>
                 <td>
                   {contact.archived === "true" ? (
                     <ButtonArchived />

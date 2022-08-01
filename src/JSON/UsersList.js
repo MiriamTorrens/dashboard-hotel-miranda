@@ -1,15 +1,15 @@
 export const UsersList = [
   {
-    fullName: "Antonio Emard",
+    fullName: "Miriam Torrens",
     id: "f4fd0bf0-54db",
-    email: "a.emard@miranda.com",
+    email: "m.torrens@miranda.com",
     startDate: "2022-04-02",
     occupation: "Manager",
     description:
       "cillum ea ea ullamco culpa veniam est aute Lorem exercitation irure veniam irure aliqua magna fugiat labore ex et",
     contact: "836-287-2369",
     status: "true",
-    photo: "https://xsgames.co/randomusers/assets/avatars/male/60.jpg",
+    photo: "https://xsgames.co/randomusers/assets/avatars/female/49.jpg",
     password: "HBUKGB4133K",
   },
   {
