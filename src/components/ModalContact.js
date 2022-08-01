@@ -31,8 +31,11 @@ const Icon = styled.div`
   float: right;
   color: #135846;
   font-size: xx-large;
+  cursor: pointer;
+  &:hover {
+    filter: brightness(2);
+  }
 `;
-
 export default function ModalContact(props) {
   const { open, handleClose } = props;
   const thisContact = useSelector(oneContact);

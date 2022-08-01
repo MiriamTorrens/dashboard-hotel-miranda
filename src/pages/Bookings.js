@@ -9,12 +9,18 @@ import {
   InputText,
   SelectDiv,
 } from "../styles/Styles";
-import { ButtonView } from "../components/Buttons";
+import { ButtonView, ButtonNewBooking } from "../components/Buttons";
 import ButtonStatus from "../components/ButtonStatus";
 import Pagination from "../components/Pagination";
-import { getBookings, allBookings } from "../features/slices/bookingsSlice";
+import {
+  getBookings,
+  allBookings,
+  getBooking,
+} from "../features/slices/bookingsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import ModalViewNotes from "../components/ModalViewNotes";
+import ModalNewBooking from "../components/ModalNewBooking";
 
 export default function Bookings() {
   const dispatch = useDispatch();
@@ -23,6 +29,9 @@ export default function Bookings() {
   const [filter, setFilter] = useState("");
   const [query, setQuery] = useState("");
   const [order, setOrder] = useState("newest");
+  const [open, setOpen] = useState(false);
+  const [openNew, setOpenNew] = useState(false);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     dispatch(getBookings());
@@ -53,6 +62,15 @@ export default function Bookings() {
     setBookingsState(filteredSearchBookings);
   }, [bookingsList, filter, query, order]);
 
+  const handleClickView = (id) => {
+    setOpen(true);
+    dispatch(getBooking(id));
+  };
+
+  const handleClickNew = () => {
+    setOpenNew(true);
+  };
+
   return (
     <AllWrapper>
       <SubWrapper>
@@ -74,6 +92,7 @@ export default function Bookings() {
             </Tab>
           </HeaderTab>
           <div>
+            <ButtonNewBooking onClick={handleClickNew} />
             <SelectDiv value={order} onChange={(e) => setOrder(e.target.value)}>
               <option value="newest">Newest</option>
               <option value="guest">Guest</option>
@@ -111,9 +130,11 @@ export default function Bookings() {
                 <td>{booking.checkin}</td>
                 <td>{booking.checkout}</td>
                 <td>
-                  <ButtonView />
+                  <ButtonView onClick={() => handleClickView(booking.id)} />
                 </td>
-                <td>{booking.roomType.roomNumber}</td>
+                <td>
+                  {booking.roomInfo} - {booking.roomType}
+                </td>
                 <td>
                   <ButtonStatus status={booking.status}></ButtonStatus>
                 </td>
@@ -123,6 +144,8 @@ export default function Bookings() {
         </Table>
         <Pagination />
       </SubWrapper>
+      <ModalViewNotes open={open} handleClose={handleClose} />
+      <ModalNewBooking open={openNew} handleClose={handleClose} />
     </AllWrapper>
   );
 }
