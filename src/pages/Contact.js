@@ -1,82 +1,106 @@
-import { AllWrapper, SubWrapper, HeaderTableWrapper, Table} from "../styles/Styles";
-import ContactsDiv from '../components/ContactsDiv';
+import {
+  AllWrapper,
+  SubWrapper,
+  HeaderTableWrapper,
+  Table,
+  HeaderTab,
+  Tab,
+  MenuOPtions,
+  SelectDiv,
+} from "../styles/Styles";
+import ContactsDiv from "../components/ContactsDiv";
 import Pagination from "../components/Pagination";
-import Header from "../components/Header";
-import Select from "../components/Select";
-import {ButtonArchive} from "../components/Buttons";
-import { getContact, allContact, createContact,} from "../features/slices/contactSlice";
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from "react";
+import { ButtonArchive } from "../components/Buttons";
+import { getContact, allContact } from "../features/slices/contactSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
-export default function Contact(){
-    const menuOptions = ["All Contacts", "Archived"];
-    const selectOptions = ["Newest", "Guest"];
-  
-    const dispatch = useDispatch();
-    const contactList = useSelector(allContact);
+export default function Contact() {
+  const dispatch = useDispatch();
+  const contactList = useSelector(allContact);
+  const [contactState, setContactState] = useState([]);
+  const [filter, setFilter] = useState("");
+  const [order, setOrder] = useState("newest");
 
-    useEffect(()=> {
-        dispatch(getContact());
-    }, [])
-    
-    const handleClick = () => {
-        dispatch(createContact({
-            id: "8e8e7c2f-9506",
-            customer: {
-                fullName: "Guy Aufderhar",
-                email: "Dominique76@yahoo.com",
-                phoneNumber: "819-821-4559"
-            },
-            subject: "et ipsum fugiat pariatur",
-            comment:"cillum minim elit officia ea esse ipsum in consequat do ea ex magna amet exercitation occaecat elit tempor eu laborum mollit enim cillum culpa mollit excepteur id velit proident anim aliquip adipisicing magna amet nostrud velit irure ipsum veniam",
-            viewed:"NO",
-            archived: "NO"
-        }));
-    }
+  useEffect(() => {
+    dispatch(getContact());
+  }, [dispatch]);
 
-    return (
-      <AllWrapper>
-        <ContactsDiv />
-        <SubWrapper>
-          <HeaderTableWrapper>
-            <Header menuOptions={menuOptions} />
-            <Select selectOptions={selectOptions} />
-          </HeaderTableWrapper>
-          <Table>
-            <thead>
-              <tr>
-                <th>ID / Date</th>
-                <th>Customer</th>
-                <th>Comment</th>
-                <th>Archive</th>
-              </tr>
-            </thead>
-            <tbody style={{ verticalAlign: "top" }}>
-              {contactList.map((contact) => (
-                <tr key={contact.id}>
-                  <td>
-                    {contact.id}
-                    <br />
-                    {contact.date}
-                  </td>
-                  <td>
-                    {contact.customer.fullName}
-                    <br />
-                    {contact.customer.email}
-                    <br />
-                    {contact.customer.phoneNumber}
-                    <br />
-                  </td>
-                  <td style={{ width: 600 }}>{contact.comment}</td>
-                  <td>
-                    <ButtonArchive />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-          <Pagination />
-        </SubWrapper>
-      </AllWrapper>
+  useEffect(() => {
+    const keysOrder = {
+      newest: "date",
+      guest: "customer.fullName",
+    };
+    const filteredOrderContact = contactList.filter((user) =>
+      user.archived.includes(filter)
     );
+    filteredOrderContact.sort((a, b) => {
+      if (a[keysOrder[order]] > b[keysOrder[order]]) {
+        return 1;
+      } else if (a[keysOrder[order]] < b[keysOrder[order]]) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+    setContactState(filteredOrderContact);
+  }, [contactList, filter, order]);
+
+  return (
+    <AllWrapper>
+      <ContactsDiv />
+      <SubWrapper>
+        <HeaderTableWrapper>
+          <HeaderTab>
+            <Tab>
+              <MenuOPtions onClick={(e) => setFilter("")}>
+                All Contacts
+              </MenuOPtions>
+              <MenuOPtions onClick={(e) => setFilter("true")}>
+                Archived
+              </MenuOPtions>
+            </Tab>
+          </HeaderTab>
+          <SelectDiv value={order} onChange={(e) => setOrder(e.target.value)}>
+            <option value="newest">Newest</option>
+            <option value="guest">Guest</option>
+          </SelectDiv>
+        </HeaderTableWrapper>
+        <Table>
+          <thead>
+            <tr>
+              <th>ID / Date</th>
+              <th>Customer</th>
+              <th>Comment</th>
+              <th>Archive</th>
+            </tr>
+          </thead>
+          <tbody style={{ verticalAlign: "top" }}>
+            {contactState.map((contact) => (
+              <tr key={contact.id}>
+                <td>
+                  {contact.id}
+                  <br />
+                  {contact.date}
+                </td>
+                <td>
+                  {contact.customer.fullName}
+                  <br />
+                  {contact.customer.email}
+                  <br />
+                  {contact.customer.phoneNumber}
+                  <br />
+                </td>
+                <td style={{ width: 600 }}>{contact.comment}</td>
+                <td>
+                  <ButtonArchive />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+        <Pagination />
+      </SubWrapper>
+    </AllWrapper>
+  );
 }

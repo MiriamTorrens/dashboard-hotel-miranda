@@ -88,7 +88,7 @@ export const SelectDiv = styled.select`
 export const InputText = styled.input`
   border-color: #135846;
   border-radius: 12px;
-  width: 250px;
+  width: 150px;
   height: 40px;
   margin-left: 15px;
   text-align: center;

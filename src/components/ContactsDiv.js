@@ -97,7 +97,7 @@ export default function ContactsDiv() {
                   <span>{contact.customer.phoneNumber}</span>
                 </User>
                 <Icon>
-                  {contact.viewed === "NO" ? (
+                  {contact.viewed === "false" ? (
                     <AiOutlineCloseCircle
                       style={{ color: "red", fontSize: "x-large" }}
                     />

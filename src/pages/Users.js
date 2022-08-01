@@ -3,68 +3,84 @@ import {
   SubWrapper,
   HeaderTableWrapper,
   Table,
+  HeaderTab,
+  Tab,
+  MenuOPtions,
+  SelectDiv,
+  InputText,
 } from "../styles/Styles";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import Pagination from "../components/Pagination";
-import { NavLink } from "react-router-dom";
 import { ButtonNewEmployee } from "../components/Buttons";
-import Header from "../components/Header";
-import Select from "../components/Select";
-import InputText from "../components/InputText";
-import {
-  getUsers,
-  allUsers,
-  createUser,
-  updateUser,
-  deleteUser,
-} from "../features/slices/usersSlice";
+import { getUsers, allUsers } from "../features/slices/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { MdOutlineDeleteOutline, MdOutlineUpdate } from "react-icons/md";
-import { IoMdAddCircleOutline } from "react-icons/io";
+import { useEffect, useState } from "react";
 
 export default function Users() {
-  const menuOptions = ["All Employee", "Active Employee", "Inactive Employee"];
-  const selectOptions = ["Newest", "Guest"];
-  const placeholder = "Search employee";
-
   const dispatch = useDispatch();
   const usersList = useSelector(allUsers);
+  const [usersState, setUsersState] = useState([]);
+  const [filter, setFilter] = useState("");
+  const [order, setOrder] = useState("newest");
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     dispatch(getUsers());
-  }, []);
+  }, [dispatch]);
 
-  const handleClick = () => {
-    dispatch(
-      createUser({
-        fullName: "Lauren Abshire",
-        id: "3bbee4c3-0074",
-        email: "l.abshire@miranda.com",
-        startDate: "2021-07-12",
-        occupation: "Reception",
-        description: "mollit duis nisi non deserunt",
-        contact: "789-965-4830",
-        status: "ACTIVE",
-        photo: "https://xsgames.co/randomusers/assets/avatars/female/23.jpg",
-        password: "BPA8BOL3",
-      })
+  useEffect(() => {
+    const keysOrder = {
+      newest: "startDate",
+      guest: "fullName",
+    };
+    const filteredOrderUsers = usersList.filter((user) =>
+      user.status.includes(filter)
     );
-  };
+    const filteredOrderSearchUsers = filteredOrderUsers.filter((user) =>
+      user.fullName.toLowerCase().includes(query.toLowerCase())
+    );
+    filteredOrderSearchUsers.sort((a, b) => {
+      if (a[keysOrder[order]] > b[keysOrder[order]]) {
+        return 1;
+      } else if (a[keysOrder[order]] < b[keysOrder[order]]) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+    setUsersState(filteredOrderSearchUsers);
+  }, [usersList, filter, order, query]);
 
   return (
     <AllWrapper>
       <SubWrapper>
         <HeaderTableWrapper>
-          <Header menuOptions={menuOptions} />
+          <HeaderTab>
+            <Tab>
+              <MenuOPtions onClick={() => setFilter("")}>
+                All Employee
+              </MenuOPtions>
+              <MenuOPtions onClick={() => setFilter("true")}>
+                Active Employee
+              </MenuOPtions>
+              <MenuOPtions onClick={() => setFilter("false")}>
+                Inactive Employee
+              </MenuOPtions>
+            </Tab>
+          </HeaderTab>
           <div>
-            <NavLink to="/users/newUser">
-              <ButtonNewEmployee />
-            </NavLink>
-            <Select selectOptions={selectOptions} />
+            <ButtonNewEmployee />
+            <SelectDiv value={order} onChange={(e) => setOrder(e.target.value)}>
+              <option value="newest">Newest</option>
+              <option value="guest">Guest</option>
+            </SelectDiv>
+            <InputText
+              placeholder="Search Employee"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
           </div>
         </HeaderTableWrapper>
-        <InputText placeholder={placeholder} />
         <Table>
           <thead>
             <tr>
@@ -73,16 +89,10 @@ export default function Users() {
               <th>Description</th>
               <th>Contact</th>
               <th>Status</th>
-              {/* <th>
-                <IoMdAddCircleOutline
-                  style={{ fontSize: 30 }}
-                  onClick={() => handleClick()}
-                />
-              </th> */}
             </tr>
           </thead>
           <tbody>
-            {usersList.map((user) => (
+            {usersState.map((user) => (
               <tr key={user.id}>
                 <td style={{ width: 250 }}>
                   <div style={{ display: "flex" }}>
@@ -114,23 +124,11 @@ export default function Users() {
                 </td>
                 <td
                   style={{
-                    color: user.status === "ACTIVE" ? "#5AD07A" : "#E23428",
+                    color: user.status === "true" ? "#5AD07A" : "#E23428",
                   }}
                 >
-                  {user.status}
+                  {user.status === "true" ? "ACTIVE" : "INACTIVE"}
                 </td>
-                {/* <td>
-                  <MdOutlineDeleteOutline
-                    style={{ fontSize: 30 }}
-                    onClick={() => dispatch(deleteUser(user))}
-                  />
-                  <MdOutlineUpdate
-                    style={{ fontSize: 30 }}
-                    onClick={() =>
-                      dispatch(updateUser({ ...user, status: "INACTIVE" }))
-                    }
-                  />
-                </td> */}
               </tr>
             ))}
           </tbody>
