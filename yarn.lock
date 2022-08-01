@@ -1324,6 +1324,11 @@
     "minimatch" "^3.1.2"
     "strip-json-comments" "^3.1.1"
 
+"@faker-js/faker@^7.3.0":
+  "integrity" "sha512-1W0PZezq2rxlAssoWemi9gFRD8IQxvf0FPL5Km3TOmGHFG7ib0TbFBJ0yC7D/1NsxunjNTK6WjUXV8ao/mKZ5w=="
+  "resolved" "https://registry.npmjs.org/@faker-js/faker/-/faker-7.3.0.tgz"
+  "version" "7.3.0"
+
 "@fullcalendar/common@~5.11.0":
   "integrity" "sha512-gWjbMAnN1u73Oqlgjbyky7i+3bY0hvFSnGT0YBPx44n874AkQa9e9OU12PMLTMOPy0tXPb8DEwRelFQ7CJNbcw=="
   "resolved" "https://registry.npmjs.org/@fullcalendar/common/-/common-5.11.0.tgz"

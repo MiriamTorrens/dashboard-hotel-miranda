@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import ModalViewNotes from "../components/ModalViewNotes";
 import ModalNewBooking from "../components/ModalNewBooking";
+import { isFocusable } from "@testing-library/user-event/dist/utils";
 
 export default function Bookings() {
   const dispatch = useDispatch();
@@ -31,7 +32,6 @@ export default function Bookings() {
   const [order, setOrder] = useState("newest");
   const [open, setOpen] = useState(false);
   const [openNew, setOpenNew] = useState(false);
-  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     dispatch(getBookings());
@@ -39,7 +39,6 @@ export default function Bookings() {
 
   useEffect(() => {
     const orderKeys = {
-      newest: "date",
       guest: "fullName",
       checkin: "checkin",
       checkout: "checkout",
@@ -51,12 +50,22 @@ export default function Bookings() {
       booking.fullName.toLowerCase().includes(query.toLowerCase())
     );
     filteredSearchBookings.sort((a, b) => {
-      if (a[orderKeys[order]] > b[orderKeys[order]]) {
-        return 1;
-      } else if (a[orderKeys[order]] < b[orderKeys[order]]) {
-        return -1;
+      if (order === "newest") {
+        if (a.date < b.date) {
+          return 1;
+        } else if (a.date > b.date) {
+          return -1;
+        } else {
+          return 0;
+        }
       } else {
-        return 0;
+        if (a[orderKeys[order]] > b[orderKeys[order]]) {
+          return 1;
+        } else if (a[orderKeys[order]] < b[orderKeys[order]]) {
+          return -1;
+        } else {
+          return 0;
+        }
       }
     });
     setBookingsState(filteredSearchBookings);
@@ -71,6 +80,10 @@ export default function Bookings() {
     setOpenNew(true);
   };
 
+  const handleClose = () => {
+    setOpen(false);
+    setOpenNew(false);
+  };
   return (
     <AllWrapper>
       <SubWrapper>
