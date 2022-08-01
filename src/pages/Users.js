@@ -15,6 +15,7 @@ import { ButtonNewEmployee } from "../components/Buttons";
 import { getUsers, allUsers } from "../features/slices/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import ModalNewUser from "../components/ModalNewUser";
 
 export default function Users() {
   const dispatch = useDispatch();
@@ -23,16 +24,15 @@ export default function Users() {
   const [filter, setFilter] = useState("");
   const [order, setOrder] = useState("newest");
   const [query, setQuery] = useState("");
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
 
   useEffect(() => {
-    const keysOrder = {
-      newest: "startDate",
-      guest: "fullName",
-    };
     const filteredOrderUsers = usersList.filter((user) =>
       user.status.includes(filter)
     );
@@ -40,12 +40,22 @@ export default function Users() {
       user.fullName.toLowerCase().includes(query.toLowerCase())
     );
     filteredOrderSearchUsers.sort((a, b) => {
-      if (a[keysOrder[order]] > b[keysOrder[order]]) {
-        return 1;
-      } else if (a[keysOrder[order]] < b[keysOrder[order]]) {
-        return -1;
+      if (order === "newest") {
+        if (a.startDate < b.startDate) {
+          return 1;
+        } else if (a.startDate > b.startDate) {
+          return -1;
+        } else {
+          return 0;
+        }
       } else {
-        return 0;
+        if (a.fullName > b.fullName) {
+          return 1;
+        } else if (a.fullName < b.fullName) {
+          return -1;
+        } else {
+          return 0;
+        }
       }
     });
     setUsersState(filteredOrderSearchUsers);
@@ -69,7 +79,7 @@ export default function Users() {
             </Tab>
           </HeaderTab>
           <div>
-            <ButtonNewEmployee />
+            <ButtonNewEmployee onClick={handleOpen} />
             <SelectDiv value={order} onChange={(e) => setOrder(e.target.value)}>
               <option value="newest">Newest</option>
               <option value="guest">Guest</option>
@@ -135,6 +145,7 @@ export default function Users() {
         </Table>
         <Pagination />
       </SubWrapper>
+      <ModalNewUser open={open} handleClose={handleClose} />
     </AllWrapper>
   );
 }

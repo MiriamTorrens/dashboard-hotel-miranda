@@ -63,7 +63,7 @@ export default function ModalNewBooking(props) {
   const [inputCheckout, setInputCheckout] = useState("");
   const [inputRequest, setInputRequest] = useState("");
   const [inputRoom, setInputRoom] = useState("");
-  const [inputType, setInputType] = useState("");
+  const [inputType, setInputType] = useState("single Bed");
 
   const handleSubmit = (e) => {
     e.preventDefault();
