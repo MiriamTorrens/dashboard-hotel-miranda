@@ -37,7 +37,7 @@ export const ButtonArchived = styled.button`
 export const ButtonNewBooking = styled.button`
   background-color: #135846;
   color: white;
-  width: 200px;
+  width: 150px;
   height: 49px;
   border-radius: 12px;
   border: none;
@@ -52,7 +52,7 @@ export const ButtonNewBooking = styled.button`
 export const ButtonNewEmployee = styled.button`
   background-color: #135846;
   color: white;
-  width: 200px;
+  width: 150px;
   height: 49px;
   border-radius: 12px;
   border: none;
